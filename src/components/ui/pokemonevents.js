@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useGame } from '@/context/GameContext';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
-import { eventPokemon } from '@/data/sv/eventPokemon';
+import { eventPokemon } from '@/data/sv/eventPokemon.js';
 import { motion } from 'framer-motion';
 import { getNatureEffectShortEn, getNatureEffectText } from '@/lib/natureEffects';
 import { Moves } from '@/data/sv/moves';

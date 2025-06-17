@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { useGame } from '@/context/GameContext';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
-import { eventPokemon } from '@/data/sv/eventPokemon';
+import { eventPokemon } from '@/data/sv/eventPokemon.js';
 import { motion } from 'framer-motion';
 import { teraSprites } from '@/data/pokemonConstants';
 import { items_sv } from '@/data/sv/items_sv';
