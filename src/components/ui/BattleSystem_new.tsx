@@ -11,6 +11,15 @@ import {
   esUltimoPokemon
 } from './battleUtils';
 
+// Función para obtener URL de audio desde soundEffects
+const getAudioUrl = (key: string): string | null => {
+  const soundEffectUrls: Record<string, string> = {
+    gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1',
+    trainerbattle: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1',
+  };
+  return soundEffectUrls[key] || null;
+};
+
 // Componente principal del sistema de combate
 const BattleSystem: React.FC<BattleProps> = ({
   gimnasioActual,
@@ -117,7 +126,8 @@ const BattleSystem: React.FC<BattleProps> = ({
     console.log('🚀 Iniciando secuencia de batalla completa');
     
     // Reproducir música de batalla
-    const musicFile = isLeaderBattle ? '/src/sounds/gymbattle.mp3' : '/src/sounds/trainerbattle.mp3';
+    const musicKey = isLeaderBattle ? 'gymbattle' : 'trainerbattle';
+    const musicFile = getAudioUrl(musicKey) || (isLeaderBattle ? '/src/sounds/gymbattle.mp3' : '/src/sounds/trainerbattle.mp3');
     const audio = new Audio(musicFile);
     audio.volume = 0.1;
     audio.loop = true;

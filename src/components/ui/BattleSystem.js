@@ -9,7 +9,7 @@ import { calcularTapsObjetivo, calcularTiempoBase, obtenerPokemonActual, obtener
 const getAudioUrl = (key) => {
   const soundEffectUrls = {
     gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1',
-    trainerbattle: '/src/sounds/trainerbattle.mp3', // Mantener local por ahora
+    trainerbattle: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1',
   };
   return soundEffectUrls[key];
 };

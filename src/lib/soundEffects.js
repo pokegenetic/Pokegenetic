@@ -21,7 +21,7 @@ const externalAudioUrls = {
   gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1',
   
   // 7. trainerbattle (música de batalla contra entrenador)
-  trainerbattle: 'https://drive.google.com/uc?export=download&id=1PMSB0zKAHMterUM3xhNXAdzGALQAuAam',
+  trainerbattle: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1',
   
   // 8. wingym (música de victoria en gimnasio)
   wingym: 'https://drive.google.com/uc?export=download&id=1QM0IQK3PypTuj7MQAgZbWQZ_t0R5gxF5',

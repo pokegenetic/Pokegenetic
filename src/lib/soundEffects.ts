@@ -14,7 +14,7 @@ const soundEffectUrls: Record<string, string> = {
   pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1', // Música de gimnasio Pokémon desde Dropbox
   wintrainer: '/src/sounds/wintrainer.mp3', // Música de victoria contra entrenador
   gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1', // Música de batalla contra líder de gimnasio desde Dropbox
-  trainerbattle: '/src/sounds/trainerbattle.mp3', // Música de batalla contra entrenador
+  trainerbattle: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1', // Música de batalla contra entrenador desde Dropbox
   wingym: '/src/sounds/wingym.mp3', // Música de victoria en gimnasio
   obtainbadge: '/src/sounds/obtainbadge.mp3', // Sonido de obtener medalla
   pokeballreturn: '/src/sounds/sfx/pokeballreturn.mp3', // Sonido cuando un Pokémon es derrotado
