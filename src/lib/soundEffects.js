@@ -12,7 +12,7 @@ const externalAudioUrls = {
   winrewards: 'https://drive.google.com/uc?export=download&id=1LcOm1fMFPtP-soBT4XfIkVLP7djPdYM3',
   
   // 4. pokemongym (música de gimnasio Pokémon)
-  pokemongym: 'https://drive.google.com/uc?export=download&id=1Pi3XxlFG1m9gfxYMH034H9QgVjpQK6hv',
+  pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1',
   
   // 5. wintrainer (música de victoria contra entrenador)
   wintrainer: 'https://drive.google.com/uc?export=download&id=1XzlnYJetMXLoQwgcYY3SyS7YQ0ss4yqv',
@@ -120,6 +120,52 @@ export function playSoundEffect(key, volume = 1, loop = false) {
         return audio;
     } catch (error) {
         console.warn(`Error creando elemento de audio para ${key}:`, error);
+        return null;
+    }
+}
+
+/**
+ * Función especializada para música de fondo con loop
+ * @param {string} key - La clave del sonido a reproducir
+ * @param {number} volume - Volumen del sonido (0-1)
+ * @returns {HTMLAudioElement|null} - El elemento de audio o null si no se pudo reproducir
+ */
+export function playLoopingMusic(key, volume = 0.1) {
+    // Primero intentar con URLs externas
+    let url = externalAudioUrls[key];
+    
+    // Si no existe en URLs externas, intentar con rutas locales
+    if (!url) {
+        url = soundEffectUrls[key];
+    }
+    
+    if (!url) {
+        console.warn(`No se encontró el sonido: ${key}`);
+        return null;
+    }
+    
+    try {
+        const audio = new window.Audio(url);
+        audio.volume = volume;
+        audio.loop = true;
+        audio.crossOrigin = "anonymous";
+        
+        // Agregar manejador de errores
+        audio.onerror = (e) => {
+            console.warn(`Error cargando música ${key} desde ${url}:`, e);
+        };
+        
+        // Reproducir con manejo de errores
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.warn(`Error reproduciendo música ${key}:`, error);
+            });
+        }
+        
+        return audio;
+    } catch (error) {
+        console.warn(`Error creando elemento de audio para música ${key}:`, error);
         return null;
     }
 }
