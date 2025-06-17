@@ -29,3 +29,4 @@ src/sounds/pokechillmusic.mov
 src/sounds/*.mp3
 !src/sounds/casino.mp3
 !src/sounds/sfx/*.mp3
+/src/sounds/pokechillmusic.mp3

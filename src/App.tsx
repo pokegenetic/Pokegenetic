@@ -23,9 +23,20 @@ import LigaPokemon from './components/ui/ligapokemon';
 import { AnimatePresence, motion } from 'framer-motion';
 import Login from './components/ui/Login';
 import { useUser } from './context/UserContext';
+import { useEffect } from 'react';
+import { initAudioSystem } from './lib/soundEffects';
 
 function App() {
   const location = useLocation();
+  
+  // Inicializar sistema de audio al cargar la aplicación
+  useEffect(() => {
+    console.log('Inicializando sistema de audio...');
+    initAudioSystem()
+      .then(() => console.log('Sistema de audio inicializado'))
+      .catch(error => console.error('Error al inicializar audio:', error));
+  }, []);
+  
   return (
     <div className="flex flex-col min-h-screen justify-between animated-bg">
       <MiniNavbar />
