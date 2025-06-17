@@ -26,7 +26,6 @@
   "exclude": [
     "backup-archivos-duplicados", 
     "dist", 
-    "node_modules",
-    "src/data/sv"
+    "node_modules"
   ]
 }
