@@ -90,8 +90,7 @@ export function playSoundEffect(key, volume = 1, loop = false) {
         audio.volume = volume;
         audio.loop = loop;
         
-        // Para Google Drive, necesitamos manejar posibles errores CORS
-        audio.crossOrigin = "anonymous";
+        // Removido crossOrigin para evitar problemas CORS con Dropbox/URLs externas
         
         // Rastrear audios de victoria globalmente para poder detenerlos después
         if (key === 'wintrainer' || key === 'wingym') {
@@ -148,7 +147,7 @@ export function playLoopingMusic(key, volume = 0.1) {
         const audio = new window.Audio(url);
         audio.volume = volume;
         audio.loop = true;
-        audio.crossOrigin = "anonymous";
+        // Removido crossOrigin para evitar problemas CORS con Dropbox
         
         // Agregar manejador de errores
         audio.onerror = (e) => {
@@ -198,7 +197,7 @@ export function createAudio(key, options = {}) {
         const audio = new window.Audio(url);
         audio.volume = volume;
         audio.loop = loop;
-        audio.crossOrigin = "anonymous"; // Para manejar posibles problemas CORS
+        // Removido crossOrigin para evitar problemas CORS con Dropbox/URLs externas
         
         // Agregar manejadores de eventos para depuración
         audio.onerror = (e) => {

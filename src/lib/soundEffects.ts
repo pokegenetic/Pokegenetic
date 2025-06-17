@@ -46,6 +46,7 @@ export function playLoopingMusic(key: string, volume: number = 0.1): HTMLAudioEl
   const audio = new window.Audio(url);
   audio.volume = volume;
   audio.loop = true;
+  // Removido crossOrigin para evitar problemas CORS con Dropbox
   audio.play().catch(console.error);
   
   return audio;
