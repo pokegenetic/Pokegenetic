@@ -13,6 +13,15 @@ import {
   esUltimoPokemon
 } from './battleUtils';
 
+// Función para obtener URL de audio desde soundEffects
+const getAudioUrl = (key: string): string | null => {
+  const soundEffectUrls: Record<string, string> = {
+    gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1',
+    trainerbattle: '/src/sounds/trainerbattle.mp3', // Mantener local por ahora
+  };
+  return soundEffectUrls[key] || null;
+};
+
 // Componente principal del sistema de combate
 const BattleSystem: React.FC<BattleProps> = ({
   gimnasioActual,
@@ -297,7 +306,8 @@ const BattleSystem: React.FC<BattleProps> = ({
   const iniciarMusicaBatalla = (reiniciar: boolean = false, forceIsLeader?: boolean) => {
     // Usar el parámetro forzado si se proporciona, sino usar el estado
     const usarIsLeader = forceIsLeader !== undefined ? forceIsLeader : isLeaderBattle;
-    const musicFile = usarIsLeader ? '/src/sounds/gymbattle.mp3' : '/src/sounds/trainerbattle.mp3';
+    const musicKey = usarIsLeader ? 'gymbattle' : 'trainerbattle';
+    const musicFile = getAudioUrl(musicKey) || (usarIsLeader ? '/src/sounds/gymbattle.mp3' : '/src/sounds/trainerbattle.mp3');
     console.log(`🎵 ${reiniciar ? 'Reiniciando' : 'Iniciando'} música de batalla:`);
     console.log(`   - Tipo: ${usarIsLeader ? 'LÍDER' : 'ENTRENADOR'}`);
     console.log(`   - Archivo: ${musicFile}`);
