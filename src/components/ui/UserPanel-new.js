@@ -1,11 +1,11 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { useUser } from '../../context/UserContext';
-import { useGame } from '../../context/GameContext';
-import { updateTrainerName, updateUserProfile } from '../../lib/userData';
+import { useUser } from '@/context/UserContext';
+import { useGame } from '@/context/GameContext';
+import { updateTrainerName, updateUserProfile } from '@/lib/userData';
 import { User, Package, Trophy, Gamepad2, X, LogOut, Loader2 } from 'lucide-react';
-import countryCodes from '../../data/countryCodes';
+import countryCodes from '@/data/countryCodes';
 const UserPanel = ({ isOpen, onClose }) => {
     const { user, logout, syncUserProfile, updateUserInContext } = useUser();
     const { pokemonTeam } = useGame();
