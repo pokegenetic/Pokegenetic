@@ -11,7 +11,7 @@ const soundEffectUrls: Record<string, string> = {
   catchmusic: '/src/sounds/sfx/catchmusic.mp3', // Sonido de música de captura exitosa
   heal: '/src/sounds/sfx/heal.mp3', // Sonido de curación para laboratorio
   superpower: '/src/sounds/sfx/superpower.mp3', // Sonido de Ataque Cargado
-  pokemongym: '/src/sounds/pokemongym.mp3', // Música de gimnasio Pokémon
+  pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1', // Música de gimnasio Pokémon desde Dropbox
   wintrainer: '/src/sounds/wintrainer.mp3', // Música de victoria contra entrenador
   gymbattle: '/src/sounds/gymbattle.mp3', // Música de batalla contra líder de gimnasio
   trainerbattle: '/src/sounds/trainerbattle.mp3', // Música de batalla contra entrenador
