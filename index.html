@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no" />
+    <!-- Prevenir zoom en iOS y mejorar experiencia móvil -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="MobileOptimized" content="width">
+    <style>
+      /* Prevenir zoom en iOS y mejorar experiencia táctil */
+      * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+      
+      input, textarea, select {
+        -webkit-user-select: text;
+        user-select: text;
+        touch-action: manipulation;
+      }
+      
+      body {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        overscroll-behavior: none;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+      
+      #root {
+        width: 100%;
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      /* Prevenir el rebote en iOS */
+      html, body {
+        position: fixed;
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+      }
+      
+      /* Botones más amigables para móviles */
+      button, .button, [role="button"] {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+      }
+    </style>
+    <title>Vite + React + TS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Variables globales para control de eventos
+      let touchStartTime = 0;
+      let touchCount = 0;
+      let lastTouchEnd = 0;
+      let preventNextClick = false;
+      
+      // Prevenir zoom por gestos en iOS y Android - ULTRA AGRESIVO
+      const preventGestureEvents = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        return false;
+      };
+      
+      document.addEventListener('gesturestart', preventGestureEvents, { passive: false, capture: true });
+      document.addEventListener('gesturechange', preventGestureEvents, { passive: false, capture: true });
+      document.addEventListener('gestureend', preventGestureEvents, { passive: false, capture: true });
+      
+      // Prevenir zoom con control ultra preciso de touchstart
+      document.addEventListener('touchstart', function(event) {
+        touchStartTime = Date.now();
+        touchCount = event.touches.length;
+        
+        // Si hay múltiples toques, prevenir inmediatamente
+        if (touchCount > 1) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          return false;
+        }
+        
+        // Prevenir doble tap en elementos que no son botones de juego
+        const target = event.target;
+        const isGameButton = target.closest('button[style*="touch-action"]') || 
+                           target.closest('button[class*="rounded-full"]') ||
+                           target.hasAttribute('data-game-button');
+        
+        if (!isGameButton) {
+          const now = Date.now();
+          if (now - lastTouchEnd <= 350) {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            preventNextClick = true;
+            return false;
+          }
+        }
+      }, { passive: false, capture: true });
+      
+      // Control preciso de touchend
+      document.addEventListener('touchend', function(event) {
+        const now = Date.now();
+        const touchDuration = now - touchStartTime;
+        
+        // Prevenir zoom en taps muy rápidos (menos de 50ms) fuera de botones de juego
+        const target = event.target;
+        const isGameButton = target.closest('button[style*="touch-action"]') || 
+                           target.closest('button[class*="rounded-full"]') ||
+                           target.hasAttribute('data-game-button');
+        
+        if (!isGameButton && touchDuration < 50) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          preventNextClick = true;
+        }
+        
+        // Prevenir doble tap zoom universal
+        if (now - lastTouchEnd <= 350) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          preventNextClick = true;
+        }
+        
+        lastTouchEnd = now;
+        touchCount = 0;
+        
+        // Reset preventNextClick después de un delay
+        setTimeout(() => {
+          preventNextClick = false;
+        }, 100);
+      }, { passive: false, capture: true });
+      
+      // Prevenir zoom con pellizco - ULTRA ROBUSTO
+      document.addEventListener('touchmove', function(event) {
+        // Si hay múltiples toques
+        if (event.touches.length > 1) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          return false;
+        }
+        
+        // Si evento tiene escala
+        if (event.scale && event.scale !== 1) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          return false;
+        }
+      }, { passive: false, capture: true });
+      
+      // Interceptar clicks que podrían causar zoom
+      document.addEventListener('click', function(event) {
+        if (preventNextClick) {
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+          preventNextClick = false;
+          return false;
+        }
+      }, { passive: false, capture: true });
+      
+      // Prevenir zoom en elementos específicos con CSS dinámico
+      const addAntiZoomStyles = () => {
+        const style = document.createElement('style');
+        style.innerHTML = `
+          /* Anti-zoom ultra agresivo */
+          * {
+            -webkit-touch-callout: none !important;
+            -webkit-user-select: none !important;
+            user-select: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            touch-action: manipulation !important;
+          }
+          
+          /* Permitir selección solo en inputs */
+          input, textarea, [contenteditable] {
+            -webkit-user-select: text !important;
+            user-select: text !important;
+          }
+          
+          /* Botones de juego específicos */
+          button[style*="touch-action"],
+          button[class*="rounded-full"],
+          .battle-button {
+            touch-action: manipulation !important;
+            -webkit-tap-highlight-color: transparent !important;
+            -webkit-touch-callout: none !important;
+            pointer-events: auto !important;
+          }
+          
+          /* Prevenir zoom en viewport */
+          html, body {
+            overflow-x: hidden !important;
+            position: fixed !important;
+            width: 100% !important;
+            height: 100vh !important;
+          }
+          
+          #root {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            height: 100vh !important;
+            -webkit-overflow-scrolling: touch !important;
+          }
+        `;
+        document.head.appendChild(style);
+      };
+      
+      // Asegurar que el viewport no cambie NUNCA
+      const enforceViewport = () => {
+        const viewport = document.querySelector('meta[name=viewport]');
+        if (viewport) {
+          viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no';
+        }
+        
+        // Forzar zoom level si es posible
+        if (window.visualViewport) {
+          window.visualViewport.addEventListener('resize', () => {
+            if (window.visualViewport.scale !== 1) {
+              console.log('Detectado zoom, intentando restablecer...');
+              // Intentar restablecer el viewport
+              const newViewport = document.querySelector('meta[name=viewport]');
+              if (newViewport) {
+                newViewport.remove();
+                const resetViewport = document.createElement('meta');
+                resetViewport.name = 'viewport';
+                resetViewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover, shrink-to-fit=no';
+                document.head.appendChild(resetViewport);
+              }
+            }
+          });
+        }
+      };
+      
+      // Ejecutar al cargar la página
+      document.addEventListener('DOMContentLoaded', function() {
+        addAntiZoomStyles();
+        enforceViewport();
+        
+        // Marcar botones de juego automáticamente
+        const markGameButtons = () => {
+          const gameButtons = document.querySelectorAll('button[style*="touch-action"], button[class*="rounded-full"]');
+          gameButtons.forEach(button => {
+            button.setAttribute('data-game-button', 'true');
+          });
+        };
+        
+        // Observer para marcar nuevos botones
+        const observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+              if (node.nodeType === 1) {
+                markGameButtons();
+              }
+            });
+          });
+        });
+        
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+        
+        markGameButtons();
+      });
+      
+      // Verificación continua del viewport
+      setInterval(enforceViewport, 1000);
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

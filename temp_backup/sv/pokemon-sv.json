@@ -1,0 +1,4863 @@
+[
+  {
+    "id": "bulbasaur",
+    "name": "Bulbasaur",
+    "num": 1,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bulbasaur.png"
+  },
+  {
+    "id": "ivysaur",
+    "name": "Ivysaur",
+    "num": 2,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ivysaur.png"
+  },
+  {
+    "id": "venusaur",
+    "name": "Venusaur",
+    "num": 3,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/venusaur.png"
+  },
+  {
+    "id": "charmander",
+    "name": "Charmander",
+    "num": 4,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/charmander.png"
+  },
+  {
+    "id": "charmeleon",
+    "name": "Charmeleon",
+    "num": 5,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/charmeleon.png"
+  },
+  {
+    "id": "charizard",
+    "name": "Charizard",
+    "num": 6,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/charizard.png"
+  },
+  {
+    "id": "squirtle",
+    "name": "Squirtle",
+    "num": 7,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/squirtle.png"
+  },
+  {
+    "id": "wartortle",
+    "name": "Wartortle",
+    "num": 8,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/wartortle.png"
+  },
+  {
+    "id": "blastoise",
+    "name": "Blastoise",
+    "num": 9,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/blastoise.png"
+  },
+  {
+    "id": "ekans",
+    "name": "Ekans",
+    "num": 23,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ekans.png"
+  },
+  {
+    "id": "arbok",
+    "name": "Arbok",
+    "num": 24,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/arbok.png"
+  },
+  {
+    "id": "pikachu",
+    "name": "Pikachu",
+    "num": 25,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pikachu.png"
+  },
+  {
+    "id": "raichu",
+    "name": "Raichu",
+    "num": 26,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/raichu.png"
+  },
+  {
+    "id": "raichualola",
+    "name": "Raichu-Alola",
+    "num": 26,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/raichualola.png"
+  },
+  {
+    "id": "sandshrew",
+    "name": "Sandshrew",
+    "num": 27,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sandshrew.png"
+  },
+  {
+    "id": "sandshrewalola",
+    "name": "Sandshrew-Alola",
+    "num": 27,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sandshrewalola.png"
+  },
+  {
+    "id": "sandslash",
+    "name": "Sandslash",
+    "num": 28,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sandslash.png"
+  },
+  {
+    "id": "sandslashalola",
+    "name": "Sandslash-Alola",
+    "num": 28,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sandslashalola.png"
+  },
+  {
+    "id": "clefairy",
+    "name": "Clefairy",
+    "num": 35,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/clefairy.png"
+  },
+  {
+    "id": "clefable",
+    "name": "Clefable",
+    "num": 36,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/clefable.png"
+  },
+  {
+    "id": "vulpix",
+    "name": "Vulpix",
+    "num": 37,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/vulpix.png"
+  },
+  {
+    "id": "vulpixalola",
+    "name": "Vulpix-Alola",
+    "num": 37,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/vulpixalola.png"
+  },
+  {
+    "id": "ninetales",
+    "name": "Ninetales",
+    "num": 38,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ninetales.png"
+  },
+  {
+    "id": "ninetalesalola",
+    "name": "Ninetales-Alola",
+    "num": 38,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ninetalesalola.png"
+  },
+  {
+    "id": "jigglypuff",
+    "name": "Jigglypuff",
+    "num": 39,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/jigglypuff.png"
+  },
+  {
+    "id": "wigglytuff",
+    "name": "Wigglytuff",
+    "num": 40,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/wigglytuff.png"
+  },
+  {
+    "id": "oddish",
+    "name": "Oddish",
+    "num": 43,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/oddish.png"
+  },
+  {
+    "id": "gloom",
+    "name": "Gloom",
+    "num": 44,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gloom.png"
+  },
+  {
+    "id": "vileplume",
+    "name": "Vileplume",
+    "num": 45,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/vileplume.png"
+  },
+  {
+    "id": "venonat",
+    "name": "Venonat",
+    "num": 48,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/venonat.png"
+  },
+  {
+    "id": "venomoth",
+    "name": "Venomoth",
+    "num": 49,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/venomoth.png"
+  },
+  {
+    "id": "diglett",
+    "name": "Diglett",
+    "num": 50,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/diglett.png"
+  },
+  {
+    "id": "diglettalola",
+    "name": "Diglett-Alola",
+    "num": 50,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/diglettalola.png"
+  },
+  {
+    "id": "dugtrio",
+    "name": "Dugtrio",
+    "num": 51,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dugtrio.png"
+  },
+  {
+    "id": "dugtrioalola",
+    "name": "Dugtrio-Alola",
+    "num": 51,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dugtrioalola.png"
+  },
+  {
+    "id": "meowth",
+    "name": "Meowth",
+    "num": 52,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/meowth.png"
+  },
+  {
+    "id": "meowthalola",
+    "name": "Meowth-Alola",
+    "num": 52,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/meowthalola.png"
+  },
+  {
+    "id": "meowthgalar",
+    "name": "Meowth-Galar",
+    "num": 52,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/meowthgalar.png"
+  },
+  {
+    "id": "persian",
+    "name": "Persian",
+    "num": 53,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/persian.png"
+  },
+  {
+    "id": "persianalola",
+    "name": "Persian-Alola",
+    "num": 53,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/persianalola.png"
+  },
+  {
+    "id": "psyduck",
+    "name": "Psyduck",
+    "num": 54,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/psyduck.png"
+  },
+  {
+    "id": "golduck",
+    "name": "Golduck",
+    "num": 55,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/golduck.png"
+  },
+  {
+    "id": "mankey",
+    "name": "Mankey",
+    "num": 56,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mankey.png"
+  },
+  {
+    "id": "primeape",
+    "name": "Primeape",
+    "num": 57,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/primeape.png"
+  },
+  {
+    "id": "growlithe",
+    "name": "Growlithe",
+    "num": 58,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/growlithe.png"
+  },
+  {
+    "id": "growlithehisui",
+    "name": "Growlithe-Hisui",
+    "num": 58,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/growlithehisui.png"
+  },
+  {
+    "id": "arcanine",
+    "name": "Arcanine",
+    "num": 59,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/arcanine.png"
+  },
+  {
+    "id": "arcaninehisui",
+    "name": "Arcanine-Hisui",
+    "num": 59,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/arcaninehisui.png"
+  },
+  {
+    "id": "poliwag",
+    "name": "Poliwag",
+    "num": 60,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/poliwag.png"
+  },
+  {
+    "id": "poliwhirl",
+    "name": "Poliwhirl",
+    "num": 61,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/poliwhirl.png"
+  },
+  {
+    "id": "poliwrath",
+    "name": "Poliwrath",
+    "num": 62,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/poliwrath.png"
+  },
+  {
+    "id": "bellsprout",
+    "name": "Bellsprout",
+    "num": 69,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bellsprout.png"
+  },
+  {
+    "id": "weepinbell",
+    "name": "Weepinbell",
+    "num": 70,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/weepinbell.png"
+  },
+  {
+    "id": "victreebel",
+    "name": "Victreebel",
+    "num": 71,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/victreebel.png"
+  },
+  {
+    "id": "tentacool",
+    "name": "Tentacool",
+    "num": 72,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tentacool.png"
+  },
+  {
+    "id": "tentacruel",
+    "name": "Tentacruel",
+    "num": 73,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tentacruel.png"
+  },
+  {
+    "id": "geodude",
+    "name": "Geodude",
+    "num": 74,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/geodude.png"
+  },
+  {
+    "id": "geodudealola",
+    "name": "Geodude-Alola",
+    "num": 74,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/geodudealola.png"
+  },
+  {
+    "id": "graveler",
+    "name": "Graveler",
+    "num": 75,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/graveler.png"
+  },
+  {
+    "id": "graveleralola",
+    "name": "Graveler-Alola",
+    "num": 75,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/graveleralola.png"
+  },
+  {
+    "id": "golem",
+    "name": "Golem",
+    "num": 76,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/golem.png"
+  },
+  {
+    "id": "golemalola",
+    "name": "Golem-Alola",
+    "num": 76,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/golemalola.png"
+  },
+  {
+    "id": "slowpoke",
+    "name": "Slowpoke",
+    "num": 79,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/slowpoke.png"
+  },
+  {
+    "id": "slowpokegalar",
+    "name": "Slowpoke-Galar",
+    "num": 79,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/slowpokegalar.png"
+  },
+  {
+    "id": "slowbro",
+    "name": "Slowbro",
+    "num": 80,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/slowbro.png"
+  },
+  {
+    "id": "slowbrogalar",
+    "name": "Slowbro-Galar",
+    "num": 80,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/slowbrogalar.png"
+  },
+  {
+    "id": "magnemite",
+    "name": "Magnemite",
+    "num": 81,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/magnemite.png"
+  },
+  {
+    "id": "magneton",
+    "name": "Magneton",
+    "num": 82,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/magneton.png"
+  },
+  {
+    "id": "doduo",
+    "name": "Doduo",
+    "num": 84,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/doduo.png"
+  },
+  {
+    "id": "dodrio",
+    "name": "Dodrio",
+    "num": 85,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dodrio.png"
+  },
+  {
+    "id": "seel",
+    "name": "Seel",
+    "num": 86,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/seel.png"
+  },
+  {
+    "id": "dewgong",
+    "name": "Dewgong",
+    "num": 87,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dewgong.png"
+  },
+  {
+    "id": "grimer",
+    "name": "Grimer",
+    "num": 88,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/grimer.png"
+  },
+  {
+    "id": "grimeralola",
+    "name": "Grimer-Alola",
+    "num": 88,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/grimeralola.png"
+  },
+  {
+    "id": "muk",
+    "name": "Muk",
+    "num": 89,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/muk.png"
+  },
+  {
+    "id": "mukalola",
+    "name": "Muk-Alola",
+    "num": 89,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mukalola.png"
+  },
+  {
+    "id": "shellder",
+    "name": "Shellder",
+    "num": 90,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shellder.png"
+  },
+  {
+    "id": "cloyster",
+    "name": "Cloyster",
+    "num": 91,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cloyster.png"
+  },
+  {
+    "id": "gastly",
+    "name": "Gastly",
+    "num": 92,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gastly.png"
+  },
+  {
+    "id": "haunter",
+    "name": "Haunter",
+    "num": 93,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/haunter.png"
+  },
+  {
+    "id": "gengar",
+    "name": "Gengar",
+    "num": 94,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gengar.png"
+  },
+  {
+    "id": "drowzee",
+    "name": "Drowzee",
+    "num": 96,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/drowzee.png"
+  },
+  {
+    "id": "hypno",
+    "name": "Hypno",
+    "num": 97,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hypno.png"
+  },
+  {
+    "id": "voltorb",
+    "name": "Voltorb",
+    "num": 100,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/voltorb.png"
+  },
+  {
+    "id": "voltorbhisui",
+    "name": "Voltorb-Hisui",
+    "num": 100,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/voltorbhisui.png"
+  },
+  {
+    "id": "electrode",
+    "name": "Electrode",
+    "num": 101,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/electrode.png"
+  },
+  {
+    "id": "electrodehisui",
+    "name": "Electrode-Hisui",
+    "num": 101,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/electrodehisui.png"
+  },
+  {
+    "id": "exeggcute",
+    "name": "Exeggcute",
+    "num": 102,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/exeggcute.png"
+  },
+  {
+    "id": "exeggutor",
+    "name": "Exeggutor",
+    "num": 103,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/exeggutor.png"
+  },
+  {
+    "id": "exeggutoralola",
+    "name": "Exeggutor-Alola",
+    "num": 103,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/exeggutoralola.png"
+  },
+  {
+    "id": "hitmonlee",
+    "name": "Hitmonlee",
+    "num": 106,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hitmonlee.png"
+  },
+  {
+    "id": "hitmonchan",
+    "name": "Hitmonchan",
+    "num": 107,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hitmonchan.png"
+  },
+  {
+    "id": "koffing",
+    "name": "Koffing",
+    "num": 109,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/koffing.png"
+  },
+  {
+    "id": "weezing",
+    "name": "Weezing",
+    "num": 110,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/weezing.png"
+  },
+  {
+    "id": "weezinggalar",
+    "name": "Weezing-Galar",
+    "num": 110,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/weezinggalar.png"
+  },
+  {
+    "id": "rhyhorn",
+    "name": "Rhyhorn",
+    "num": 111,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rhyhorn.png"
+  },
+  {
+    "id": "rhydon",
+    "name": "Rhydon",
+    "num": 112,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rhydon.png"
+  },
+  {
+    "id": "chansey",
+    "name": "Chansey",
+    "num": 113,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chansey.png"
+  },
+  {
+    "id": "horsea",
+    "name": "Horsea",
+    "num": 116,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/horsea.png"
+  },
+  {
+    "id": "seadra",
+    "name": "Seadra",
+    "num": 117,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/seadra.png"
+  },
+  {
+    "id": "scyther",
+    "name": "Scyther",
+    "num": 123,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/scyther.png"
+  },
+  {
+    "id": "electabuzz",
+    "name": "Electabuzz",
+    "num": 125,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/electabuzz.png"
+  },
+  {
+    "id": "magmar",
+    "name": "Magmar",
+    "num": 126,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/magmar.png"
+  },
+  {
+    "id": "tauros",
+    "name": "Tauros",
+    "num": 128,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tauros.png"
+  },
+  {
+    "id": "taurospaldeacombat",
+    "name": "Tauros-Paldea-Combat",
+    "num": 128,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/taurospaldeacombat.png"
+  },
+  {
+    "id": "taurospaldeablaze",
+    "name": "Tauros-Paldea-Blaze",
+    "num": 128,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/taurospaldeablaze.png"
+  },
+  {
+    "id": "taurospaldeaaqua",
+    "name": "Tauros-Paldea-Aqua",
+    "num": 128,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/taurospaldeaaqua.png"
+  },
+  {
+    "id": "magikarp",
+    "name": "Magikarp",
+    "num": 129,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/magikarp.png"
+  },
+  {
+    "id": "gyarados",
+    "name": "Gyarados",
+    "num": 130,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gyarados.png"
+  },
+  {
+    "id": "lapras",
+    "name": "Lapras",
+    "num": 131,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lapras.png"
+  },
+  {
+    "id": "ditto",
+    "name": "Ditto",
+    "num": 132,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ditto.png"
+  },
+  {
+    "id": "eevee",
+    "name": "Eevee",
+    "num": 133,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/eevee.png"
+  },
+  {
+    "id": "vaporeon",
+    "name": "Vaporeon",
+    "num": 134,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/vaporeon.png"
+  },
+  {
+    "id": "jolteon",
+    "name": "Jolteon",
+    "num": 135,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/jolteon.png"
+  },
+  {
+    "id": "flareon",
+    "name": "Flareon",
+    "num": 136,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/flareon.png"
+  },
+  {
+    "id": "porygon",
+    "name": "Porygon",
+    "num": 137,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/porygon.png"
+  },
+  {
+    "id": "snorlax",
+    "name": "Snorlax",
+    "num": 143,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/snorlax.png"
+  },
+  {
+    "id": "articuno",
+    "name": "Articuno",
+    "num": 144,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/articuno.png"
+  },
+  {
+    "id": "articunogalar",
+    "name": "Articuno-Galar",
+    "num": 144,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/articunogalar.png"
+  },
+  {
+    "id": "zapdos",
+    "name": "Zapdos",
+    "num": 145,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zapdos.png"
+  },
+  {
+    "id": "zapdosgalar",
+    "name": "Zapdos-Galar",
+    "num": 145,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zapdosgalar.png"
+  },
+  {
+    "id": "moltres",
+    "name": "Moltres",
+    "num": 146,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/moltres.png"
+  },
+  {
+    "id": "moltresgalar",
+    "name": "Moltres-Galar",
+    "num": 146,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/moltresgalar.png"
+  },
+  {
+    "id": "dratini",
+    "name": "Dratini",
+    "num": 147,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dratini.png"
+  },
+  {
+    "id": "dragonair",
+    "name": "Dragonair",
+    "num": 148,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dragonair.png"
+  },
+  {
+    "id": "dragonite",
+    "name": "Dragonite",
+    "num": 149,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dragonite.png"
+  },
+  {
+    "id": "mewtwo",
+    "name": "Mewtwo",
+    "num": 150,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mewtwo.png"
+  },
+  {
+    "id": "mew",
+    "name": "Mew",
+    "num": 151,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mew.png"
+  },
+  {
+    "id": "chikorita",
+    "name": "Chikorita",
+    "num": 152,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chikorita.png"
+  },
+  {
+    "id": "bayleef",
+    "name": "Bayleef",
+    "num": 153,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bayleef.png"
+  },
+  {
+    "id": "meganium",
+    "name": "Meganium",
+    "num": 154,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/meganium.png"
+  },
+  {
+    "id": "cyndaquil",
+    "name": "Cyndaquil",
+    "num": 155,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cyndaquil.png"
+  },
+  {
+    "id": "quilava",
+    "name": "Quilava",
+    "num": 156,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/quilava.png"
+  },
+  {
+    "id": "typhlosion",
+    "name": "Typhlosion",
+    "num": 157,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/typhlosion.png"
+  },
+  {
+    "id": "typhlosionhisui",
+    "name": "Typhlosion-Hisui",
+    "num": 157,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/typhlosionhisui.png"
+  },
+  {
+    "id": "totodile",
+    "name": "Totodile",
+    "num": 158,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/totodile.png"
+  },
+  {
+    "id": "croconaw",
+    "name": "Croconaw",
+    "num": 159,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/croconaw.png"
+  },
+  {
+    "id": "feraligatr",
+    "name": "Feraligatr",
+    "num": 160,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/feraligatr.png"
+  },
+  {
+    "id": "sentret",
+    "name": "Sentret",
+    "num": 161,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sentret.png"
+  },
+  {
+    "id": "furret",
+    "name": "Furret",
+    "num": 162,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/furret.png"
+  },
+  {
+    "id": "hoothoot",
+    "name": "Hoothoot",
+    "num": 163,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hoothoot.png"
+  },
+  {
+    "id": "noctowl",
+    "name": "Noctowl",
+    "num": 164,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/noctowl.png"
+  },
+  {
+    "id": "spinarak",
+    "name": "Spinarak",
+    "num": 167,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/spinarak.png"
+  },
+  {
+    "id": "ariados",
+    "name": "Ariados",
+    "num": 168,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ariados.png"
+  },
+  {
+    "id": "chinchou",
+    "name": "Chinchou",
+    "num": 170,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chinchou.png"
+  },
+  {
+    "id": "lanturn",
+    "name": "Lanturn",
+    "num": 171,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lanturn.png"
+  },
+  {
+    "id": "pichu",
+    "name": "Pichu",
+    "num": 172,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pichu.png"
+  },
+  {
+    "id": "cleffa",
+    "name": "Cleffa",
+    "num": 173,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cleffa.png"
+  },
+  {
+    "id": "igglybuff",
+    "name": "Igglybuff",
+    "num": 174,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/igglybuff.png"
+  },
+  {
+    "id": "mareep",
+    "name": "Mareep",
+    "num": 179,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mareep.png"
+  },
+  {
+    "id": "flaaffy",
+    "name": "Flaaffy",
+    "num": 180,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/flaaffy.png"
+  },
+  {
+    "id": "ampharos",
+    "name": "Ampharos",
+    "num": 181,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ampharos.png"
+  },
+  {
+    "id": "bellossom",
+    "name": "Bellossom",
+    "num": 182,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bellossom.png"
+  },
+  {
+    "id": "marill",
+    "name": "Marill",
+    "num": 183,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/marill.png"
+  },
+  {
+    "id": "azumarill",
+    "name": "Azumarill",
+    "num": 184,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/azumarill.png"
+  },
+  {
+    "id": "sudowoodo",
+    "name": "Sudowoodo",
+    "num": 185,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sudowoodo.png"
+  },
+  {
+    "id": "politoed",
+    "name": "Politoed",
+    "num": 186,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/politoed.png"
+  },
+  {
+    "id": "hoppip",
+    "name": "Hoppip",
+    "num": 187,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hoppip.png"
+  },
+  {
+    "id": "skiploom",
+    "name": "Skiploom",
+    "num": 188,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/skiploom.png"
+  },
+  {
+    "id": "jumpluff",
+    "name": "Jumpluff",
+    "num": 189,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/jumpluff.png"
+  },
+  {
+    "id": "aipom",
+    "name": "Aipom",
+    "num": 190,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/aipom.png"
+  },
+  {
+    "id": "sunkern",
+    "name": "Sunkern",
+    "num": 191,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sunkern.png"
+  },
+  {
+    "id": "sunflora",
+    "name": "Sunflora",
+    "num": 192,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sunflora.png"
+  },
+  {
+    "id": "yanma",
+    "name": "Yanma",
+    "num": 193,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/yanma.png"
+  },
+  {
+    "id": "wooper",
+    "name": "Wooper",
+    "num": 194,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/wooper.png"
+  },
+  {
+    "id": "wooperpaldea",
+    "name": "Wooper-Paldea",
+    "num": 194,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/wooperpaldea.png"
+  },
+  {
+    "id": "quagsire",
+    "name": "Quagsire",
+    "num": 195,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/quagsire.png"
+  },
+  {
+    "id": "espeon",
+    "name": "Espeon",
+    "num": 196,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/espeon.png"
+  },
+  {
+    "id": "umbreon",
+    "name": "Umbreon",
+    "num": 197,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/umbreon.png"
+  },
+  {
+    "id": "murkrow",
+    "name": "Murkrow",
+    "num": 198,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/murkrow.png"
+  },
+  {
+    "id": "slowking",
+    "name": "Slowking",
+    "num": 199,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/slowking.png"
+  },
+  {
+    "id": "slowkinggalar",
+    "name": "Slowking-Galar",
+    "num": 199,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/slowkinggalar.png"
+  },
+  {
+    "id": "misdreavus",
+    "name": "Misdreavus",
+    "num": 200,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/misdreavus.png"
+  },
+  {
+    "id": "girafarig",
+    "name": "Girafarig",
+    "num": 203,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/girafarig.png"
+  },
+  {
+    "id": "pineco",
+    "name": "Pineco",
+    "num": 204,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pineco.png"
+  },
+  {
+    "id": "forretress",
+    "name": "Forretress",
+    "num": 205,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/forretress.png"
+  },
+  {
+    "id": "dunsparce",
+    "name": "Dunsparce",
+    "num": 206,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dunsparce.png"
+  },
+  {
+    "id": "gligar",
+    "name": "Gligar",
+    "num": 207,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gligar.png"
+  },
+  {
+    "id": "snubbull",
+    "name": "Snubbull",
+    "num": 209,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/snubbull.png"
+  },
+  {
+    "id": "granbull",
+    "name": "Granbull",
+    "num": 210,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/granbull.png"
+  },
+  {
+    "id": "qwilfish",
+    "name": "Qwilfish",
+    "num": 211,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/qwilfish.png"
+  },
+  {
+    "id": "qwilfishhisui",
+    "name": "Qwilfish-Hisui",
+    "num": 211,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/qwilfishhisui.png"
+  },
+  {
+    "id": "scizor",
+    "name": "Scizor",
+    "num": 212,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/scizor.png"
+  },
+  {
+    "id": "heracross",
+    "name": "Heracross",
+    "num": 214,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/heracross.png"
+  },
+  {
+    "id": "sneasel",
+    "name": "Sneasel",
+    "num": 215,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sneasel.png"
+  },
+  {
+    "id": "sneaselhisui",
+    "name": "Sneasel-Hisui",
+    "num": 215,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sneaselhisui.png"
+  },
+  {
+    "id": "teddiursa",
+    "name": "Teddiursa",
+    "num": 216,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/teddiursa.png"
+  },
+  {
+    "id": "ursaring",
+    "name": "Ursaring",
+    "num": 217,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ursaring.png"
+  },
+  {
+    "id": "slugma",
+    "name": "Slugma",
+    "num": 218,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/slugma.png"
+  },
+  {
+    "id": "magcargo",
+    "name": "Magcargo",
+    "num": 219,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/magcargo.png"
+  },
+  {
+    "id": "swinub",
+    "name": "Swinub",
+    "num": 220,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/swinub.png"
+  },
+  {
+    "id": "piloswine",
+    "name": "Piloswine",
+    "num": 221,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/piloswine.png"
+  },
+  {
+    "id": "delibird",
+    "name": "Delibird",
+    "num": 225,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/delibird.png"
+  },
+  {
+    "id": "skarmory",
+    "name": "Skarmory",
+    "num": 227,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/skarmory.png"
+  },
+  {
+    "id": "houndour",
+    "name": "Houndour",
+    "num": 228,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/houndour.png"
+  },
+  {
+    "id": "houndoom",
+    "name": "Houndoom",
+    "num": 229,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/houndoom.png"
+  },
+  {
+    "id": "kingdra",
+    "name": "Kingdra",
+    "num": 230,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kingdra.png"
+  },
+  {
+    "id": "phanpy",
+    "name": "Phanpy",
+    "num": 231,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/phanpy.png"
+  },
+  {
+    "id": "donphan",
+    "name": "Donphan",
+    "num": 232,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/donphan.png"
+  },
+  {
+    "id": "porygon2",
+    "name": "Porygon2",
+    "num": 233,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/porygon2.png"
+  },
+  {
+    "id": "stantler",
+    "name": "Stantler",
+    "num": 234,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/stantler.png"
+  },
+  {
+    "id": "smeargle",
+    "name": "Smeargle",
+    "num": 235,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/smeargle.png"
+  },
+  {
+    "id": "tyrogue",
+    "name": "Tyrogue",
+    "num": 236,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tyrogue.png"
+  },
+  {
+    "id": "hitmontop",
+    "name": "Hitmontop",
+    "num": 237,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hitmontop.png"
+  },
+  {
+    "id": "elekid",
+    "name": "Elekid",
+    "num": 239,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/elekid.png"
+  },
+  {
+    "id": "magby",
+    "name": "Magby",
+    "num": 240,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/magby.png"
+  },
+  {
+    "id": "blissey",
+    "name": "Blissey",
+    "num": 242,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/blissey.png"
+  },
+  {
+    "id": "raikou",
+    "name": "Raikou",
+    "num": 243,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/raikou.png"
+  },
+  {
+    "id": "entei",
+    "name": "Entei",
+    "num": 244,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/entei.png"
+  },
+  {
+    "id": "suicune",
+    "name": "Suicune",
+    "num": 245,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/suicune.png"
+  },
+  {
+    "id": "larvitar",
+    "name": "Larvitar",
+    "num": 246,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/larvitar.png"
+  },
+  {
+    "id": "pupitar",
+    "name": "Pupitar",
+    "num": 247,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pupitar.png"
+  },
+  {
+    "id": "tyranitar",
+    "name": "Tyranitar",
+    "num": 248,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tyranitar.png"
+  },
+  {
+    "id": "lugia",
+    "name": "Lugia",
+    "num": 249,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lugia.png"
+  },
+  {
+    "id": "hooh",
+    "name": "Ho-Oh",
+    "num": 250,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hooh.png"
+  },
+  {
+    "id": "treecko",
+    "name": "Treecko",
+    "num": 252,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/treecko.png"
+  },
+  {
+    "id": "grovyle",
+    "name": "Grovyle",
+    "num": 253,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/grovyle.png"
+  },
+  {
+    "id": "sceptile",
+    "name": "Sceptile",
+    "num": 254,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sceptile.png"
+  },
+  {
+    "id": "torchic",
+    "name": "Torchic",
+    "num": 255,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/torchic.png"
+  },
+  {
+    "id": "combusken",
+    "name": "Combusken",
+    "num": 256,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/combusken.png"
+  },
+  {
+    "id": "blaziken",
+    "name": "Blaziken",
+    "num": 257,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/blaziken.png"
+  },
+  {
+    "id": "mudkip",
+    "name": "Mudkip",
+    "num": 258,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mudkip.png"
+  },
+  {
+    "id": "marshtomp",
+    "name": "Marshtomp",
+    "num": 259,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/marshtomp.png"
+  },
+  {
+    "id": "swampert",
+    "name": "Swampert",
+    "num": 260,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/swampert.png"
+  },
+  {
+    "id": "poochyena",
+    "name": "Poochyena",
+    "num": 261,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/poochyena.png"
+  },
+  {
+    "id": "mightyena",
+    "name": "Mightyena",
+    "num": 262,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mightyena.png"
+  },
+  {
+    "id": "lotad",
+    "name": "Lotad",
+    "num": 270,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lotad.png"
+  },
+  {
+    "id": "lombre",
+    "name": "Lombre",
+    "num": 271,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lombre.png"
+  },
+  {
+    "id": "ludicolo",
+    "name": "Ludicolo",
+    "num": 272,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ludicolo.png"
+  },
+  {
+    "id": "seedot",
+    "name": "Seedot",
+    "num": 273,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/seedot.png"
+  },
+  {
+    "id": "nuzleaf",
+    "name": "Nuzleaf",
+    "num": 274,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/nuzleaf.png"
+  },
+  {
+    "id": "shiftry",
+    "name": "Shiftry",
+    "num": 275,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shiftry.png"
+  },
+  {
+    "id": "wingull",
+    "name": "Wingull",
+    "num": 278,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/wingull.png"
+  },
+  {
+    "id": "pelipper",
+    "name": "Pelipper",
+    "num": 279,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pelipper.png"
+  },
+  {
+    "id": "ralts",
+    "name": "Ralts",
+    "num": 280,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ralts.png"
+  },
+  {
+    "id": "kirlia",
+    "name": "Kirlia",
+    "num": 281,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kirlia.png"
+  },
+  {
+    "id": "gardevoir",
+    "name": "Gardevoir",
+    "num": 282,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gardevoir.png"
+  },
+  {
+    "id": "surskit",
+    "name": "Surskit",
+    "num": 283,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/surskit.png"
+  },
+  {
+    "id": "masquerain",
+    "name": "Masquerain",
+    "num": 284,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/masquerain.png"
+  },
+  {
+    "id": "shroomish",
+    "name": "Shroomish",
+    "num": 285,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shroomish.png"
+  },
+  {
+    "id": "breloom",
+    "name": "Breloom",
+    "num": 286,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/breloom.png"
+  },
+  {
+    "id": "slakoth",
+    "name": "Slakoth",
+    "num": 287,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/slakoth.png"
+  },
+  {
+    "id": "vigoroth",
+    "name": "Vigoroth",
+    "num": 288,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/vigoroth.png"
+  },
+  {
+    "id": "slaking",
+    "name": "Slaking",
+    "num": 289,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/slaking.png"
+  },
+  {
+    "id": "makuhita",
+    "name": "Makuhita",
+    "num": 296,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/makuhita.png"
+  },
+  {
+    "id": "hariyama",
+    "name": "Hariyama",
+    "num": 297,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hariyama.png"
+  },
+  {
+    "id": "azurill",
+    "name": "Azurill",
+    "num": 298,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/azurill.png"
+  },
+  {
+    "id": "nosepass",
+    "name": "Nosepass",
+    "num": 299,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/nosepass.png"
+  },
+  {
+    "id": "sableye",
+    "name": "Sableye",
+    "num": 302,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sableye.png"
+  },
+  {
+    "id": "meditite",
+    "name": "Meditite",
+    "num": 307,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/meditite.png"
+  },
+  {
+    "id": "medicham",
+    "name": "Medicham",
+    "num": 308,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/medicham.png"
+  },
+  {
+    "id": "plusle",
+    "name": "Plusle",
+    "num": 311,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/plusle.png"
+  },
+  {
+    "id": "minun",
+    "name": "Minun",
+    "num": 312,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/minun.png"
+  },
+  {
+    "id": "volbeat",
+    "name": "Volbeat",
+    "num": 313,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/volbeat.png"
+  },
+  {
+    "id": "illumise",
+    "name": "Illumise",
+    "num": 314,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/illumise.png"
+  },
+  {
+    "id": "gulpin",
+    "name": "Gulpin",
+    "num": 316,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gulpin.png"
+  },
+  {
+    "id": "swalot",
+    "name": "Swalot",
+    "num": 317,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/swalot.png"
+  },
+  {
+    "id": "numel",
+    "name": "Numel",
+    "num": 322,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/numel.png"
+  },
+  {
+    "id": "camerupt",
+    "name": "Camerupt",
+    "num": 323,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/camerupt.png"
+  },
+  {
+    "id": "torkoal",
+    "name": "Torkoal",
+    "num": 324,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/torkoal.png"
+  },
+  {
+    "id": "spoink",
+    "name": "Spoink",
+    "num": 325,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/spoink.png"
+  },
+  {
+    "id": "grumpig",
+    "name": "Grumpig",
+    "num": 326,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/grumpig.png"
+  },
+  {
+    "id": "trapinch",
+    "name": "Trapinch",
+    "num": 328,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/trapinch.png"
+  },
+  {
+    "id": "vibrava",
+    "name": "Vibrava",
+    "num": 329,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/vibrava.png"
+  },
+  {
+    "id": "flygon",
+    "name": "Flygon",
+    "num": 330,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/flygon.png"
+  },
+  {
+    "id": "cacnea",
+    "name": "Cacnea",
+    "num": 331,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cacnea.png"
+  },
+  {
+    "id": "cacturne",
+    "name": "Cacturne",
+    "num": 332,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cacturne.png"
+  },
+  {
+    "id": "swablu",
+    "name": "Swablu",
+    "num": 333,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/swablu.png"
+  },
+  {
+    "id": "altaria",
+    "name": "Altaria",
+    "num": 334,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/altaria.png"
+  },
+  {
+    "id": "zangoose",
+    "name": "Zangoose",
+    "num": 335,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zangoose.png"
+  },
+  {
+    "id": "seviper",
+    "name": "Seviper",
+    "num": 336,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/seviper.png"
+  },
+  {
+    "id": "barboach",
+    "name": "Barboach",
+    "num": 339,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/barboach.png"
+  },
+  {
+    "id": "whiscash",
+    "name": "Whiscash",
+    "num": 340,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/whiscash.png"
+  },
+  {
+    "id": "corphish",
+    "name": "Corphish",
+    "num": 341,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/corphish.png"
+  },
+  {
+    "id": "crawdaunt",
+    "name": "Crawdaunt",
+    "num": 342,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/crawdaunt.png"
+  },
+  {
+    "id": "feebas",
+    "name": "Feebas",
+    "num": 349,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/feebas.png"
+  },
+  {
+    "id": "milotic",
+    "name": "Milotic",
+    "num": 350,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/milotic.png"
+  },
+  {
+    "id": "shuppet",
+    "name": "Shuppet",
+    "num": 353,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shuppet.png"
+  },
+  {
+    "id": "banette",
+    "name": "Banette",
+    "num": 354,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/banette.png"
+  },
+  {
+    "id": "duskull",
+    "name": "Duskull",
+    "num": 355,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/duskull.png"
+  },
+  {
+    "id": "dusclops",
+    "name": "Dusclops",
+    "num": 356,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dusclops.png"
+  },
+  {
+    "id": "tropius",
+    "name": "Tropius",
+    "num": 357,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tropius.png"
+  },
+  {
+    "id": "chimecho",
+    "name": "Chimecho",
+    "num": 358,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chimecho.png"
+  },
+  {
+    "id": "snorunt",
+    "name": "Snorunt",
+    "num": 361,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/snorunt.png"
+  },
+  {
+    "id": "glalie",
+    "name": "Glalie",
+    "num": 362,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/glalie.png"
+  },
+  {
+    "id": "luvdisc",
+    "name": "Luvdisc",
+    "num": 370,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/luvdisc.png"
+  },
+  {
+    "id": "bagon",
+    "name": "Bagon",
+    "num": 371,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bagon.png"
+  },
+  {
+    "id": "shelgon",
+    "name": "Shelgon",
+    "num": 372,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shelgon.png"
+  },
+  {
+    "id": "salamence",
+    "name": "Salamence",
+    "num": 373,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/salamence.png"
+  },
+  {
+    "id": "beldum",
+    "name": "Beldum",
+    "num": 374,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/beldum.png"
+  },
+  {
+    "id": "metang",
+    "name": "Metang",
+    "num": 375,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/metang.png"
+  },
+  {
+    "id": "metagross",
+    "name": "Metagross",
+    "num": 376,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/metagross.png"
+  },
+  {
+    "id": "regirock",
+    "name": "Regirock",
+    "num": 377,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/regirock.png"
+  },
+  {
+    "id": "regice",
+    "name": "Regice",
+    "num": 378,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/regice.png"
+  },
+  {
+    "id": "registeel",
+    "name": "Registeel",
+    "num": 379,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/registeel.png"
+  },
+  {
+    "id": "latias",
+    "name": "Latias",
+    "num": 380,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/latias.png"
+  },
+  {
+    "id": "latios",
+    "name": "Latios",
+    "num": 381,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/latios.png"
+  },
+  {
+    "id": "kyogre",
+    "name": "Kyogre",
+    "num": 382,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kyogre.png"
+  },
+  {
+    "id": "groudon",
+    "name": "Groudon",
+    "num": 383,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/groudon.png"
+  },
+  {
+    "id": "rayquaza",
+    "name": "Rayquaza",
+    "num": 384,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rayquaza.png"
+  },
+  {
+    "id": "jirachi",
+    "name": "Jirachi",
+    "num": 385,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/jirachi.png"
+  },
+  {
+    "id": "deoxys",
+    "name": "Deoxys",
+    "num": 386,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/deoxys.png"
+  },
+  {
+    "id": "deoxysattack",
+    "name": "Deoxys-Attack",
+    "num": 386,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/deoxysattack.png"
+  },
+  {
+    "id": "deoxysdefense",
+    "name": "Deoxys-Defense",
+    "num": 386,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/deoxysdefense.png"
+  },
+  {
+    "id": "deoxysspeed",
+    "name": "Deoxys-Speed",
+    "num": 386,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/deoxysspeed.png"
+  },
+  {
+    "id": "turtwig",
+    "name": "Turtwig",
+    "num": 387,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/turtwig.png"
+  },
+  {
+    "id": "grotle",
+    "name": "Grotle",
+    "num": 388,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/grotle.png"
+  },
+  {
+    "id": "torterra",
+    "name": "Torterra",
+    "num": 389,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/torterra.png"
+  },
+  {
+    "id": "chimchar",
+    "name": "Chimchar",
+    "num": 390,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chimchar.png"
+  },
+  {
+    "id": "monferno",
+    "name": "Monferno",
+    "num": 391,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/monferno.png"
+  },
+  {
+    "id": "infernape",
+    "name": "Infernape",
+    "num": 392,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/infernape.png"
+  },
+  {
+    "id": "piplup",
+    "name": "Piplup",
+    "num": 393,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/piplup.png"
+  },
+  {
+    "id": "prinplup",
+    "name": "Prinplup",
+    "num": 394,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/prinplup.png"
+  },
+  {
+    "id": "empoleon",
+    "name": "Empoleon",
+    "num": 395,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/empoleon.png"
+  },
+  {
+    "id": "starly",
+    "name": "Starly",
+    "num": 396,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/starly.png"
+  },
+  {
+    "id": "staravia",
+    "name": "Staravia",
+    "num": 397,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/staravia.png"
+  },
+  {
+    "id": "staraptor",
+    "name": "Staraptor",
+    "num": 398,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/staraptor.png"
+  },
+  {
+    "id": "kricketot",
+    "name": "Kricketot",
+    "num": 401,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kricketot.png"
+  },
+  {
+    "id": "kricketune",
+    "name": "Kricketune",
+    "num": 402,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kricketune.png"
+  },
+  {
+    "id": "shinx",
+    "name": "Shinx",
+    "num": 403,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shinx.png"
+  },
+  {
+    "id": "luxio",
+    "name": "Luxio",
+    "num": 404,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/luxio.png"
+  },
+  {
+    "id": "luxray",
+    "name": "Luxray",
+    "num": 405,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/luxray.png"
+  },
+  {
+    "id": "cranidos",
+    "name": "Cranidos",
+    "num": 408,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cranidos.png"
+  },
+  {
+    "id": "rampardos",
+    "name": "Rampardos",
+    "num": 409,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rampardos.png"
+  },
+  {
+    "id": "shieldon",
+    "name": "Shieldon",
+    "num": 410,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shieldon.png"
+  },
+  {
+    "id": "bastiodon",
+    "name": "Bastiodon",
+    "num": 411,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bastiodon.png"
+  },
+  {
+    "id": "combee",
+    "name": "Combee",
+    "num": 415,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/combee.png"
+  },
+  {
+    "id": "vespiquen",
+    "name": "Vespiquen",
+    "num": 416,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/vespiquen.png"
+  },
+  {
+    "id": "pachirisu",
+    "name": "Pachirisu",
+    "num": 417,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pachirisu.png"
+  },
+  {
+    "id": "buizel",
+    "name": "Buizel",
+    "num": 418,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/buizel.png"
+  },
+  {
+    "id": "floatzel",
+    "name": "Floatzel",
+    "num": 419,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/floatzel.png"
+  },
+  {
+    "id": "shellos",
+    "name": "Shellos",
+    "num": 422,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shellos.png"
+  },
+  {
+    "id": "gastrodon",
+    "name": "Gastrodon",
+    "num": 423,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gastrodon.png"
+  },
+  {
+    "id": "ambipom",
+    "name": "Ambipom",
+    "num": 424,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ambipom.png"
+  },
+  {
+    "id": "drifloon",
+    "name": "Drifloon",
+    "num": 425,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/drifloon.png"
+  },
+  {
+    "id": "drifblim",
+    "name": "Drifblim",
+    "num": 426,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/drifblim.png"
+  },
+  {
+    "id": "mismagius",
+    "name": "Mismagius",
+    "num": 429,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mismagius.png"
+  },
+  {
+    "id": "honchkrow",
+    "name": "Honchkrow",
+    "num": 430,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/honchkrow.png"
+  },
+  {
+    "id": "chingling",
+    "name": "Chingling",
+    "num": 433,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chingling.png"
+  },
+  {
+    "id": "stunky",
+    "name": "Stunky",
+    "num": 434,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/stunky.png"
+  },
+  {
+    "id": "skuntank",
+    "name": "Skuntank",
+    "num": 435,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/skuntank.png"
+  },
+  {
+    "id": "bronzor",
+    "name": "Bronzor",
+    "num": 436,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bronzor.png"
+  },
+  {
+    "id": "bronzong",
+    "name": "Bronzong",
+    "num": 437,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bronzong.png"
+  },
+  {
+    "id": "bonsly",
+    "name": "Bonsly",
+    "num": 438,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bonsly.png"
+  },
+  {
+    "id": "happiny",
+    "name": "Happiny",
+    "num": 440,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/happiny.png"
+  },
+  {
+    "id": "spiritomb",
+    "name": "Spiritomb",
+    "num": 442,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/spiritomb.png"
+  },
+  {
+    "id": "gible",
+    "name": "Gible",
+    "num": 443,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gible.png"
+  },
+  {
+    "id": "gabite",
+    "name": "Gabite",
+    "num": 444,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gabite.png"
+  },
+  {
+    "id": "garchomp",
+    "name": "Garchomp",
+    "num": 445,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/garchomp.png"
+  },
+  {
+    "id": "munchlax",
+    "name": "Munchlax",
+    "num": 446,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/munchlax.png"
+  },
+  {
+    "id": "riolu",
+    "name": "Riolu",
+    "num": 447,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/riolu.png"
+  },
+  {
+    "id": "lucario",
+    "name": "Lucario",
+    "num": 448,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lucario.png"
+  },
+  {
+    "id": "hippopotas",
+    "name": "Hippopotas",
+    "num": 449,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hippopotas.png"
+  },
+  {
+    "id": "hippowdon",
+    "name": "Hippowdon",
+    "num": 450,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hippowdon.png"
+  },
+  {
+    "id": "croagunk",
+    "name": "Croagunk",
+    "num": 453,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/croagunk.png"
+  },
+  {
+    "id": "toxicroak",
+    "name": "Toxicroak",
+    "num": 454,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/toxicroak.png"
+  },
+  {
+    "id": "finneon",
+    "name": "Finneon",
+    "num": 456,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/finneon.png"
+  },
+  {
+    "id": "lumineon",
+    "name": "Lumineon",
+    "num": 457,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lumineon.png"
+  },
+  {
+    "id": "snover",
+    "name": "Snover",
+    "num": 459,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/snover.png"
+  },
+  {
+    "id": "abomasnow",
+    "name": "Abomasnow",
+    "num": 460,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/abomasnow.png"
+  },
+  {
+    "id": "weavile",
+    "name": "Weavile",
+    "num": 461,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/weavile.png"
+  },
+  {
+    "id": "magnezone",
+    "name": "Magnezone",
+    "num": 462,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/magnezone.png"
+  },
+  {
+    "id": "rhyperior",
+    "name": "Rhyperior",
+    "num": 464,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rhyperior.png"
+  },
+  {
+    "id": "electivire",
+    "name": "Electivire",
+    "num": 466,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/electivire.png"
+  },
+  {
+    "id": "magmortar",
+    "name": "Magmortar",
+    "num": 467,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/magmortar.png"
+  },
+  {
+    "id": "yanmega",
+    "name": "Yanmega",
+    "num": 469,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/yanmega.png"
+  },
+  {
+    "id": "leafeon",
+    "name": "Leafeon",
+    "num": 470,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/leafeon.png"
+  },
+  {
+    "id": "glaceon",
+    "name": "Glaceon",
+    "num": 471,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/glaceon.png"
+  },
+  {
+    "id": "gliscor",
+    "name": "Gliscor",
+    "num": 472,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gliscor.png"
+  },
+  {
+    "id": "mamoswine",
+    "name": "Mamoswine",
+    "num": 473,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mamoswine.png"
+  },
+  {
+    "id": "porygonz",
+    "name": "Porygon-Z",
+    "num": 474,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/porygonz.png"
+  },
+  {
+    "id": "gallade",
+    "name": "Gallade",
+    "num": 475,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gallade.png"
+  },
+  {
+    "id": "probopass",
+    "name": "Probopass",
+    "num": 476,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/probopass.png"
+  },
+  {
+    "id": "dusknoir",
+    "name": "Dusknoir",
+    "num": 477,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dusknoir.png"
+  },
+  {
+    "id": "froslass",
+    "name": "Froslass",
+    "num": 478,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/froslass.png"
+  },
+  {
+    "id": "rotom",
+    "name": "Rotom",
+    "num": 479,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rotom.png"
+  },
+  {
+    "id": "rotomheat",
+    "name": "Rotom-Heat",
+    "num": 479,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rotomheat.png"
+  },
+  {
+    "id": "rotomwash",
+    "name": "Rotom-Wash",
+    "num": 479,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rotomwash.png"
+  },
+  {
+    "id": "rotomfrost",
+    "name": "Rotom-Frost",
+    "num": 479,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rotomfrost.png"
+  },
+  {
+    "id": "rotomfan",
+    "name": "Rotom-Fan",
+    "num": 479,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rotomfan.png"
+  },
+  {
+    "id": "rotommow",
+    "name": "Rotom-Mow",
+    "num": 479,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rotommow.png"
+  },
+  {
+    "id": "uxie",
+    "name": "Uxie",
+    "num": 480,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/uxie.png"
+  },
+  {
+    "id": "mesprit",
+    "name": "Mesprit",
+    "num": 481,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mesprit.png"
+  },
+  {
+    "id": "azelf",
+    "name": "Azelf",
+    "num": 482,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/azelf.png"
+  },
+  {
+    "id": "dialga",
+    "name": "Dialga",
+    "num": 483,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dialga.png"
+  },
+  {
+    "id": "palkia",
+    "name": "Palkia",
+    "num": 484,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/palkia.png"
+  },
+  {
+    "id": "heatran",
+    "name": "Heatran",
+    "num": 485,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/heatran.png"
+  },
+  {
+    "id": "regigigas",
+    "name": "Regigigas",
+    "num": 486,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/regigigas.png"
+  },
+  {
+    "id": "giratina",
+    "name": "Giratina",
+    "num": 487,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/giratina.png"
+  },
+  {
+    "id": "giratinaorigin",
+    "name": "Giratina-Origin",
+    "num": 487,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/giratinaorigin.png"
+  },
+  {
+    "id": "cresselia",
+    "name": "Cresselia",
+    "num": 488,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cresselia.png"
+  },
+  {
+    "id": "phione",
+    "name": "Phione",
+    "num": 489,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/phione.png"
+  },
+  {
+    "id": "manaphy",
+    "name": "Manaphy",
+    "num": 490,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/manaphy.png"
+  },
+  {
+    "id": "darkrai",
+    "name": "Darkrai",
+    "num": 491,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/darkrai.png"
+  },
+  {
+    "id": "shaymin",
+    "name": "Shaymin",
+    "num": 492,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shaymin.png"
+  },
+  {
+    "id": "shayminsky",
+    "name": "Shaymin-Sky",
+    "num": 492,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shayminsky.png"
+  },
+  {
+    "id": "arceus",
+    "name": "Arceus",
+    "num": 493,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/arceus.png"
+  },
+  {
+    "id": "snivy",
+    "name": "Snivy",
+    "num": 495,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/snivy.png"
+  },
+  {
+    "id": "servine",
+    "name": "Servine",
+    "num": 496,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/servine.png"
+  },
+  {
+    "id": "serperior",
+    "name": "Serperior",
+    "num": 497,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/serperior.png"
+  },
+  {
+    "id": "tepig",
+    "name": "Tepig",
+    "num": 498,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tepig.png"
+  },
+  {
+    "id": "pignite",
+    "name": "Pignite",
+    "num": 499,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pignite.png"
+  },
+  {
+    "id": "emboar",
+    "name": "Emboar",
+    "num": 500,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/emboar.png"
+  },
+  {
+    "id": "oshawott",
+    "name": "Oshawott",
+    "num": 501,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/oshawott.png"
+  },
+  {
+    "id": "dewott",
+    "name": "Dewott",
+    "num": 502,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dewott.png"
+  },
+  {
+    "id": "samurott",
+    "name": "Samurott",
+    "num": 503,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/samurott.png"
+  },
+  {
+    "id": "samurotthisui",
+    "name": "Samurott-Hisui",
+    "num": 503,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/samurotthisui.png"
+  },
+  {
+    "id": "blitzle",
+    "name": "Blitzle",
+    "num": 522,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/blitzle.png"
+  },
+  {
+    "id": "zebstrika",
+    "name": "Zebstrika",
+    "num": 523,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zebstrika.png"
+  },
+  {
+    "id": "drilbur",
+    "name": "Drilbur",
+    "num": 529,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/drilbur.png"
+  },
+  {
+    "id": "excadrill",
+    "name": "Excadrill",
+    "num": 530,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/excadrill.png"
+  },
+  {
+    "id": "timburr",
+    "name": "Timburr",
+    "num": 532,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/timburr.png"
+  },
+  {
+    "id": "gurdurr",
+    "name": "Gurdurr",
+    "num": 533,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gurdurr.png"
+  },
+  {
+    "id": "conkeldurr",
+    "name": "Conkeldurr",
+    "num": 534,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/conkeldurr.png"
+  },
+  {
+    "id": "sewaddle",
+    "name": "Sewaddle",
+    "num": 540,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sewaddle.png"
+  },
+  {
+    "id": "swadloon",
+    "name": "Swadloon",
+    "num": 541,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/swadloon.png"
+  },
+  {
+    "id": "leavanny",
+    "name": "Leavanny",
+    "num": 542,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/leavanny.png"
+  },
+  {
+    "id": "cottonee",
+    "name": "Cottonee",
+    "num": 546,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cottonee.png"
+  },
+  {
+    "id": "whimsicott",
+    "name": "Whimsicott",
+    "num": 547,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/whimsicott.png"
+  },
+  {
+    "id": "petilil",
+    "name": "Petilil",
+    "num": 548,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/petilil.png"
+  },
+  {
+    "id": "lilligant",
+    "name": "Lilligant",
+    "num": 549,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lilligant.png"
+  },
+  {
+    "id": "lilliganthisui",
+    "name": "Lilligant-Hisui",
+    "num": 549,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lilliganthisui.png"
+  },
+  {
+    "id": "basculin",
+    "name": "Basculin",
+    "num": 550,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/basculin.png"
+  },
+  {
+    "id": "sandile",
+    "name": "Sandile",
+    "num": 551,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sandile.png"
+  },
+  {
+    "id": "krokorok",
+    "name": "Krokorok",
+    "num": 552,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/krokorok.png"
+  },
+  {
+    "id": "krookodile",
+    "name": "Krookodile",
+    "num": 553,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/krookodile.png"
+  },
+  {
+    "id": "scraggy",
+    "name": "Scraggy",
+    "num": 559,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/scraggy.png"
+  },
+  {
+    "id": "scrafty",
+    "name": "Scrafty",
+    "num": 560,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/scrafty.png"
+  },
+  {
+    "id": "zorua",
+    "name": "Zorua",
+    "num": 570,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zorua.png"
+  },
+  {
+    "id": "zoruahisui",
+    "name": "Zorua-Hisui",
+    "num": 570,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zoruahisui.png"
+  },
+  {
+    "id": "zoroark",
+    "name": "Zoroark",
+    "num": 571,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zoroark.png"
+  },
+  {
+    "id": "zoroarkhisui",
+    "name": "Zoroark-Hisui",
+    "num": 571,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zoroarkhisui.png"
+  },
+  {
+    "id": "minccino",
+    "name": "Minccino",
+    "num": 572,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/minccino.png"
+  },
+  {
+    "id": "cinccino",
+    "name": "Cinccino",
+    "num": 573,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cinccino.png"
+  },
+  {
+    "id": "gothita",
+    "name": "Gothita",
+    "num": 574,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gothita.png"
+  },
+  {
+    "id": "gothorita",
+    "name": "Gothorita",
+    "num": 575,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gothorita.png"
+  },
+  {
+    "id": "gothitelle",
+    "name": "Gothitelle",
+    "num": 576,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gothitelle.png"
+  },
+  {
+    "id": "solosis",
+    "name": "Solosis",
+    "num": 577,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/solosis.png"
+  },
+  {
+    "id": "duosion",
+    "name": "Duosion",
+    "num": 578,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/duosion.png"
+  },
+  {
+    "id": "reuniclus",
+    "name": "Reuniclus",
+    "num": 579,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/reuniclus.png"
+  },
+  {
+    "id": "ducklett",
+    "name": "Ducklett",
+    "num": 580,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ducklett.png"
+  },
+  {
+    "id": "swanna",
+    "name": "Swanna",
+    "num": 581,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/swanna.png"
+  },
+  {
+    "id": "deerling",
+    "name": "Deerling",
+    "num": 585,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/deerling.png"
+  },
+  {
+    "id": "sawsbuck",
+    "name": "Sawsbuck",
+    "num": 586,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sawsbuck.png"
+  },
+  {
+    "id": "foongus",
+    "name": "Foongus",
+    "num": 590,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/foongus.png"
+  },
+  {
+    "id": "amoonguss",
+    "name": "Amoonguss",
+    "num": 591,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/amoonguss.png"
+  },
+  {
+    "id": "alomomola",
+    "name": "Alomomola",
+    "num": 594,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/alomomola.png"
+  },
+  {
+    "id": "joltik",
+    "name": "Joltik",
+    "num": 595,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/joltik.png"
+  },
+  {
+    "id": "galvantula",
+    "name": "Galvantula",
+    "num": 596,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/galvantula.png"
+  },
+  {
+    "id": "tynamo",
+    "name": "Tynamo",
+    "num": 602,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tynamo.png"
+  },
+  {
+    "id": "eelektrik",
+    "name": "Eelektrik",
+    "num": 603,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/eelektrik.png"
+  },
+  {
+    "id": "eelektross",
+    "name": "Eelektross",
+    "num": 604,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/eelektross.png"
+  },
+  {
+    "id": "litwick",
+    "name": "Litwick",
+    "num": 607,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/litwick.png"
+  },
+  {
+    "id": "lampent",
+    "name": "Lampent",
+    "num": 608,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lampent.png"
+  },
+  {
+    "id": "chandelure",
+    "name": "Chandelure",
+    "num": 609,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chandelure.png"
+  },
+  {
+    "id": "axew",
+    "name": "Axew",
+    "num": 610,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/axew.png"
+  },
+  {
+    "id": "fraxure",
+    "name": "Fraxure",
+    "num": 611,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/fraxure.png"
+  },
+  {
+    "id": "haxorus",
+    "name": "Haxorus",
+    "num": 612,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/haxorus.png"
+  },
+  {
+    "id": "cubchoo",
+    "name": "Cubchoo",
+    "num": 613,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cubchoo.png"
+  },
+  {
+    "id": "beartic",
+    "name": "Beartic",
+    "num": 614,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/beartic.png"
+  },
+  {
+    "id": "cryogonal",
+    "name": "Cryogonal",
+    "num": 615,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cryogonal.png"
+  },
+  {
+    "id": "mienfoo",
+    "name": "Mienfoo",
+    "num": 619,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mienfoo.png"
+  },
+  {
+    "id": "mienshao",
+    "name": "Mienshao",
+    "num": 620,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mienshao.png"
+  },
+  {
+    "id": "golett",
+    "name": "Golett",
+    "num": 622,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/golett.png"
+  },
+  {
+    "id": "golurk",
+    "name": "Golurk",
+    "num": 623,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/golurk.png"
+  },
+  {
+    "id": "pawniard",
+    "name": "Pawniard",
+    "num": 624,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pawniard.png"
+  },
+  {
+    "id": "bisharp",
+    "name": "Bisharp",
+    "num": 625,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bisharp.png"
+  },
+  {
+    "id": "rufflet",
+    "name": "Rufflet",
+    "num": 627,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rufflet.png"
+  },
+  {
+    "id": "braviary",
+    "name": "Braviary",
+    "num": 628,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/braviary.png"
+  },
+  {
+    "id": "braviaryhisui",
+    "name": "Braviary-Hisui",
+    "num": 628,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/braviaryhisui.png"
+  },
+  {
+    "id": "vullaby",
+    "name": "Vullaby",
+    "num": 629,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/vullaby.png"
+  },
+  {
+    "id": "mandibuzz",
+    "name": "Mandibuzz",
+    "num": 630,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mandibuzz.png"
+  },
+  {
+    "id": "deino",
+    "name": "Deino",
+    "num": 633,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/deino.png"
+  },
+  {
+    "id": "zweilous",
+    "name": "Zweilous",
+    "num": 634,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zweilous.png"
+  },
+  {
+    "id": "hydreigon",
+    "name": "Hydreigon",
+    "num": 635,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hydreigon.png"
+  },
+  {
+    "id": "larvesta",
+    "name": "Larvesta",
+    "num": 636,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/larvesta.png"
+  },
+  {
+    "id": "volcarona",
+    "name": "Volcarona",
+    "num": 637,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/volcarona.png"
+  },
+  {
+    "id": "cobalion",
+    "name": "Cobalion",
+    "num": 638,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cobalion.png"
+  },
+  {
+    "id": "terrakion",
+    "name": "Terrakion",
+    "num": 639,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/terrakion.png"
+  },
+  {
+    "id": "virizion",
+    "name": "Virizion",
+    "num": 640,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/virizion.png"
+  },
+  {
+    "id": "tornadus",
+    "name": "Tornadus",
+    "num": 641,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tornadus.png"
+  },
+  {
+    "id": "tornadustherian",
+    "name": "Tornadus-Therian",
+    "num": 641,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tornadustherian.png"
+  },
+  {
+    "id": "thundurus",
+    "name": "Thundurus",
+    "num": 642,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/thundurus.png"
+  },
+  {
+    "id": "thundurustherian",
+    "name": "Thundurus-Therian",
+    "num": 642,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/thundurustherian.png"
+  },
+  {
+    "id": "reshiram",
+    "name": "Reshiram",
+    "num": 643,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/reshiram.png"
+  },
+  {
+    "id": "zekrom",
+    "name": "Zekrom",
+    "num": 644,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zekrom.png"
+  },
+  {
+    "id": "landorus",
+    "name": "Landorus",
+    "num": 645,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/landorus.png"
+  },
+  {
+    "id": "landorustherian",
+    "name": "Landorus-Therian",
+    "num": 645,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/landorustherian.png"
+  },
+  {
+    "id": "kyurem",
+    "name": "Kyurem",
+    "num": 646,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kyurem.png"
+  },
+  {
+    "id": "kyuremblack",
+    "name": "Kyurem-Black",
+    "num": 646,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kyuremblack.png"
+  },
+  {
+    "id": "kyuremwhite",
+    "name": "Kyurem-White",
+    "num": 646,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kyuremwhite.png"
+  },
+  {
+    "id": "keldeo",
+    "name": "Keldeo",
+    "num": 647,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/keldeo.png"
+  },
+  {
+    "id": "meloetta",
+    "name": "Meloetta",
+    "num": 648,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/meloetta.png"
+  },
+  {
+    "id": "chespin",
+    "name": "Chespin",
+    "num": 650,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chespin.png"
+  },
+  {
+    "id": "quilladin",
+    "name": "Quilladin",
+    "num": 651,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/quilladin.png"
+  },
+  {
+    "id": "chesnaught",
+    "name": "Chesnaught",
+    "num": 652,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chesnaught.png"
+  },
+  {
+    "id": "fennekin",
+    "name": "Fennekin",
+    "num": 653,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/fennekin.png"
+  },
+  {
+    "id": "braixen",
+    "name": "Braixen",
+    "num": 654,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/braixen.png"
+  },
+  {
+    "id": "delphox",
+    "name": "Delphox",
+    "num": 655,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/delphox.png"
+  },
+  {
+    "id": "froakie",
+    "name": "Froakie",
+    "num": 656,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/froakie.png"
+  },
+  {
+    "id": "frogadier",
+    "name": "Frogadier",
+    "num": 657,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/frogadier.png"
+  },
+  {
+    "id": "greninja",
+    "name": "Greninja",
+    "num": 658,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/greninja.png"
+  },
+  {
+    "id": "fletchling",
+    "name": "Fletchling",
+    "num": 661,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/fletchling.png"
+  },
+  {
+    "id": "fletchinder",
+    "name": "Fletchinder",
+    "num": 662,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/fletchinder.png"
+  },
+  {
+    "id": "talonflame",
+    "name": "Talonflame",
+    "num": 663,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/talonflame.png"
+  },
+  {
+    "id": "scatterbug",
+    "name": "Scatterbug",
+    "num": 664,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/scatterbug.png"
+  },
+  {
+    "id": "spewpa",
+    "name": "Spewpa",
+    "num": 665,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/spewpa.png"
+  },
+  {
+    "id": "vivillon",
+    "name": "Vivillon",
+    "num": 666,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/vivillon.png"
+  },
+  {
+    "id": "litleo",
+    "name": "Litleo",
+    "num": 667,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/litleo.png"
+  },
+  {
+    "id": "pyroar",
+    "name": "Pyroar",
+    "num": 668,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pyroar.png"
+  },
+  {
+    "id": "flabebe",
+    "name": "Flabébé",
+    "num": 669,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/flabebe.png"
+  },
+  {
+    "id": "floette",
+    "name": "Floette",
+    "num": 670,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/floette.png"
+  },
+  {
+    "id": "florges",
+    "name": "Florges",
+    "num": 671,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/florges.png"
+  },
+  {
+    "id": "skiddo",
+    "name": "Skiddo",
+    "num": 672,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/skiddo.png"
+  },
+  {
+    "id": "gogoat",
+    "name": "Gogoat",
+    "num": 673,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gogoat.png"
+  },
+  {
+    "id": "espurr",
+    "name": "Espurr",
+    "num": 677,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/espurr.png"
+  },
+  {
+    "id": "meowstic",
+    "name": "Meowstic",
+    "num": 678,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/meowstic.png"
+  },
+  {
+    "id": "inkay",
+    "name": "Inkay",
+    "num": 686,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/inkay.png"
+  },
+  {
+    "id": "malamar",
+    "name": "Malamar",
+    "num": 687,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/malamar.png"
+  },
+  {
+    "id": "skrelp",
+    "name": "Skrelp",
+    "num": 690,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/skrelp.png"
+  },
+  {
+    "id": "dragalge",
+    "name": "Dragalge",
+    "num": 691,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dragalge.png"
+  },
+  {
+    "id": "clauncher",
+    "name": "Clauncher",
+    "num": 692,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/clauncher.png"
+  },
+  {
+    "id": "clawitzer",
+    "name": "Clawitzer",
+    "num": 693,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/clawitzer.png"
+  },
+  {
+    "id": "sylveon",
+    "name": "Sylveon",
+    "num": 700,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sylveon.png"
+  },
+  {
+    "id": "hawlucha",
+    "name": "Hawlucha",
+    "num": 701,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hawlucha.png"
+  },
+  {
+    "id": "dedenne",
+    "name": "Dedenne",
+    "num": 702,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dedenne.png"
+  },
+  {
+    "id": "carbink",
+    "name": "Carbink",
+    "num": 703,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/carbink.png"
+  },
+  {
+    "id": "goomy",
+    "name": "Goomy",
+    "num": 704,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/goomy.png"
+  },
+  {
+    "id": "sliggoo",
+    "name": "Sliggoo",
+    "num": 705,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sliggoo.png"
+  },
+  {
+    "id": "sliggoohisui",
+    "name": "Sliggoo-Hisui",
+    "num": 705,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sliggoohisui.png"
+  },
+  {
+    "id": "goodra",
+    "name": "Goodra",
+    "num": 706,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/goodra.png"
+  },
+  {
+    "id": "goodrahisui",
+    "name": "Goodra-Hisui",
+    "num": 706,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/goodrahisui.png"
+  },
+  {
+    "id": "klefki",
+    "name": "Klefki",
+    "num": 707,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/klefki.png"
+  },
+  {
+    "id": "phantump",
+    "name": "Phantump",
+    "num": 708,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/phantump.png"
+  },
+  {
+    "id": "trevenant",
+    "name": "Trevenant",
+    "num": 709,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/trevenant.png"
+  },
+  {
+    "id": "bergmite",
+    "name": "Bergmite",
+    "num": 712,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bergmite.png"
+  },
+  {
+    "id": "avalugg",
+    "name": "Avalugg",
+    "num": 713,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/avalugg.png"
+  },
+  {
+    "id": "avalugghisui",
+    "name": "Avalugg-Hisui",
+    "num": 713,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/avalugghisui.png"
+  },
+  {
+    "id": "noibat",
+    "name": "Noibat",
+    "num": 714,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/noibat.png"
+  },
+  {
+    "id": "noivern",
+    "name": "Noivern",
+    "num": 715,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/noivern.png"
+  },
+  {
+    "id": "diancie",
+    "name": "Diancie",
+    "num": 719,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/diancie.png"
+  },
+  {
+    "id": "hoopa",
+    "name": "Hoopa",
+    "num": 720,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hoopa.png"
+  },
+  {
+    "id": "hoopaunbound",
+    "name": "Hoopa-Unbound",
+    "num": 720,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hoopaunbound.png"
+  },
+  {
+    "id": "volcanion",
+    "name": "Volcanion",
+    "num": 721,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/volcanion.png"
+  },
+  {
+    "id": "rowlet",
+    "name": "Rowlet",
+    "num": 722,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rowlet.png"
+  },
+  {
+    "id": "dartrix",
+    "name": "Dartrix",
+    "num": 723,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dartrix.png"
+  },
+  {
+    "id": "decidueye",
+    "name": "Decidueye",
+    "num": 724,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/decidueye.png"
+  },
+  {
+    "id": "decidueyehisui",
+    "name": "Decidueye-Hisui",
+    "num": 724,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/decidueyehisui.png"
+  },
+  {
+    "id": "litten",
+    "name": "Litten",
+    "num": 725,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/litten.png"
+  },
+  {
+    "id": "torracat",
+    "name": "Torracat",
+    "num": 726,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/torracat.png"
+  },
+  {
+    "id": "incineroar",
+    "name": "Incineroar",
+    "num": 727,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/incineroar.png"
+  },
+  {
+    "id": "popplio",
+    "name": "Popplio",
+    "num": 728,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/popplio.png"
+  },
+  {
+    "id": "brionne",
+    "name": "Brionne",
+    "num": 729,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/brionne.png"
+  },
+  {
+    "id": "primarina",
+    "name": "Primarina",
+    "num": 730,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/primarina.png"
+  },
+  {
+    "id": "pikipek",
+    "name": "Pikipek",
+    "num": 731,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pikipek.png"
+  },
+  {
+    "id": "trumbeak",
+    "name": "Trumbeak",
+    "num": 732,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/trumbeak.png"
+  },
+  {
+    "id": "toucannon",
+    "name": "Toucannon",
+    "num": 733,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/toucannon.png"
+  },
+  {
+    "id": "yungoos",
+    "name": "Yungoos",
+    "num": 734,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/yungoos.png"
+  },
+  {
+    "id": "gumshoos",
+    "name": "Gumshoos",
+    "num": 735,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gumshoos.png"
+  },
+  {
+    "id": "grubbin",
+    "name": "Grubbin",
+    "num": 736,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/grubbin.png"
+  },
+  {
+    "id": "charjabug",
+    "name": "Charjabug",
+    "num": 737,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/charjabug.png"
+  },
+  {
+    "id": "vikavolt",
+    "name": "Vikavolt",
+    "num": 738,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/vikavolt.png"
+  },
+  {
+    "id": "crabrawler",
+    "name": "Crabrawler",
+    "num": 739,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/crabrawler.png"
+  },
+  {
+    "id": "crabominable",
+    "name": "Crabominable",
+    "num": 740,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/crabominable.png"
+  },
+  {
+    "id": "oricorio",
+    "name": "Oricorio",
+    "num": 741,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/oricorio.png"
+  },
+  {
+    "id": "oricoriopompom",
+    "name": "Oricorio-Pom-Pom",
+    "num": 741,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/oricoriopompom.png"
+  },
+  {
+    "id": "oricoriopau",
+    "name": "Oricorio-Pa'u",
+    "num": 741,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/oricoriopau.png"
+  },
+  {
+    "id": "oricoriosensu",
+    "name": "Oricorio-Sensu",
+    "num": 741,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/oricoriosensu.png"
+  },
+  {
+    "id": "cutiefly",
+    "name": "Cutiefly",
+    "num": 742,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cutiefly.png"
+  },
+  {
+    "id": "ribombee",
+    "name": "Ribombee",
+    "num": 743,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ribombee.png"
+  },
+  {
+    "id": "rockruff",
+    "name": "Rockruff",
+    "num": 744,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rockruff.png"
+  },
+  {
+    "id": "rockruffdusk",
+    "name": "Rockruff-Dusk",
+    "num": 744,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rockruffdusk.png"
+  },
+  {
+    "id": "lycanroc",
+    "name": "Lycanroc",
+    "num": 745,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lycanroc.png"
+  },
+  {
+    "id": "lycanrocmidnight",
+    "name": "Lycanroc-Midnight",
+    "num": 745,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lycanrocmidnight.png"
+  },
+  {
+    "id": "lycanrocdusk",
+    "name": "Lycanroc-Dusk",
+    "num": 745,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lycanrocdusk.png"
+  },
+  {
+    "id": "mareanie",
+    "name": "Mareanie",
+    "num": 747,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mareanie.png"
+  },
+  {
+    "id": "toxapex",
+    "name": "Toxapex",
+    "num": 748,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/toxapex.png"
+  },
+  {
+    "id": "mudbray",
+    "name": "Mudbray",
+    "num": 749,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mudbray.png"
+  },
+  {
+    "id": "mudsdale",
+    "name": "Mudsdale",
+    "num": 750,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mudsdale.png"
+  },
+  {
+    "id": "dewpider",
+    "name": "Dewpider",
+    "num": 751,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dewpider.png"
+  },
+  {
+    "id": "araquanid",
+    "name": "Araquanid",
+    "num": 752,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/araquanid.png"
+  },
+  {
+    "id": "fomantis",
+    "name": "Fomantis",
+    "num": 753,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/fomantis.png"
+  },
+  {
+    "id": "lurantis",
+    "name": "Lurantis",
+    "num": 754,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lurantis.png"
+  },
+  {
+    "id": "salandit",
+    "name": "Salandit",
+    "num": 757,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/salandit.png"
+  },
+  {
+    "id": "salazzle",
+    "name": "Salazzle",
+    "num": 758,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/salazzle.png"
+  },
+  {
+    "id": "bounsweet",
+    "name": "Bounsweet",
+    "num": 761,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bounsweet.png"
+  },
+  {
+    "id": "steenee",
+    "name": "Steenee",
+    "num": 762,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/steenee.png"
+  },
+  {
+    "id": "tsareena",
+    "name": "Tsareena",
+    "num": 763,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tsareena.png"
+  },
+  {
+    "id": "comfey",
+    "name": "Comfey",
+    "num": 764,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/comfey.png"
+  },
+  {
+    "id": "oranguru",
+    "name": "Oranguru",
+    "num": 765,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/oranguru.png"
+  },
+  {
+    "id": "passimian",
+    "name": "Passimian",
+    "num": 766,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/passimian.png"
+  },
+  {
+    "id": "sandygast",
+    "name": "Sandygast",
+    "num": 769,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sandygast.png"
+  },
+  {
+    "id": "palossand",
+    "name": "Palossand",
+    "num": 770,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/palossand.png"
+  },
+  {
+    "id": "minior",
+    "name": "Minior",
+    "num": 774,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/minior.png"
+  },
+  {
+    "id": "komala",
+    "name": "Komala",
+    "num": 775,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/komala.png"
+  },
+  {
+    "id": "mimikyu",
+    "name": "Mimikyu",
+    "num": 778,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mimikyu.png"
+  },
+  {
+    "id": "bruxish",
+    "name": "Bruxish",
+    "num": 779,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bruxish.png"
+  },
+  {
+    "id": "jangmoo",
+    "name": "Jangmo-o",
+    "num": 782,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/jangmoo.png"
+  },
+  {
+    "id": "hakamoo",
+    "name": "Hakamo-o",
+    "num": 783,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hakamoo.png"
+  },
+  {
+    "id": "kommoo",
+    "name": "Kommo-o",
+    "num": 784,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kommoo.png"
+  },
+  {
+    "id": "cosmog",
+    "name": "Cosmog",
+    "num": 789,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cosmog.png"
+  },
+  {
+    "id": "cosmoem",
+    "name": "Cosmoem",
+    "num": 790,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cosmoem.png"
+  },
+  {
+    "id": "solgaleo",
+    "name": "Solgaleo",
+    "num": 791,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/solgaleo.png"
+  },
+  {
+    "id": "lunala",
+    "name": "Lunala",
+    "num": 792,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lunala.png"
+  },
+  {
+    "id": "necrozma",
+    "name": "Necrozma",
+    "num": 800,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/necrozma.png"
+  },
+  {
+    "id": "necrozmaduskmane",
+    "name": "Necrozma-Dusk-Mane",
+    "num": 800,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/necrozmaduskmane.png"
+  },
+  {
+    "id": "necrozmadawnwings",
+    "name": "Necrozma-Dawn-Wings",
+    "num": 800,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/necrozmadawnwings.png"
+  },
+  {
+    "id": "magearna",
+    "name": "Magearna",
+    "num": 801,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/magearna.png"
+  },
+  {
+    "id": "grookey",
+    "name": "Grookey",
+    "num": 810,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/grookey.png"
+  },
+  {
+    "id": "thwackey",
+    "name": "Thwackey",
+    "num": 811,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/thwackey.png"
+  },
+  {
+    "id": "rillaboom",
+    "name": "Rillaboom",
+    "num": 812,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rillaboom.png"
+  },
+  {
+    "id": "scorbunny",
+    "name": "Scorbunny",
+    "num": 813,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/scorbunny.png"
+  },
+  {
+    "id": "raboot",
+    "name": "Raboot",
+    "num": 814,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/raboot.png"
+  },
+  {
+    "id": "cinderace",
+    "name": "Cinderace",
+    "num": 815,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cinderace.png"
+  },
+  {
+    "id": "sobble",
+    "name": "Sobble",
+    "num": 816,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sobble.png"
+  },
+  {
+    "id": "drizzile",
+    "name": "Drizzile",
+    "num": 817,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/drizzile.png"
+  },
+  {
+    "id": "inteleon",
+    "name": "Inteleon",
+    "num": 818,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/inteleon.png"
+  },
+  {
+    "id": "skwovet",
+    "name": "Skwovet",
+    "num": 819,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/skwovet.png"
+  },
+  {
+    "id": "greedent",
+    "name": "Greedent",
+    "num": 820,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/greedent.png"
+  },
+  {
+    "id": "rookidee",
+    "name": "Rookidee",
+    "num": 821,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rookidee.png"
+  },
+  {
+    "id": "corvisquire",
+    "name": "Corvisquire",
+    "num": 822,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/corvisquire.png"
+  },
+  {
+    "id": "corviknight",
+    "name": "Corviknight",
+    "num": 823,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/corviknight.png"
+  },
+  {
+    "id": "chewtle",
+    "name": "Chewtle",
+    "num": 833,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chewtle.png"
+  },
+  {
+    "id": "drednaw",
+    "name": "Drednaw",
+    "num": 834,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/drednaw.png"
+  },
+  {
+    "id": "rolycoly",
+    "name": "Rolycoly",
+    "num": 837,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rolycoly.png"
+  },
+  {
+    "id": "carkol",
+    "name": "Carkol",
+    "num": 838,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/carkol.png"
+  },
+  {
+    "id": "coalossal",
+    "name": "Coalossal",
+    "num": 839,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/coalossal.png"
+  },
+  {
+    "id": "applin",
+    "name": "Applin",
+    "num": 840,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/applin.png"
+  },
+  {
+    "id": "flapple",
+    "name": "Flapple",
+    "num": 841,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/flapple.png"
+  },
+  {
+    "id": "appletun",
+    "name": "Appletun",
+    "num": 842,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/appletun.png"
+  },
+  {
+    "id": "silicobra",
+    "name": "Silicobra",
+    "num": 843,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/silicobra.png"
+  },
+  {
+    "id": "sandaconda",
+    "name": "Sandaconda",
+    "num": 844,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sandaconda.png"
+  },
+  {
+    "id": "cramorant",
+    "name": "Cramorant",
+    "num": 845,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cramorant.png"
+  },
+  {
+    "id": "arrokuda",
+    "name": "Arrokuda",
+    "num": 846,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/arrokuda.png"
+  },
+  {
+    "id": "barraskewda",
+    "name": "Barraskewda",
+    "num": 847,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/barraskewda.png"
+  },
+  {
+    "id": "toxel",
+    "name": "Toxel",
+    "num": 848,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/toxel.png"
+  },
+  {
+    "id": "toxtricity",
+    "name": "Toxtricity",
+    "num": 849,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/toxtricity.png"
+  },
+  {
+    "id": "sinistea",
+    "name": "Sinistea",
+    "num": 854,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sinistea.png"
+  },
+  {
+    "id": "polteageist",
+    "name": "Polteageist",
+    "num": 855,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/polteageist.png"
+  },
+  {
+    "id": "hatenna",
+    "name": "Hatenna",
+    "num": 856,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hatenna.png"
+  },
+  {
+    "id": "hattrem",
+    "name": "Hattrem",
+    "num": 857,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hattrem.png"
+  },
+  {
+    "id": "hatterene",
+    "name": "Hatterene",
+    "num": 858,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hatterene.png"
+  },
+  {
+    "id": "impidimp",
+    "name": "Impidimp",
+    "num": 859,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/impidimp.png"
+  },
+  {
+    "id": "morgrem",
+    "name": "Morgrem",
+    "num": 860,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/morgrem.png"
+  },
+  {
+    "id": "grimmsnarl",
+    "name": "Grimmsnarl",
+    "num": 861,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/grimmsnarl.png"
+  },
+  {
+    "id": "perrserker",
+    "name": "Perrserker",
+    "num": 863,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/perrserker.png"
+  },
+  {
+    "id": "milcery",
+    "name": "Milcery",
+    "num": 868,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/milcery.png"
+  },
+  {
+    "id": "alcremie",
+    "name": "Alcremie",
+    "num": 869,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/alcremie.png"
+  },
+  {
+    "id": "falinks",
+    "name": "Falinks",
+    "num": 870,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/falinks.png"
+  },
+  {
+    "id": "pincurchin",
+    "name": "Pincurchin",
+    "num": 871,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pincurchin.png"
+  },
+  {
+    "id": "snom",
+    "name": "Snom",
+    "num": 872,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/snom.png"
+  },
+  {
+    "id": "frosmoth",
+    "name": "Frosmoth",
+    "num": 873,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/frosmoth.png"
+  },
+  {
+    "id": "stonjourner",
+    "name": "Stonjourner",
+    "num": 874,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/stonjourner.png"
+  },
+  {
+    "id": "eiscue",
+    "name": "Eiscue",
+    "num": 875,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/eiscue.png"
+  },
+  {
+    "id": "indeedee",
+    "name": "Indeedee",
+    "num": 876,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/indeedee.png"
+  },
+  {
+    "id": "indeedeef",
+    "name": "Indeedee-F",
+    "num": 876,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/indeedeef.png"
+  },
+  {
+    "id": "morpeko",
+    "name": "Morpeko",
+    "num": 877,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/morpeko.png"
+  },
+  {
+    "id": "cufant",
+    "name": "Cufant",
+    "num": 878,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cufant.png"
+  },
+  {
+    "id": "copperajah",
+    "name": "Copperajah",
+    "num": 879,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/copperajah.png"
+  },
+  {
+    "id": "duraludon",
+    "name": "Duraludon",
+    "num": 884,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/duraludon.png"
+  },
+  {
+    "id": "dreepy",
+    "name": "Dreepy",
+    "num": 885,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dreepy.png"
+  },
+  {
+    "id": "drakloak",
+    "name": "Drakloak",
+    "num": 886,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/drakloak.png"
+  },
+  {
+    "id": "dragapult",
+    "name": "Dragapult",
+    "num": 887,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dragapult.png"
+  },
+  {
+    "id": "zacian",
+    "name": "Zacian",
+    "num": 888,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zacian.png"
+  },
+  {
+    "id": "zamazenta",
+    "name": "Zamazenta",
+    "num": 889,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zamazenta.png"
+  },
+
+  {
+    "id": "eternatus",
+    "name": "Eternatus",
+    "num": 890,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/eternatus.png"
+  },
+  {
+    "id": "kubfu",
+    "name": "Kubfu",
+    "num": 891,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kubfu.png"
+  },
+  {
+    "id": "urshifu",
+    "name": "Urshifu",
+    "num": 892,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/urshifu.png"
+  },
+  {
+    "id": "zarude",
+    "name": "Zarude",
+    "num": 893,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/zarude.png"
+  },
+  {
+    "id": "regieleki",
+    "name": "Regieleki",
+    "num": 894,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/regieleki.png"
+  },
+  {
+    "id": "regidrago",
+    "name": "Regidrago",
+    "num": 895,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/regidrago.png"
+  },
+  {
+    "id": "glastrier",
+    "name": "Glastrier",
+    "num": 896,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/glastrier.png"
+  },
+  {
+    "id": "spectrier",
+    "name": "Spectrier",
+    "num": 897,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/spectrier.png"
+  },
+  {
+    "id": "calyrex",
+    "name": "Calyrex",
+    "num": 898,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/calyrex.png"
+  },
+  {
+    "id": "wyrdeer",
+    "name": "Wyrdeer",
+    "num": 899,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/wyrdeer.png"
+  },
+  {
+    "id": "kleavor",
+    "name": "Kleavor",
+    "num": 900,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kleavor.png"
+  },
+  {
+    "id": "ursaluna",
+    "name": "Ursaluna",
+    "num": 901,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ursaluna.png"
+  },
+  {
+    "id": "ursalunabloodmoon",
+    "name": "Ursaluna-Bloodmoon",
+    "num": 901,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ursalunabloodmoon.png"
+  },
+  {
+    "id": "basculegion",
+    "name": "Basculegion",
+    "num": 902,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/basculegion.png"
+  },
+  {
+    "id": "basculegionf",
+    "name": "Basculegion-F",
+    "num": 902,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/basculegionf.png"
+  },
+  {
+    "id": "sneasler",
+    "name": "Sneasler",
+    "num": 903,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sneasler.png"
+  },
+  {
+    "id": "overqwil",
+    "name": "Overqwil",
+    "num": 904,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/overqwil.png"
+  },
+  {
+    "id": "enamorus",
+    "name": "Enamorus",
+    "num": 905,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/enamorus.png"
+  },
+  {
+    "id": "enamorustherian",
+    "name": "Enamorus-Therian",
+    "num": 905,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/enamorustherian.png"
+  },
+  {
+    "id": "sprigatito",
+    "name": "Sprigatito",
+    "num": 906,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sprigatito.png"
+  },
+  {
+    "id": "floragato",
+    "name": "Floragato",
+    "num": 907,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/floragato.png"
+  },
+  {
+    "id": "meowscarada",
+    "name": "Meowscarada",
+    "num": 908,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/meowscarada.png"
+  },
+  {
+    "id": "fuecoco",
+    "name": "Fuecoco",
+    "num": 909,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/fuecoco.png"
+  },
+  {
+    "id": "crocalor",
+    "name": "Crocalor",
+    "num": 910,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/crocalor.png"
+  },
+  {
+    "id": "skeledirge",
+    "name": "Skeledirge",
+    "num": 911,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/skeledirge.png"
+  },
+  {
+    "id": "quaxly",
+    "name": "Quaxly",
+    "num": 912,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/quaxly.png"
+  },
+  {
+    "id": "quaxwell",
+    "name": "Quaxwell",
+    "num": 913,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/quaxwell.png"
+  },
+  {
+    "id": "quaquaval",
+    "name": "Quaquaval",
+    "num": 914,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/quaquaval.png"
+  },
+  {
+    "id": "lechonk",
+    "name": "Lechonk",
+    "num": 915,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lechonk.png"
+  },
+  {
+    "id": "oinkologne",
+    "name": "Oinkologne",
+    "num": 916,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/oinkologne.png"
+  },
+  {
+    "id": "oinkolognef",
+    "name": "Oinkologne-F",
+    "num": 916,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/oinkolognef.png"
+  },
+  {
+    "id": "tarountula",
+    "name": "Tarountula",
+    "num": 917,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tarountula.png"
+  },
+  {
+    "id": "spidops",
+    "name": "Spidops",
+    "num": 918,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/spidops.png"
+  },
+  {
+    "id": "nymble",
+    "name": "Nymble",
+    "num": 919,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/nymble.png"
+  },
+  {
+    "id": "lokix",
+    "name": "Lokix",
+    "num": 920,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/lokix.png"
+  },
+  {
+    "id": "pawmi",
+    "name": "Pawmi",
+    "num": 921,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pawmi.png"
+  },
+  {
+    "id": "pawmo",
+    "name": "Pawmo",
+    "num": 922,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pawmo.png"
+  },
+  {
+    "id": "pawmot",
+    "name": "Pawmot",
+    "num": 923,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pawmot.png"
+  },
+  {
+    "id": "tandemaus",
+    "name": "Tandemaus",
+    "num": 924,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tandemaus.png"
+  },
+  {
+    "id": "maushold",
+    "name": "Maushold",
+    "num": 925,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/maushold.png"
+  },
+  {
+    "id": "fidough",
+    "name": "Fidough",
+    "num": 926,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/fidough.png"
+  },
+  {
+    "id": "dachsbun",
+    "name": "Dachsbun",
+    "num": 927,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dachsbun.png"
+  },
+  {
+    "id": "smoliv",
+    "name": "Smoliv",
+    "num": 928,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/smoliv.png"
+  },
+  {
+    "id": "dolliv",
+    "name": "Dolliv",
+    "num": 929,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dolliv.png"
+  },
+  {
+    "id": "arboliva",
+    "name": "Arboliva",
+    "num": 930,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/arboliva.png"
+  },
+  {
+    "id": "squawkabilly",
+    "name": "Squawkabilly",
+    "num": 931,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/squawkabilly.png"
+  },
+  {
+    "id": "nacli",
+    "name": "Nacli",
+    "num": 932,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/nacli.png"
+  },
+  {
+    "id": "naclstack",
+    "name": "Naclstack",
+    "num": 933,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/naclstack.png"
+  },
+  {
+    "id": "garganacl",
+    "name": "Garganacl",
+    "num": 934,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/garganacl.png"
+  },
+  {
+    "id": "charcadet",
+    "name": "Charcadet",
+    "num": 935,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/charcadet.png"
+  },
+  {
+    "id": "armarouge",
+    "name": "Armarouge",
+    "num": 936,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/armarouge.png"
+  },
+  {
+    "id": "ceruledge",
+    "name": "Ceruledge",
+    "num": 937,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ceruledge.png"
+  },
+  {
+    "id": "tadbulb",
+    "name": "Tadbulb",
+    "num": 938,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tadbulb.png"
+  },
+  {
+    "id": "bellibolt",
+    "name": "Bellibolt",
+    "num": 939,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bellibolt.png"
+  },
+  {
+    "id": "wattrel",
+    "name": "Wattrel",
+    "num": 940,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/wattrel.png"
+  },
+  {
+    "id": "kilowattrel",
+    "name": "Kilowattrel",
+    "num": 941,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kilowattrel.png"
+  },
+  {
+    "id": "maschiff",
+    "name": "Maschiff",
+    "num": 942,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/maschiff.png"
+  },
+  {
+    "id": "mabosstiff",
+    "name": "Mabosstiff",
+    "num": 943,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/mabosstiff.png"
+  },
+  {
+    "id": "shroodle",
+    "name": "Shroodle",
+    "num": 944,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/shroodle.png"
+  },
+  {
+    "id": "grafaiai",
+    "name": "Grafaiai",
+    "num": 945,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/grafaiai.png"
+  },
+  {
+    "id": "bramblin",
+    "name": "Bramblin",
+    "num": 946,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bramblin.png"
+  },
+  {
+    "id": "brambleghast",
+    "name": "Brambleghast",
+    "num": 947,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/brambleghast.png"
+  },
+  {
+    "id": "toedscool",
+    "name": "Toedscool",
+    "num": 948,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/toedscool.png"
+  },
+  {
+    "id": "toedscruel",
+    "name": "Toedscruel",
+    "num": 949,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/toedscruel.png"
+  },
+  {
+    "id": "klawf",
+    "name": "Klawf",
+    "num": 950,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/klawf.png"
+  },
+  {
+    "id": "capsakid",
+    "name": "Capsakid",
+    "num": 951,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/capsakid.png"
+  },
+  {
+    "id": "scovillain",
+    "name": "Scovillain",
+    "num": 952,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/scovillain.png"
+  },
+  {
+    "id": "rellor",
+    "name": "Rellor",
+    "num": 953,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rellor.png"
+  },
+  {
+    "id": "rabsca",
+    "name": "Rabsca",
+    "num": 954,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/rabsca.png"
+  },
+  {
+    "id": "flittle",
+    "name": "Flittle",
+    "num": 955,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/flittle.png"
+  },
+  {
+    "id": "espathra",
+    "name": "Espathra",
+    "num": 956,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/espathra.png"
+  },
+  {
+    "id": "tinkatink",
+    "name": "Tinkatink",
+    "num": 957,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tinkatink.png"
+  },
+  {
+    "id": "tinkatuff",
+    "name": "Tinkatuff",
+    "num": 958,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tinkatuff.png"
+  },
+  {
+    "id": "tinkaton",
+    "name": "Tinkaton",
+    "num": 959,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tinkaton.png"
+  },
+  {
+    "id": "wiglett",
+    "name": "Wiglett",
+    "num": 960,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/wiglett.png"
+  },
+  {
+    "id": "wugtrio",
+    "name": "Wugtrio",
+    "num": 961,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/wugtrio.png"
+  },
+  {
+    "id": "bombirdier",
+    "name": "Bombirdier",
+    "num": 962,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/bombirdier.png"
+  },
+  {
+    "id": "finizen",
+    "name": "Finizen",
+    "num": 963,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/finizen.png"
+  },
+  {
+    "id": "palafin",
+    "name": "Palafin",
+    "num": 964,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/palafin.png"
+  },
+  {
+    "id": "varoom",
+    "name": "Varoom",
+    "num": 965,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/varoom.png"
+  },
+  {
+    "id": "revavroom",
+    "name": "Revavroom",
+    "num": 966,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/revavroom.png"
+  },
+  {
+    "id": "cyclizar",
+    "name": "Cyclizar",
+    "num": 967,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cyclizar.png"
+  },
+  {
+    "id": "orthworm",
+    "name": "Orthworm",
+    "num": 968,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/orthworm.png"
+  },
+  {
+    "id": "glimmet",
+    "name": "Glimmet",
+    "num": 969,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/glimmet.png"
+  },
+  {
+    "id": "glimmora",
+    "name": "Glimmora",
+    "num": 970,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/glimmora.png"
+  },
+  {
+    "id": "greavard",
+    "name": "Greavard",
+    "num": 971,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/greavard.png"
+  },
+  {
+    "id": "houndstone",
+    "name": "Houndstone",
+    "num": 972,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/houndstone.png"
+  },
+  {
+    "id": "flamigo",
+    "name": "Flamigo",
+    "num": 973,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/flamigo.png"
+  },
+  {
+    "id": "cetoddle",
+    "name": "Cetoddle",
+    "num": 974,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cetoddle.png"
+  },
+  {
+    "id": "cetitan",
+    "name": "Cetitan",
+    "num": 975,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/cetitan.png"
+  },
+  {
+    "id": "veluza",
+    "name": "Veluza",
+    "num": 976,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/veluza.png"
+  },
+  {
+    "id": "dondozo",
+    "name": "Dondozo",
+    "num": 977,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dondozo.png"
+  },
+  {
+    "id": "tatsugiri",
+    "name": "Tatsugiri",
+    "num": 978,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tatsugiri.png"
+  },
+  {
+    "id": "annihilape",
+    "name": "Annihilape",
+    "num": 979,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/annihilape.png"
+  },
+  {
+    "id": "clodsire",
+    "name": "Clodsire",
+    "num": 980,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/clodsire.png"
+  },
+  {
+    "id": "farigiraf",
+    "name": "Farigiraf",
+    "num": 981,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/farigiraf.png"
+  },
+  {
+    "id": "dudunsparce",
+    "name": "Dudunsparce",
+    "num": 982,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dudunsparce.png"
+  },
+  {
+    "id": "kingambit",
+    "name": "Kingambit",
+    "num": 983,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/kingambit.png"
+  },
+  {
+    "id": "greattusk",
+    "name": "Great Tusk",
+    "num": 984,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/greattusk.png"
+  },
+  {
+    "id": "screamtail",
+    "name": "Scream Tail",
+    "num": 985,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/screamtail.png"
+  },
+  {
+    "id": "brutebonnet",
+    "name": "Brute Bonnet",
+    "num": 986,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/brutebonnet.png"
+  },
+  {
+    "id": "fluttermane",
+    "name": "Flutter Mane",
+    "num": 987,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/fluttermane.png"
+  },
+  {
+    "id": "slitherwing",
+    "name": "Slither Wing",
+    "num": 988,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/slitherwing.png"
+  },
+  {
+    "id": "sandyshocks",
+    "name": "Sandy Shocks",
+    "num": 989,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sandyshocks.png"
+  },
+  {
+    "id": "irontreads",
+    "name": "Iron Treads",
+    "num": 990,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/irontreads.png"
+  },
+  {
+    "id": "ironbundle",
+    "name": "Iron Bundle",
+    "num": 991,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ironbundle.png"
+  },
+  {
+    "id": "ironhands",
+    "name": "Iron Hands",
+    "num": 992,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ironhands.png"
+  },
+  {
+    "id": "ironjugulis",
+    "name": "Iron Jugulis",
+    "num": 993,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ironjugulis.png"
+  },
+  {
+    "id": "ironmoth",
+    "name": "Iron Moth",
+    "num": 994,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ironmoth.png"
+  },
+  {
+    "id": "ironthorns",
+    "name": "Iron Thorns",
+    "num": 995,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ironthorns.png"
+  },
+  {
+    "id": "frigibax",
+    "name": "Frigibax",
+    "num": 996,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/frigibax.png"
+  },
+  {
+    "id": "arctibax",
+    "name": "Arctibax",
+    "num": 997,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/arctibax.png"
+  },
+  {
+    "id": "baxcalibur",
+    "name": "Baxcalibur",
+    "num": 998,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/baxcalibur.png"
+  },
+  {
+    "id": "gimmighoul",
+    "name": "Gimmighoul",
+    "num": 999,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gimmighoul.png"
+  },
+  {
+    "id": "gimmighoulroaming",
+    "name": "Gimmighoul-Roaming",
+    "num": 999,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gimmighoulroaming.png"
+  },
+  {
+    "id": "gholdengo",
+    "name": "Gholdengo",
+    "num": 1000,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gholdengo.png"
+  },
+  {
+    "id": "wochien",
+    "name": "Wo-Chien",
+    "num": 1001,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/wochien.png"
+  },
+  {
+    "id": "chienpao",
+    "name": "Chien-Pao",
+    "num": 1002,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chienpao.png"
+  },
+  {
+    "id": "tinglu",
+    "name": "Ting-Lu",
+    "num": 1003,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/tinglu.png"
+  },
+  {
+    "id": "chiyu",
+    "name": "Chi-Yu",
+    "num": 1004,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/chiyu.png"
+  },
+  {
+    "id": "roaringmoon",
+    "name": "Roaring Moon",
+    "num": 1005,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/roaringmoon.png"
+  },
+  {
+    "id": "ironvaliant",
+    "name": "Iron Valiant",
+    "num": 1006,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ironvaliant.png"
+  },
+  {
+    "id": "koraidon",
+    "name": "Koraidon",
+    "num": 1007,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/koraidon.png"
+  },
+  {
+    "id": "miraidon",
+    "name": "Miraidon",
+    "num": 1008,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/miraidon.png"
+  },
+  {
+    "id": "walkingwake",
+    "name": "Walking Wake",
+    "num": 1009,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/walkingwake.png"
+  },
+  {
+    "id": "ironleaves",
+    "name": "Iron Leaves",
+    "num": 1010,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ironleaves.png"
+  },
+  {
+    "id": "dipplin",
+    "name": "Dipplin",
+    "num": 1011,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/dipplin.png"
+  },
+  {
+    "id": "poltchageist",
+    "name": "Poltchageist",
+    "num": 1012,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/poltchageist.png"
+  },
+  {
+    "id": "sinistcha",
+    "name": "Sinistcha",
+    "num": 1013,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/sinistcha.png"
+  },
+  {
+    "id": "okidogi",
+    "name": "Okidogi",
+    "num": 1014,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/okidogi.png"
+  },
+  {
+    "id": "munkidori",
+    "name": "Munkidori",
+    "num": 1015,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/munkidori.png"
+  },
+  {
+    "id": "fezandipiti",
+    "name": "Fezandipiti",
+    "num": 1016,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/fezandipiti.png"
+  },
+  {
+    "id": "ogerpon",
+    "name": "Ogerpon",
+    "num": 1017,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ogerpon.png"
+  },
+  {
+    "id": "ogerponwellspring",
+    "name": "Ogerpon-Wellspring",
+    "num": 1017,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ogerponwellspring.png"
+  },
+  {
+    "id": "ogerponhearthflame",
+    "name": "Ogerpon-Hearthflame",
+    "num": 1017,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ogerponhearthflame.png"
+  },
+  {
+    "id": "ogerponcornerstone",
+    "name": "Ogerpon-Cornerstone",
+    "num": 1017,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ogerponcornerstone.png"
+  },
+  {
+    "id": "archaludon",
+    "name": "Archaludon",
+    "num": 1018,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/archaludon.png"
+  },
+  {
+    "id": "hydrapple",
+    "name": "Hydrapple",
+    "num": 1019,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/hydrapple.png"
+  },
+  {
+    "id": "gougingfire",
+    "name": "Gouging Fire",
+    "num": 1020,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/gougingfire.png"
+  },
+  {
+    "id": "ragingbolt",
+    "name": "Raging Bolt",
+    "num": 1021,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ragingbolt.png"
+  },
+  {
+    "id": "ironboulder",
+    "name": "Iron Boulder",
+    "num": 1022,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ironboulder.png"
+  },
+  {
+    "id": "ironcrown",
+    "name": "Iron Crown",
+    "num": 1023,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/ironcrown.png"
+  },
+  {
+    "id": "terapagos",
+    "name": "Terapagos",
+    "num": 1024,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/terapagos.png"
+  },
+  {
+    "id": "terapagosstellar",
+    "name": "Terapagos-Stellar",
+    "num": 1024,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/terapagosstellar.png"
+  },
+  {
+    "id": "pecharunt",
+    "name": "Pecharunt",
+    "num": 1025,
+    "sprite": "https://img.pokemondb.net/sprites/home/normal/pecharunt.png"
+  }
+]
