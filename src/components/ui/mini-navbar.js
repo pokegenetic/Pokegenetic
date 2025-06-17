@@ -2,21 +2,19 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import logo from '@/img/logopokegenetic.png';
-// Import audio files with error handling
-const tryImportAudio = (path) => {
-  try {
-    return { valid: true, audio: path };
-  } catch (error) {
-    console.warn(`Could not import audio: ${path}`, error);
-    return { valid: false };
-  }
-};
-// Safe import with fallback
-const pokechillmusic = tryImportAudio('@/sounds/pokechillmusic.mp3');
 import { Volume2, VolumeX } from 'lucide-react';
 import { useGame } from '@/context/GameContext';
 import { useUser } from '@/context/UserContext';
 import UserMenu from './UserMenu';
+
+// Función para obtener URL de audio desde soundEffects
+const getAudioUrl = (key) => {
+  const soundEffectUrls = {
+    pokechillmusic: 'https://www.dropbox.com/scl/fi/rf5wcwn0dlq9qs6vvgjvu/pokechillmusic.mp3?rlkey=ex3zevbk8s21l3jntflpfcykn&st=r101jruf&dl=1',
+  };
+  return soundEffectUrls[key];
+};
+
 import sv from '@/img/scarlet-violet.png';
 import swsh from '@/img/sword-shield.png';
 import arceus from '@/img/legends-arceus.png';
@@ -96,7 +94,7 @@ export function MiniNavbar() {
     }, [audioEnabled]);
     // Controla reproducción y pausa según visibilidad y toggle
     useEffect(() => {
-        if (!audioRef.current || !pokechillmusic?.valid)
+        if (!audioRef.current || !getAudioUrl('pokechillmusic'))
             return;
         audioRef.current.volume = 0.04;
         audioRef.current.loop = true;
@@ -297,7 +295,7 @@ export function MiniNavbar() {
                 }, type: "button", disabled: teamCount === 0 && !!user, children: teamCount > 0 ? `Enviar al Laboratorio (${teamCount})` : "Enviar al Laboratorio" })] }));
     return (_jsx("header", { className: "fixed top-0 left-0 right-0 z-20 w-full px-4 sm:px-6 py-3 backdrop-blur-md bg-white/20 shadow-md transition-all duration-200 ease-in-out", children: _jsxs("div", { className: "max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6", children: [_jsxs("div", { className: "flex items-center gap-2 w-full sm:w-auto relative", children: [_jsx("img", { src: logo, alt: "Pok\u00E9Genetic Logo", className: "w-16 h-16 sm:w-20 sm:h-20 drop-shadow-md cursor-pointer transition-all duration-200", onClick: () => navigate('/') }), _jsxs("div", { className: "relative flex flex-col items-center", children: [_jsx("button", { "aria-label": audioEnabled ? 'Apagar música' : 'Encender música', className: `ml-1 p-0.5 rounded-full bg-gradient-to-br from-pink-400 via-fuchsia-500 to-purple-500 shadow-lg transition relative ${audioEnabled ? 'music-wave-anim' : ''}`, onClick: () => {
                                         setAudioEnabled((v) => !v);
-                                    }, style: { lineHeight: 0 }, children: audioEnabled ? (_jsx(Volume2, { className: "w-4 h-4 text-white" })) : (_jsx(VolumeX, { className: "w-4 h-4 text-gray-200" })) }), _jsx("audio", { ref: audioRef, src: pokechillmusic?.valid ? pokechillmusic.audio : '', loop: true, preload: "auto", style: { display: 'none' } }), showAudioNotice && (_jsxs("div", { className: `audio-notice-blink${hideAudioNotice ? ' hide' : ''}`, style: {
+                                    }, style: { lineHeight: 0 }, children: audioEnabled ? (_jsx(Volume2, { className: "w-4 h-4 text-white" })) : (_jsx(VolumeX, { className: "w-4 h-4 text-gray-200" })) }), _jsx("audio", { ref: audioRef, src: getAudioUrl('pokechillmusic') || '', loop: true, preload: "auto", style: { display: 'none' } }), showAudioNotice && (_jsxs("div", { className: `audio-notice-blink${hideAudioNotice ? ' hide' : ''}`, style: {
                                         position: 'absolute',
                                         left: '60%', // Mueve un poco a la derecha
                                         top: 'calc(100% + 8px)',

@@ -19,6 +19,7 @@ const soundEffectUrls: Record<string, string> = {
   obtainbadge: '/src/sounds/obtainbadge.mp3', // Sonido de obtener medalla
   pokeballreturn: '/src/sounds/sfx/pokeballreturn.mp3', // Sonido cuando un Pokémon es derrotado
   pop: 'https://play.pokemonshowdown.com/audio/notification.wav', // Sonido para navegación
+  pokechillmusic: 'https://www.dropbox.com/scl/fi/rf5wcwn0dlq9qs6vvgjvu/pokechillmusic.mp3?rlkey=ex3zevbk8s21l3jntflpfcykn&st=r101jruf&dl=1', // Música de fondo principal desde Dropbox
   // Puedes agregar más sonidos aquí, por ejemplo:
   // success: 'url',
 };
