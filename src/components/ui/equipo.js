@@ -6,16 +6,16 @@ import { cn } from "@/lib/utils";
 import { Pencil, Trash2, PlusSquare, DollarSign } from "lucide-react";
 import { Pokedex } from "@/data/sv/pokedex_module";
 // Corrected import path and ensure parseShowdownTextToArray is exported from the file
-import { generateShowdownTextFromParsed } from "../../lib/parseShowdown";
+import { generateShowdownTextFromParsed } from "@/lib/parseShowdown";
 import { Moves } from "@/data/sv/moves";
 import { teraSprites, teraOptions } from "@/data/pokemonConstants";
 import { getNatureEffectShortEn, getNatureEffectText } from '@/lib/natureEffects';
 import { items_sv } from '@/data/sv/items_sv';
 import { descuentos, getPokemonPrice, getPokemonOriginalPrice } from "./preciospokemon"; // Added import for pricing
-import { getPokemonTeam, setPokemonTeam } from '../../lib/equipoStorage';
-import { useGame } from '../../context/GameContext';
+import { getPokemonTeam, setPokemonTeam } from '@/lib/equipoStorage';
+import { useGame } from '@/context/GameContext';
 import { formatNameForPokedexLookup } from './equipoUtils'; // Import from equipoUtils
-import { getShowdownCryUrl } from '../../lib/getShowdownCryUrl';
+import { getShowdownCryUrl } from '@/lib/getShowdownCryUrl';
 import MagnetizeButtonEdicionTarjeta from './magnetize-button-ediciontarjeta';
 function capitalizeFirst(str) {
     if (!str)

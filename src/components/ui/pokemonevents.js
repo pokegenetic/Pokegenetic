@@ -8,7 +8,7 @@ import { getNatureEffectShortEn, getNatureEffectText } from '@/lib/natureEffects
 import { Moves } from '@/data/sv/moves';
 import { teraSprites, typeColors } from '@/data/pokemonConstants';
 import { preciosPokemon } from './preciospokemon';
-import { addPokemonToTeam } from '../../lib/equipoStorage';
+import { addPokemonToTeam } from '@/lib/equipoStorage';
 import { PlusSquare, DollarSign } from 'lucide-react';
 import { Pokedex } from '@/data/sv/pokedex_module';
 import { getGenderForSpecies } from '@/lib/pokedexHelper';
