@@ -37,3 +37,16 @@ export function playSoundEffect(key: string, volume: number = 1) {
   
   audio.play();
 }
+
+// Función especializada para música de fondo con loop
+export function playLoopingMusic(key: string, volume: number = 0.1): HTMLAudioElement | null {
+  const url = soundEffectUrls[key];
+  if (!url) return null;
+  
+  const audio = new window.Audio(url);
+  audio.volume = volume;
+  audio.loop = true;
+  audio.play().catch(console.error);
+  
+  return audio;
+}
