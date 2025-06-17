@@ -1,5 +1,5 @@
-import { Pokedex } from '../data/sv/pokedex_module';
-import { Learnsets } from '../data/sv/learnsets';
+import { Pokedex } from '@/data/sv/pokedex_module';
+import { Learnsets } from '@/data/sv/learnsets';
 /**
  * Retrieves specific details for a Pokémon species.
  * @param speciesName The name of the Pokémon species.

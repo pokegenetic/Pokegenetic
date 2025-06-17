@@ -1,6 +1,6 @@
 // pokemonValidator.ts
 // Validador centralizado para Pokémon especiales según basepokemonData
-import { basepokemonData } from '../data/sv/basepokemon';
+import { basepokemonData } from '@/data/sv/basepokemon';
 // Lista de Pokémon Paradox que NO pueden ser shiny
 const NON_SHINY_PARADOX = [
     "Gouging Fire",
