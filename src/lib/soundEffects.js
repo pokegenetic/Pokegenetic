@@ -15,7 +15,7 @@ const externalAudioUrls = {
   pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1',
   
   // 5. wintrainer (música de victoria contra entrenador)
-  wintrainer: 'https://drive.google.com/uc?export=download&id=1XzlnYJetMXLoQwgcYY3SyS7YQ0ss4yqv',
+  wintrainer: 'https://www.dropbox.com/scl/fi/knul5jzv7ymcerkk1lc47/wintrainer.mp3?rlkey=z7qlv2415yke4ox1y546fod76&st=4zul5uwe&dl=1',
   
   // 6. gymbattle (música de batalla contra líder de gimnasio)
   gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1',

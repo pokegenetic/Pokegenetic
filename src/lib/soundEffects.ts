@@ -12,7 +12,7 @@ const soundEffectUrls: Record<string, string> = {
   heal: '/src/sounds/sfx/heal.mp3', // Sonido de curación para laboratorio
   superpower: '/src/sounds/sfx/superpower.mp3', // Sonido de Ataque Cargado
   pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1', // Música de gimnasio Pokémon desde Dropbox
-  wintrainer: '/src/sounds/wintrainer.mp3', // Música de victoria contra entrenador
+  wintrainer: 'https://www.dropbox.com/scl/fi/knul5jzv7ymcerkk1lc47/wintrainer.mp3?rlkey=z7qlv2415yke4ox1y546fod76&st=4zul5uwe&dl=1', // Música de victoria contra entrenador desde Dropbox
   gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1', // Música de batalla contra líder de gimnasio desde Dropbox
   trainerbattle: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1', // Música de batalla contra entrenador desde Dropbox
   wingym: '/src/sounds/wingym.mp3', // Música de victoria en gimnasio
