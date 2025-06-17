@@ -1,8 +1,0 @@
-src/data/sv/
-*.backup.tsx
-*_old.tsx
-backup-archivos-duplicados/
-node_modules/
-.git/
-.DS_Store
-*.log

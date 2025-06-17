@@ -1,3 +1,0 @@
-// Este archivo se sobreescribirá cada vez que guardes cambios en la edición de una tarjeta.
-// Contiene el texto Showdown exportado más reciente.
-
