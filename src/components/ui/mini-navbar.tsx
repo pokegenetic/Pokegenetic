@@ -1,7 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import logo from '@/img/logopokegenetic.png';
-import pokechillmusic from '@/sounds/pokechillmusic.mp3';
+
+// Import audio files with error handling
+const tryImportAudio = (path: string) => {
+  try {
+    return { valid: true, audio: path };
+  } catch (error) {
+    console.warn(`Could not import audio: ${path}`, error);
+    return { valid: false, audio: '' };
+  }
+};
+
+// Safe import with fallback
+const pokechillmusic = tryImportAudio('@/sounds/pokechillmusic.mp3');
+
 import { Volume2, VolumeX } from 'lucide-react';
 import { useGame } from '@/context/GameContext';
 import { useUser } from '@/context/UserContext';
@@ -109,7 +122,7 @@ export function MiniNavbar() {
 
   // Controla reproducción y pausa según visibilidad y toggle
   useEffect(() => {
-    if (!audioRef.current) return;
+    if (!audioRef.current || !pokechillmusic.valid) return;
     audioRef.current.volume = 0.04;
     audioRef.current.loop = true;
     if (audioEnabled) {
@@ -211,7 +224,7 @@ export function MiniNavbar() {
           })}
           <button
             onClick={() => {
-              setSelectedGame(null);
+              setSelectedGame({ id: '', name: '', region: '', generation: '' });
               setDropdownOpen(false);
             }}
             className="block w-full px-4 py-2 text-sm text-red-600 hover:bg-red-100 text-left border-t"
@@ -409,7 +422,7 @@ export function MiniNavbar() {
                 <VolumeX className="w-4 h-4 text-gray-200" />
               )}
             </button>
-            <audio ref={audioRef} src={pokechillmusic} loop preload="auto" style={{ display: 'none' }} />
+            <audio ref={audioRef} src={pokechillmusic.valid ? pokechillmusic.audio : ''} loop preload="auto" style={{ display: 'none' }} />
             {/* Aviso de audio absolutamente posicionado bajo el toggle */}
             {showAudioNotice && (
               <div className={`audio-notice-blink${hideAudioNotice ? ' hide' : ''}`}
