@@ -27,7 +27,7 @@ const externalAudioUrls = {
   wingym: 'https://www.dropbox.com/scl/fi/w5r8r2vsp0pt51g67gn3b/wingym.mp3?rlkey=kd5ffs8rvplqg7i4anq2y8wmd&st=v5uzpegp&dl=1',
   
   // 9. obtainbadge (sonido de obtener medalla)
-  obtainbadge: 'https://drive.google.com/uc?export=download&id=19UsRhg6A_qnGzwSDOnNH1vXWoAJmBpOV',
+  obtainbadge: 'https://www.dropbox.com/scl/fi/7cq8v51e967tbe54jvrei/obtainbadge.mp3?rlkey=grkimuyje3f5omglu4uzveto3&st=to1x4gtx&dl=1',
   
   // 10. casino (música de fondo para tragamonedas)
   casino: 'https://drive.google.com/uc?export=download&id=1f332jqpnji2h28El80PgEkVD-rfGcuVa',
