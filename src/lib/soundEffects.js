@@ -24,7 +24,7 @@ const externalAudioUrls = {
   trainerbattle: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1',
   
   // 8. wingym (música de victoria en gimnasio)
-  wingym: 'https://drive.google.com/uc?export=download&id=1QM0IQK3PypTuj7MQAgZbWQZ_t0R5gxF5',
+  wingym: 'https://www.dropbox.com/scl/fi/w5r8r2vsp0pt51g67gn3b/wingym.mp3?rlkey=kd5ffs8rvplqg7i4anq2y8wmd&st=v5uzpegp&dl=1',
   
   // 9. obtainbadge (sonido de obtener medalla)
   obtainbadge: 'https://drive.google.com/uc?export=download&id=19UsRhg6A_qnGzwSDOnNH1vXWoAJmBpOV',
