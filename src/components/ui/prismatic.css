@@ -1,0 +1,77 @@
+/* Prismatic effect for Stellar/Astral type */
+@keyframes prismatic-glow {
+  0% {
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)) 
+            drop-shadow(0 0 3px rgba(210, 235, 255, 0.3)) 
+            hue-rotate(0deg);
+  }
+  25% {
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6)) 
+            drop-shadow(0 0 4px rgba(180, 215, 255, 0.4)) 
+            hue-rotate(45deg);
+  }
+  50% {
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.7)) 
+            drop-shadow(0 0 5px rgba(220, 230, 255, 0.5)) 
+            hue-rotate(90deg);
+  }
+  75% {
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6)) 
+            drop-shadow(0 0 4px rgba(200, 225, 255, 0.4)) 
+            hue-rotate(45deg);
+  }
+  100% {
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5)) 
+            drop-shadow(0 0 3px rgba(210, 235, 255, 0.3)) 
+            hue-rotate(0deg);
+  }
+}
+
+.animate-slow-pulse {
+  animation: prismatic-glow 3s infinite;
+}
+
+/* Prismatic background for badge */
+.bg-prismatic {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95),
+    rgba(230, 240, 255, 0.9), 
+    rgba(245, 245, 255, 0.95), 
+    rgba(220, 230, 255, 0.9));
+  background-size: 200% 200%;
+  animation: prismatic-bg 4s ease infinite;
+}
+
+/* Hidden Ability badge pulse animation */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}
+
+@keyframes prismatic-bg {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}

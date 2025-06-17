@@ -1,0 +1,30 @@
+/* Animación constante del sprite (por ejemplo, un pequeño bounce) */
+.sprite-constant-animation {
+  animation: sprite-bounce 1.2s infinite cubic-bezier(.5,0,.5,1);
+}
+
+@keyframes sprite-bounce {
+  0% { transform: translateY(0); }
+  20% { transform: translateY(-8px); }
+  40% { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+/* Fade out para cuando desaparece tras lanzar la pokeball */
+.pokemon-fade-out {
+  animation: sprite-fade-out 0.3s forwards;
+}
+
+@keyframes sprite-fade-out {
+  to { opacity: 0; }
+}
+
+/* Fade in para cuando reaparece si falla la captura */
+.pokemon-fade-in {
+  animation: sprite-fade-in 0.3s forwards;
+}
+
+@keyframes sprite-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
