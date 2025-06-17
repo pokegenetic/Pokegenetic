@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { playSoundEffect, playLoopingMusic } from '@/lib/soundEffects';
+import { playSoundEffect } from '@/lib/soundEffects';
+
+// Función para obtener URL de audio desde soundEffects
+const getAudioUrl = (key: string): string | null => {
+  const soundEffectUrls: Record<string, string> = {
+    pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1',
+  };
+  return soundEffectUrls[key] || null;
+};
 import { useUser } from '../../context/UserContext';
 import { addPokemonToTeam } from '@/lib/equipoStorage';
 import { updateUserPokeballs, updateUserFichas } from '@/lib/userData';
@@ -61,8 +69,13 @@ export default function LigaPokemon() {
       }
     });
 
-    // Reproducir música de gimnasio al entrar usando el sistema centralizado
-    gymAudioRef.current = playLoopingMusic('pokemongym', 0.1);
+    // Reproducir música de gimnasio al entrar usando elemento HTML audio nativo
+    if (gymAudioRef.current && getAudioUrl('pokemongym')) {
+      gymAudioRef.current.src = getAudioUrl('pokemongym')!;
+      gymAudioRef.current.volume = 0.1;
+      gymAudioRef.current.loop = true;
+      gymAudioRef.current.play().catch(console.error);
+    }
   }, []);
 
   // Función para detener la música del gimnasio cuando entra en combate
@@ -1691,6 +1704,14 @@ export default function LigaPokemon() {
           </div>
         </div>
       )}
+      
+      {/* Audio element para música de gimnasio */}
+      <audio 
+        ref={gymAudioRef} 
+        loop 
+        preload="auto" 
+        style={{ display: 'none' }} 
+      />
       
     </div>
     </>
