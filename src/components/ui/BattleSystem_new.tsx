@@ -1,0 +1,579 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { playSoundEffect } from '@/lib/soundEffects';
+import { BattleProps } from './battleTypes';
+import { getPokemonIconUrl, getPokemonStaticIconUrl } from '../../utils/pokemonSprites';
+import {
+  calcularTapsObjetivo,
+  calcularTiempoBase,
+  obtenerPokemonActual,
+  obtenerNombreOponente,
+  obtenerSpriteOponente,
+  esUltimoPokemon
+} from './battleUtils';
+
+// Componente principal del sistema de combate
+const BattleSystem: React.FC<BattleProps> = ({
+  gimnasioActual,
+  entrenadorActual,
+  pokemonActual,
+  combatienteActual,
+  tipoSeleccionado,
+  gimnasios,
+  onVictoria,
+  onDerrota,
+  onVolverAlGimnasio,
+  estado
+}) => {
+  // Estados del combate
+  const [tapsAcumulados, setTapsAcumulados] = useState(0);
+  const [tiempoRestante, setTiempoRestante] = useState(0);
+  const [combateEnCurso, setCombateEnCurso] = useState(false);
+  const [ataqueInminente, setAtaqueInminente] = useState(false);
+  
+  // Estados para las animaciones de batalla
+  const [faseAnimacion, setFaseAnimacion] = useState('intro'); // 'intro', 'pokeball', 'pokemon', 'countdown', 'battle', 'victory', 'transition'
+  const [cuentaRegresiva, setCuentaRegresiva] = useState(3);
+  const [pokemonFainted, setPokemonFainted] = useState(false);
+  const [trainerData, setTrainerData] = useState<any>(null);
+  const [isLeaderBattle, setIsLeaderBattle] = useState(false);
+
+  // Referencias
+  const tapsAcumuladosRef = useRef(tapsAcumulados);
+  const combateEnCursoRef = useRef(combateEnCurso);
+
+  // Actualizar referencias
+  useEffect(() => {
+    tapsAcumuladosRef.current = tapsAcumulados;
+    combateEnCursoRef.current = combateEnCurso;
+  });
+
+  // Función para limpiar timers
+  const limpiarTimers = () => {
+    if ((window as any).currentIntervals) {
+      const { ataqueInterval, timerInterval } = (window as any).currentIntervals;
+      if (ataqueInterval) clearInterval(ataqueInterval);
+      if (timerInterval) clearInterval(timerInterval);
+      (window as any).currentIntervals = null;
+    }
+  };
+
+  // Frases aleatorias del entrenador
+  const getTrainerPhrase = (isLeader: boolean) => {
+    const frases = isLeader ? [
+      "¡No podrás contra mis Pokémon!",
+      "¡Me he preparado mucho para convertirme en líder!",
+      "¡Veamos si tienes lo necesario para vencerme!"
+    ] : [
+      "¡No creas que será fácil!",
+      "¡Mis Pokémon no se rendirán sin pelear!",
+      "¡Veamos de qué estás hecho!"
+    ];
+    
+    return frases[Math.floor(Math.random() * frases.length)];
+  };
+
+  // Función de efectividad de tipos
+  const calcularEfectividad = (tipoAtacante: string, tipoDefensor: string): 'fuerte' | 'debil' | 'inmune' | 'normal' => {
+    const efectividades: Record<string, { fuerte: string[]; debil: string[]; inmune: string[] }> = {
+      'Normal': { fuerte: [], debil: ['Roca', 'Acero'], inmune: ['Fantasma'] },
+      'Fuego': { fuerte: ['Planta', 'Hielo', 'Bicho', 'Acero'], debil: ['Fuego', 'Agua', 'Roca', 'Dragón'], inmune: [] },
+      'Agua': { fuerte: ['Fuego', 'Tierra', 'Roca'], debil: ['Agua', 'Planta', 'Dragón'], inmune: [] },
+      'Eléctrico': { fuerte: ['Agua', 'Volador'], debil: ['Eléctrico', 'Planta', 'Dragón'], inmune: ['Tierra'] },
+      'Planta': { fuerte: ['Agua', 'Tierra', 'Roca'], debil: ['Fuego', 'Planta', 'Veneno', 'Volador', 'Bicho', 'Dragón', 'Acero'], inmune: [] },
+      'Roca': { fuerte: ['Fuego', 'Hielo', 'Volador', 'Bicho'], debil: ['Lucha', 'Tierra', 'Acero'], inmune: [] }
+    };
+
+    const tipoData = efectividades[tipoAtacante];
+    if (!tipoData) return 'normal';
+
+    if (tipoData.inmune.includes(tipoDefensor)) return 'inmune';
+    if (tipoData.fuerte.includes(tipoDefensor)) return 'fuerte';
+    if (tipoData.debil.includes(tipoDefensor)) return 'debil';
+    return 'normal';
+  };
+
+  // Inicializar batalla cuando se monta el componente
+  useEffect(() => {
+    console.log('🎮 BattleSystem montado - Iniciando secuencia de batalla');
+    
+    // Determinar si es líder o entrenador
+    const isLeader = combatienteActual === 'lider';
+    setIsLeaderBattle(isLeader);
+    
+    // Obtener datos del entrenador
+    const gimnasio = gimnasios[gimnasioActual];
+    const currentTrainer = isLeader ? 
+      { nombre: gimnasio.nombre, sprite: gimnasio.sprite } :
+      gimnasio.entrenadores[entrenadorActual];
+    
+    setTrainerData(currentTrainer);
+    
+    // Iniciar secuencia de batalla
+    iniciarSecuenciaBatalla();
+  }, []);
+
+  // Función principal para iniciar la secuencia de batalla
+  const iniciarSecuenciaBatalla = () => {
+    console.log('🚀 Iniciando secuencia de batalla completa');
+    
+    // Reproducir música de batalla
+    const musicFile = isLeaderBattle ? '/src/sounds/gymbattle.mp3' : '/src/sounds/trainerbattle.mp3';
+    const audio = new Audio(musicFile);
+    audio.volume = 0.1;
+    audio.loop = true;
+    audio.play().catch(console.error);
+    
+    // Fase 1: Mostrar entrenador y diálogo (3 segundos)
+    setFaseAnimacion('intro');
+    
+    setTimeout(() => {
+      // Fase 2: Animación de pokeball (2 segundos)
+      setFaseAnimacion('pokeball');
+      
+      setTimeout(() => {
+        // Fase 3: Aparición del pokemon (1.5 segundos)
+        setFaseAnimacion('pokemon');
+        
+        setTimeout(() => {
+          // Fase 4: Cuenta regresiva (4 segundos)
+          setFaseAnimacion('countdown');
+          iniciarCuentaRegresiva();
+        }, 1500);
+      }, 2000);
+    }, 3000);
+  };
+
+  // Función de cuenta regresiva
+  const iniciarCuentaRegresiva = () => {
+    setCuentaRegresiva(3);
+    
+    const interval = setInterval(() => {
+      setCuentaRegresiva(prev => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          // ¡AQUÍ ES DONDE DEBE INICIAR EL COMBATE!
+          console.log('⚔️ ¡INICIANDO COMBATE AHORA!');
+          setFaseAnimacion('battle');
+          iniciarCombateReal();
+          return 0;
+        }
+        playSoundEffect('notification', 0.15);
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  // Función para iniciar el combate real
+  const iniciarCombateReal = () => {
+    console.log('🔥 COMBATE REAL INICIADO');
+    
+    const gimnasio = gimnasios[gimnasioActual];
+    const tiempoBase = calcularTiempoBase(combatienteActual, gimnasioActual);
+
+    setTapsAcumulados(0);
+    setTiempoRestante(tiempoBase);
+    setCombateEnCurso(true);
+    setAtaqueInminente(false);
+
+    playSoundEffect('notification', 0.2);
+
+    // Ataques del oponente
+    const intervaloBase = combatienteActual === 'entrenador' ? 2000 : 1200;
+    const intervaloAtaque = Math.max(intervaloBase - (gimnasioActual * 100), 800);
+    
+    const ataqueInterval = setInterval(() => {
+      setAtaqueInminente(true);
+      setTimeout(() => {
+        setTapsAcumulados(prev => {
+          const efectividad = calcularEfectividad(tipoSeleccionado, gimnasio.tipo);
+          let tapsPerdidos = combatienteActual === 'entrenador' ? 3 : 5;
+          
+          if (efectividad === 'fuerte') tapsPerdidos = Math.ceil(tapsPerdidos * 0.7);
+          else if (efectividad === 'debil') tapsPerdidos = Math.ceil(tapsPerdidos * 1.3);
+          else if (efectividad === 'inmune') tapsPerdidos = Math.ceil(tapsPerdidos * 1.5);
+
+          return Math.max(0, prev - tapsPerdidos);
+        });
+        setAtaqueInminente(false);
+      }, 1500);
+    }, intervaloAtaque);
+
+    // Timer del combate
+    const timerInterval = setInterval(() => {
+      setTiempoRestante(prev => {
+        if (prev <= 1) {
+          clearInterval(ataqueInterval);
+          clearInterval(timerInterval);
+          
+          const tapsObjetivoFinal = calcularTapsObjetivo(combatienteActual, gimnasioActual, pokemonActual);
+
+          if (tapsAcumuladosRef.current >= tapsObjetivoFinal) {
+            victoria();
+          } else {
+            derrota();
+          }
+          
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    // Guardar intervalos
+    (window as any).currentIntervals = { ataqueInterval, timerInterval };
+  };
+
+  // Victoria contra un Pokémon
+  const victoria = () => {
+    limpiarTimers();
+    
+    const gimnasio = gimnasios[gimnasioActual];
+    const pokemonActualNombre = obtenerPokemonActual(gimnasio, combatienteActual, entrenadorActual, pokemonActual);
+    
+    // Mostrar animación de "fainted"
+    setPokemonFainted(true);
+    playSoundEffect('wintrainer', 0.3);
+    
+    setTimeout(() => {
+      setPokemonFainted(false);
+      
+      const esUltimoDelOponente = esUltimoPokemon(
+        gimnasios[gimnasioActual],
+        combatienteActual,
+        entrenadorActual,
+        pokemonActual
+      );
+      
+      if (esUltimoDelOponente) {
+        // Es el último Pokémon, terminar combate completamente
+        onVictoria();
+      } else {
+        // Hay más Pokémon, continuar con el siguiente
+        setTimeout(() => {
+          onVolverAlGimnasio();
+        }, 1000);
+      }
+    }, 2000);
+  };
+
+  // Derrota
+  const derrota = () => {
+    limpiarTimers();
+    playSoundEffect('error', 0.2);
+    onDerrota();
+  };
+
+  // Manejar clics para sumar taps
+  const handleTap = () => {
+    if (!combateEnCurso) return;
+    
+    playSoundEffect('pop', 0.1);
+    setTapsAcumulados(prev => prev + 1);
+  };
+
+  // Verificar victoria automáticamente
+  useEffect(() => {
+    if (!combateEnCurso) return;
+    
+    const tapsObjetivo = calcularTapsObjetivo(combatienteActual, gimnasioActual, pokemonActual);
+    
+    if (tapsAcumulados >= tapsObjetivo) {
+      limpiarTimers();
+      setCombateEnCurso(false);
+      victoria();
+    }
+  }, [tapsAcumulados, combateEnCurso]);
+
+  // Cleanup al desmontar
+  useEffect(() => {
+    return () => {
+      limpiarTimers();
+    };
+  }, []);
+
+  // Variables para el render
+  const gimnasio = gimnasios[gimnasioActual];
+  const pokemonNombre = obtenerPokemonActual(gimnasio, combatienteActual, entrenadorActual, pokemonActual);
+  const oponenteNombre = obtenerNombreOponente(gimnasio, combatienteActual, entrenadorActual);
+  const tapsObjetivo = calcularTapsObjetivo(combatienteActual, gimnasioActual, pokemonActual);
+
+  // Estados de batalla especiales
+  if (estado === 'victoria') {
+    return (
+      <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg p-8 text-center max-w-md">
+          <div className="text-6xl mb-4">🏆</div>
+          <h2 className="text-2xl font-bold text-green-600 mb-4">¡Victoria!</h2>
+          <p className="text-gray-600 mb-6">
+            Has derrotado a {pokemonNombre} de {oponenteNombre}
+          </p>
+          <button
+            onClick={onVolverAlGimnasio}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg"
+          >
+            Continuar
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (estado === 'derrota') {
+    return (
+      <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
+        <div className="bg-white rounded-lg p-8 text-center max-w-md">
+          <div className="text-6xl mb-4">💀</div>
+          <h2 className="text-2xl font-bold text-red-600 mb-4">Derrota</h2>
+          <p className="text-gray-600 mb-6">
+            No has podido contra {pokemonNombre}
+          </p>
+          <button
+            onClick={onVolverAlGimnasio}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg"
+          >
+            Volver al Gimnasio
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Animación de pokémon derrotado
+  if (pokemonFainted) {
+    return (
+      <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center z-[60]">
+        <div className="text-center">
+          <div className="mb-6 relative">
+            <img 
+              src={getPokemonIconUrl(pokemonNombre)}
+              alt={pokemonNombre}
+              className="w-32 h-32 mx-auto grayscale opacity-50 transform rotate-90 transition-all duration-1000"
+              style={{ imageRendering: 'pixelated' }}
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-6xl animate-bounce">💥</div>
+            </div>
+          </div>
+          <h2 className="text-4xl font-bold text-red-400 mb-4 animate-pulse">
+            {pokemonNombre} se ha debilitado!
+          </h2>
+        </div>
+      </div>
+    );
+  }
+
+  // Fase de introducción - Entrenador hablando
+  if (faseAnimacion === 'intro' && trainerData) {
+    return (
+      <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center z-[60]">
+        <div className="text-center animate-in fade-in duration-500">
+          <div className="mb-8">
+            <img 
+              src={trainerData.sprite} 
+              alt={trainerData.nombre}
+              className="w-48 h-48 mx-auto rounded-lg border-4 border-white/30 shadow-2xl"
+              style={{ imageRendering: 'pixelated' }}
+            />
+          </div>
+          <h2 className="text-4xl font-bold text-white mb-4 drop-shadow-2xl">
+            {isLeaderBattle ? `Líder ${trainerData.nombre}` : trainerData.nombre}
+          </h2>
+          <div className="bg-black/80 backdrop-blur-sm rounded-lg p-6 max-w-md mx-auto border border-white/20 shadow-2xl">
+            <p className="text-xl text-white text-center leading-relaxed drop-shadow-lg">
+              {getTrainerPhrase(isLeaderBattle)}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Fase de pokeball
+  if (faseAnimacion === 'pokeball') {
+    return (
+      <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center z-[60]">
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes throwBall {
+              0% { transform: translate(-200px, 100px) scale(0.3) rotate(0deg); }
+              50% { transform: translate(0px, -50px) scale(0.8) rotate(360deg); }
+              100% { transform: translate(200px, 0px) scale(1.2) rotate(720deg); }
+            }
+          `
+        }} />
+        <div className="relative w-full h-full flex items-center justify-center">
+          <div className="absolute left-10 bottom-10 opacity-30">
+            <img 
+              src={trainerData?.sprite} 
+              alt="Entrenador"
+              className="w-24 h-24"
+              style={{ imageRendering: 'pixelated' }}
+            />
+          </div>
+          
+          <div 
+            className="w-16 h-16"
+            style={{ animation: 'throwBall 2s ease-out infinite' }}
+          >
+            <img 
+              src="/pokeball.png" 
+              alt="Pokeball"
+              className="w-full h-full object-contain drop-shadow-lg"
+              style={{ imageRendering: 'pixelated' }}
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+                if (fallback) {
+                  fallback.style.display = 'flex';
+                  fallback.classList.add('w-16', 'h-16', 'bg-red-500', 'rounded-full', 'border-4', 'border-white', 'items-center', 'justify-center');
+                  fallback.textContent = '⚫';
+                }
+              }}
+            />
+            <div className="hidden"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Fase de aparición del pokémon
+  if (faseAnimacion === 'pokemon') {
+    return (
+      <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center z-[60]">
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes appearPokemon {
+              0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+              50% { transform: scale(1.3) rotate(-90deg); opacity: 0.7; }
+              100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            }
+          `
+        }} />
+        <div className="text-center">
+          <div 
+            className="mb-4"
+            style={{ animation: 'appearPokemon 1.5s ease-out' }}
+          >
+            <img 
+              src={getPokemonIconUrl(pokemonNombre)}
+              alt={pokemonNombre}
+              className="w-48 h-48 mx-auto drop-shadow-2xl"
+              style={{ imageRendering: 'pixelated' }}
+            />
+          </div>
+          <div className="bg-black/60 backdrop-blur-sm rounded-lg p-4 max-w-sm mx-auto">
+            <p className="text-white text-lg font-bold">
+              ¡{pokemonNombre} apareció!
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Fase de cuenta regresiva
+  if (faseAnimacion === 'countdown') {
+    return (
+      <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center z-[60]">
+        <div className="text-white text-center">
+          <div className="text-9xl font-bold animate-pulse drop-shadow-2xl">
+            {cuentaRegresiva === 0 ? '¡COMBATE!' : cuentaRegresiva}
+          </div>
+          <p className="text-xl mt-4 drop-shadow-lg">
+            {cuentaRegresiva === 0 ? '¡Comienza la batalla!' : 'Preparándose para batalla...'}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Pantalla principal de combate (faseAnimacion === 'battle')
+  return (
+    <div className="fixed inset-0 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 flex flex-col items-center justify-center z-[60] text-white">
+      <div className="absolute inset-0 bg-black/30"></div>
+      
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4">
+        {/* Header con información del oponente */}
+        <div className="flex items-center gap-4 mb-8 bg-black/40 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+          <div className="text-shadow-lg">
+            <h2 className="text-2xl font-bold text-white drop-shadow-lg">{oponenteNombre}</h2>
+            <p className="text-lg text-gray-100 drop-shadow-md">{pokemonNombre}</p>
+            <p className="text-sm text-gray-200 drop-shadow-md">Tipo: {gimnasio.tipo}</p>
+          </div>
+        </div>
+
+        {/* Sprite del Pokémon actual */}
+        <div className="mb-6">
+          <div className="relative bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+            <img 
+              src={getPokemonIconUrl(pokemonNombre)}
+              alt={pokemonNombre}
+              className="w-32 h-32 mx-auto"
+              style={{ imageRendering: 'pixelated' }}
+            />
+          </div>
+        </div>
+
+        {/* Barras de progreso */}
+        <div className="mb-6 w-full max-w-md space-y-4">
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+            <div className="flex justify-between text-sm text-gray-200 mb-2">
+              <span>Progreso: {tapsAcumulados}/{tapsObjetivo}</span>
+              <span>Tiempo: {tiempoRestante}s</span>
+            </div>
+            <div className="w-full bg-gray-600 rounded-full h-3 mb-2 overflow-hidden">
+              <div 
+                className="bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full transition-all duration-300 shadow-lg"
+                style={{ width: `${Math.min((tapsAcumulados / tapsObjetivo) * 100, 100)}%` }}
+              ></div>
+            </div>
+            <div className="w-full bg-gray-600 rounded-full h-2 overflow-hidden">
+              <div 
+                className="bg-gradient-to-r from-yellow-400 to-red-500 h-2 rounded-full transition-all duration-1000"
+                style={{ width: `${(tiempoRestante / calcularTiempoBase(combatienteActual, gimnasioActual)) * 100}%` }}
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Área de tap */}
+        <div className="mb-8">
+          <button
+            onClick={handleTap}
+            disabled={!combateEnCurso}
+            className={`w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl ${
+              combateEnCurso
+                ? ataqueInminente
+                  ? 'bg-red-500 hover:bg-red-400 animate-pulse border-red-300 shadow-red-500/50'
+                  : 'bg-blue-500 hover:bg-blue-400 border-blue-300 shadow-blue-500/50'
+                : 'bg-gray-500 cursor-not-allowed border-gray-400 shadow-gray-500/30'
+            }`}
+          >
+            {combateEnCurso ? '👊' : '🔄'}
+          </button>
+        </div>
+
+        {/* Efectividad de tipo */}
+        {combateEnCurso && (
+          <div className="mt-4 text-center bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+            <p className="text-sm text-white drop-shadow-md">
+              {tipoSeleccionado} vs {gimnasio.tipo}
+            </p>
+            <p className={`text-xs font-bold drop-shadow-md ${
+              calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'fuerte' ? 'text-green-400' :
+              calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'debil' ? 'text-red-400' :
+              'text-white'
+            }`}>
+              {calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'fuerte' ? 'Súper efectivo' :
+               calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'debil' ? 'No muy efectivo' :
+               'Efectividad normal'}
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default BattleSystem;
