@@ -18,7 +18,7 @@ import StatInputGroup from '@/components/EdicionTarjeta/StatInputGroup';
 import PokemonDisplayCard from '@/components/EdicionTarjeta/PokemonDisplayCard';
 import MoveSelectorSlot from '@/components/EdicionTarjeta/MoveSelectorSlot';
 import { getPokemonTeam, setPokemonTeam } from '@/lib/equipoStorage';
-import { validatePokemon } from '../../lib/pokemonValidator';
+import { validatePokemon } from '@/lib/pokemonValidator';
 // Define CSS for prismatic effect animation
 import './prismatic.css';
 function formatNameForPokemondb(name) {

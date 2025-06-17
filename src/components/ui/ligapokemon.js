@@ -2,15 +2,15 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { playSoundEffect } from '@/lib/soundEffects';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '@/context/UserContext';
 import { addPokemonToTeam } from '@/lib/equipoStorage';
 import { updateUserPokeballs, updateUserFichas } from '@/lib/userData';
 import LoginRequired from './LoginRequired';
 import BattleSystem from './BattleSystem';
-import { REGION_KANTO, TIPOS_JUGADOR, LEGENDARIOS_FINALES } from '../../data/ligaPokemon';
+import { REGION_KANTO, TIPOS_JUGADOR, LEGENDARIOS_FINALES } from '@/data/ligaPokemon';
 import { TipoSelector } from '../ligaPokemon/TipoSelector';
-import { generateEggForType } from '../../utils/ligaPokemon';
-import { getPokemonIconUrl, getPokemonStaticIconUrl } from '../../utils/pokemonSprites';
+import { generateEggForType } from '@/utils/ligaPokemon';
+import { getPokemonIconUrl, getPokemonStaticIconUrl } from '@/utils/pokemonSprites';
 export default function LigaPokemon() {
     const navigate = useNavigate();
     const { user, loginWithGoogle } = useUser();

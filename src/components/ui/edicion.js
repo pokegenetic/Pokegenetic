@@ -18,7 +18,7 @@ import MoveSelectorSlot from '@/components/EdicionTarjeta/MoveSelectorSlot';
 import StatInputGroup from '@/components/EdicionTarjeta/StatInputGroup';
 import { getPokemonTeam, setPokemonTeam } from '@/lib/equipoStorage';
 import { statsKeys, statLabels, statShowdownMap, typeColors } from '@/data/pokemonConstants';
-import { validatePokemon } from '../../lib/pokemonValidator';
+import { validatePokemon } from '@/lib/pokemonValidator';
 import aceroIcon from '@/img/teratipos/Teratipo_acero_icono_EP.png';
 import aguaIcon from '@/img/teratipos/Teratipo_agua_icono_EP.png';
 import astralIcon from '@/img/teratipos/Teratipo_astral_icono_EP.png';

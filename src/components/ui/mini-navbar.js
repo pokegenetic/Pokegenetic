@@ -24,7 +24,7 @@ import bdsp from '@/img/diamond-pearl.png';
 import letsgo from '@/img/lets-go.png';
 import { playSoundEffect } from '@/lib/soundEffects';
 import { teamToShowdownText } from './equipo';
-import { getPokemonTeam } from '../../lib/equipoStorage';
+import { getPokemonTeam } from '@/lib/equipoStorage';
 const AnimatedNavLink = ({ href, children }) => {
     const location = useLocation();
     const isActive = location.pathname === href ||

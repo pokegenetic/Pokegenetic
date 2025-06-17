@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from 'react';
-import { useUser } from '../../context/UserContext';
-import { playSoundEffect } from '../../lib/soundEffects';
+import { useUser } from '@/context/UserContext';
+import { playSoundEffect } from '@/lib/soundEffects';
 import { getUserPokeballs, setUserPokeballs } from './pokeballs';
 
 // Import audio files with error handling
