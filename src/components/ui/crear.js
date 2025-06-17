@@ -10,8 +10,8 @@ import { addPokemonToTeam } from '@/lib/equipoStorage';
 import { getPokemonTeam } from '@/lib/equipoStorage';
 import { playSoundEffect } from '@/lib/soundEffects';
 import { getShowdownCryUrl } from '@/lib/getShowdownCryUrl';
-import { basepokemonData } from '../../data/sv/basepokemon';
-import { isTransferOnly } from '../../data/sv/transfer-only';
+import { basepokemonData } from '@/data/sv/basepokemon';
+import { isTransferOnly } from '@/data/sv/transfer-only';
 // Función para determinar generación a partir del número de Pokédex
 function getGeneration(numInput) {
     const num = typeof numInput === 'string' ? parseInt(numInput, 10) : numInput;
