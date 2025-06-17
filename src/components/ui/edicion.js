@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-import { getLegalBasePokemon, editLegalBasePokemon } from '../../data/sv/pokemonCreationUtils';
-import { BASEPOKEMON_EDIT_RULES } from '../../data/sv/basepokemon-util';
-import { basepokemonData } from '../../data/sv/basepokemon';
-import { isTransferOnly } from '../../data/sv/transfer-only';
+import { getLegalBasePokemon, editLegalBasePokemon } from '@/data/sv/pokemonCreationUtils';
+import { BASEPOKEMON_EDIT_RULES } from '@/data/sv/basepokemon-util';
+import { basepokemonData } from '@/data/sv/basepokemon';
+import { isTransferOnly } from '@/data/sv/transfer-only';
 import { MagnetizeButton } from "@/components/ui/magnetize-button";
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { cn } from '@/lib/utils';
@@ -12,8 +12,8 @@ import { Natures as allNatures } from '@/data/sv/natures';
 import { items_sv } from '@/data/sv/items_sv';
 import { Learnsets } from '@/data/sv/learnsets';
 import { Moves } from '@/data/sv/moves'; // This should be Record<string, MoveData>
-import { parseShowdownText } from '../../lib/parseShowdown';
-import { getGenderForSpecies, getRandomMovesForSpecies } from '../../lib/pokedexHelper';
+import { parseShowdownText } from '@/lib/parseShowdown';
+import { getGenderForSpecies, getRandomMovesForSpecies } from '@/lib/pokedexHelper';
 import MoveSelectorSlot from '@/components/EdicionTarjeta/MoveSelectorSlot';
 import StatInputGroup from '@/components/EdicionTarjeta/StatInputGroup';
 import { getPokemonTeam, setPokemonTeam } from '@/lib/equipoStorage';

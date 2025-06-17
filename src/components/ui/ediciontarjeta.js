@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { getLegalBasePokemon } from '../../data/sv/pokemonCreationUtils';
-import basepokemonText from '../../data/sv/basepokemon.ts?raw';
+import { getLegalBasePokemon } from '@/data/sv/pokemonCreationUtils';
+import basepokemonText from '@/data/sv/basepokemon.ts?raw';
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useAnimation } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -12,12 +12,12 @@ import { Learnsets } from '@/data/sv/learnsets';
 import { Moves } from '@/data/sv/moves';
 import { teraOptions, statsKeys, statLabels, statShowdownMap, typeColors, teraSprites, showdownTeraTypeMap } from '@/data/pokemonConstants';
 import { parseShowdownText } from '@/lib/parseShowdown';
-import { getGenderForSpecies, getRandomMovesForSpecies } from '../../lib/pokedexHelper';
+import { getGenderForSpecies, getRandomMovesForSpecies } from '@/lib/pokedexHelper';
 import MagnetizeButtonEdicionTarjeta from "@/components/ui/magnetize-button-ediciontarjeta";
 import StatInputGroup from '@/components/EdicionTarjeta/StatInputGroup';
 import PokemonDisplayCard from '@/components/EdicionTarjeta/PokemonDisplayCard';
 import MoveSelectorSlot from '@/components/EdicionTarjeta/MoveSelectorSlot';
-import { getPokemonTeam, setPokemonTeam } from '../../lib/equipoStorage';
+import { getPokemonTeam, setPokemonTeam } from '@/lib/equipoStorage';
 import { validatePokemon } from '../../lib/pokemonValidator';
 // Define CSS for prismatic effect animation
 import './prismatic.css';
