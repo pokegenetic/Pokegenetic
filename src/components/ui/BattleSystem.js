@@ -637,22 +637,9 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
         return mensajes[Math.floor(Math.random() * mensajes.length)];
     };
     // Manejar clics para sumar taps
-    // Estados para controlar el debounce en iOS
-    const [lastTapTime, setLastTapTime] = useState(0);
-    const [lastSuperTapTime, setLastSuperTapTime] = useState(0);
-    const [showTapIndicator, setShowTapIndicator] = useState(false);
-    const TAP_DEBOUNCE_MS = 50; // 50ms de debounce mínimo
     const handleTap = () => {
         if (!combateEnCurso)
             return;
-        // Debounce para evitar taps duplicados en iOS
-        const now = Date.now();
-        if (now - lastTapTime < TAP_DEBOUNCE_MS)
-            return;
-        setLastTapTime(now);
-        // Mostrar indicador visual de tap exitoso
-        setShowTapIndicator(true);
-        setTimeout(() => setShowTapIndicator(false), 200);
         // Calcular si es un ataque crítico (2% de probabilidad)
         const esCritico = Math.random() < 0.02; // 2% de probabilidad
         if (esCritico) {
@@ -675,33 +662,10 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
             setTapsHistoricos(prev => prev + 1);
         }
     };
-    // Funciones específicas para iOS - mejor detección táctil
-    const handleTouchStart = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (!combateEnCurso)
-            return;
-        // Debounce para evitar múltiples registros
-        const now = Date.now();
-        if (now - lastTapTime < TAP_DEBOUNCE_MS)
-            return;
-        // Registrar el toque inmediatamente en touchstart
-        handleTap();
-    };
-    const handleTouchEnd = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        // No hacer nada más en touchend para evitar doble registro
-    };
     // Manejar Ataque Cargado (botón separado)
     const handleSuperTap = () => {
         if (!combateEnCurso || !superTapDisponible)
             return;
-        // Debounce para evitar taps duplicados en iOS
-        const now = Date.now();
-        if (now - lastSuperTapTime < TAP_DEBOUNCE_MS)
-            return;
-        setLastSuperTapTime(now);
         // Ataque Cargado: 20 taps de una vez
         playSoundEffect('superpower', 0.9); // Sonido especial para Ataque Cargado
         setTapsAcumulados(prev => prev + 20);
@@ -714,24 +678,6 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
         setTimeout(() => {
             setMostrarSuperTap(false);
         }, 2000);
-    };
-    // Función específica para SuperTap en iOS
-    const handleSuperTouchStart = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        if (!combateEnCurso || !superTapDisponible)
-            return;
-        // Debounce para evitar múltiples registros
-        const now = Date.now();
-        if (now - lastSuperTapTime < TAP_DEBOUNCE_MS)
-            return;
-        // Registrar el super toque inmediatamente en touchstart
-        handleSuperTap();
-    };
-    const handleSuperTouchEnd = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        // No hacer nada más en touchend para evitar doble registro
     };
     // Verificar victoria automáticamente
     useEffect(() => {
@@ -783,7 +729,7 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
                                 aspectRatio: 'auto',
                                 maxHeight: '192px',
                                 objectFit: 'contain'
-                            } }) }), _jsx("h2", { className: "text-4xl font-bold text-white mb-4 drop-shadow-2xl", children: isLeaderBattle ? `Líder ${trainerData?.nombre}` : trainerData?.nombre }), _jsxs("div", { className: "bg-black/80 backdrop-blur-sm rounded-lg p-6 max-w-lg mx-4 border border-white/20 shadow-2xl", children: [_jsx("p", { className: "text-xl text-white text-center leading-relaxed drop-shadow-lg mb-6", children: mensajeDialogo }), _jsx("button", { onClick: tipoDialogo === 'final' ? cerrarDialogoFinal : cerrarDialogoSiguiente, className: "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg touch-manipulation select-none", style: { touchAction: 'manipulation' }, children: tipoDialogo === 'final' ? '¡Obtener Recompensas!' : '¡Siguiente Pokémon!' })] })] }) }));
+                            } }) }), _jsx("h2", { className: "text-4xl font-bold text-white mb-4 drop-shadow-2xl", children: isLeaderBattle ? `Líder ${trainerData?.nombre}` : trainerData?.nombre }), _jsxs("div", { className: "bg-black/80 backdrop-blur-sm rounded-lg p-6 max-w-lg mx-4 border border-white/20 shadow-2xl", children: [_jsx("p", { className: "text-xl text-white text-center leading-relaxed drop-shadow-lg mb-6", children: mensajeDialogo }), _jsx("button", { onClick: tipoDialogo === 'final' ? cerrarDialogoFinal : cerrarDialogoSiguiente, className: "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg", children: tipoDialogo === 'final' ? '¡Obtener Recompensas!' : '¡Siguiente Pokémon!' })] })] }) }));
     }
     // Diálogo de derrota del entrenador/líder
     if (mostrarDialogoDerrota) {
@@ -796,7 +742,7 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
                             } }) }), _jsx("h2", { className: "text-4xl font-bold text-red-400 mb-4 drop-shadow-2xl", children: isLeaderBattle ? `Líder ${trainerData?.nombre}` : trainerData?.nombre }), _jsxs("div", { className: "bg-black/80 backdrop-blur-sm rounded-lg p-6 max-w-lg mx-4 border border-red-500/30 shadow-2xl", children: [_jsx("p", { className: "text-xl text-white text-center leading-relaxed drop-shadow-lg mb-6", children: mensajeDialogoDerrota }), _jsxs("div", { className: "text-center", children: [_jsx("div", { className: "text-red-400 text-lg mb-4 font-bold", children: "\u00A1Has sido derrotado!" }), _jsx("div", { className: "text-sm text-gray-400", children: "Regresando a la liga..." })] })] })] }) }));
     }
     if (estado === 'derrota') {
-        return (_jsx("div", { className: "fixed inset-0 bg-black/90 flex items-center justify-center z-50", children: _jsxs("div", { className: "bg-white rounded-lg p-8 text-center max-w-md", children: [_jsx("div", { className: "text-6xl mb-4", children: "\uD83D\uDC80" }), _jsx("h2", { className: "text-2xl font-bold text-red-600 mb-4", children: "Derrota" }), _jsxs("p", { className: "text-gray-600 mb-6", children: ["No has podido contra ", pokemonNombre] }), _jsx("button", { onClick: onVolverAlGimnasio, className: "bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg active:scale-95 transition-all touch-manipulation select-none", style: { touchAction: 'manipulation' }, children: "Volver al Gimnasio" })] }) }));
+        return (_jsx("div", { className: "fixed inset-0 bg-black/90 flex items-center justify-center z-50", children: _jsxs("div", { className: "bg-white rounded-lg p-8 text-center max-w-md", children: [_jsx("div", { className: "text-6xl mb-4", children: "\uD83D\uDC80" }), _jsx("h2", { className: "text-2xl font-bold text-red-600 mb-4", children: "Derrota" }), _jsxs("p", { className: "text-gray-600 mb-6", children: ["No has podido contra ", pokemonNombre] }), _jsx("button", { onClick: onVolverAlGimnasio, className: "bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg", children: "Volver al Gimnasio" })] }) }));
     }
     // Animación de pokémon derrotado
     if (pokemonFainted) {
@@ -889,129 +835,26 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
                         __html: `
             @keyframes throwBall {
               0% { 
-                transform: translate(-350px, 200px) scale(0.15) rotate(0deg); 
-                opacity: 0.85; 
-                filter: blur(1.5px) brightness(0.7);
+                transform: translate(-300px, 150px) scale(0.3) rotate(0deg); 
+                opacity: 1; 
               }
-              5% {
-                transform: translate(-320px, 160px) scale(0.2) rotate(30deg);
-                opacity: 0.9;
-                filter: blur(1.2px) brightness(0.8);
+              30% { 
+                transform: translate(-100px, -80px) scale(0.7) rotate(180deg); 
+                opacity: 1; 
               }
-              10% {
-                transform: translate(-290px, 120px) scale(0.25) rotate(60deg);
-                opacity: 0.92;
-                filter: blur(1px) brightness(0.85);
-              }
-              15% {
-                transform: translate(-260px, 85px) scale(0.3) rotate(90deg);
-                opacity: 0.95;
-                filter: blur(0.8px) brightness(0.9);
-              }
-              20% {
-                transform: translate(-230px, 50px) scale(0.35) rotate(120deg);
-                opacity: 0.97;
-                filter: blur(0.6px) brightness(0.95);
-              }
-              25% {
-                transform: translate(-200px, 20px) scale(0.4) rotate(150deg);
-                opacity: 0.98;
-                filter: blur(0.4px) brightness(1.0);
-              }
-              30% {
-                transform: translate(-170px, -5px) scale(0.45) rotate(180deg);
-                opacity: 1;
-                filter: blur(0.2px) brightness(1.05);
-              }
-              35% {
-                transform: translate(-140px, -25px) scale(0.5) rotate(210deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.1);
-              }
-              40% {
-                transform: translate(-110px, -40px) scale(0.55) rotate(240deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.15);
-              }
-              45% {
-                transform: translate(-80px, -50px) scale(0.6) rotate(270deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.2);
-              }
-              50% {
-                transform: translate(-50px, -55px) scale(0.65) rotate(300deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.25);
-              }
-              55% {
-                transform: translate(-20px, -55px) scale(0.7) rotate(330deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.3);
-              }
-              60% {
-                transform: translate(10px, -50px) scale(0.75) rotate(360deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.35);
-              }
-              65% {
-                transform: translate(40px, -40px) scale(0.8) rotate(390deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.4);
-              }
-              70% {
-                transform: translate(70px, -25px) scale(0.85) rotate(420deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.45);
-              }
-              75% {
-                transform: translate(100px, -5px) scale(0.9) rotate(450deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.5);
-              }
-              80% {
-                transform: translate(120px, 20px) scale(0.95) rotate(480deg);
-                opacity: 0.98;
-                filter: blur(0.2px) brightness(1.45);
-              }
-              85% {
-                transform: translate(130px, 50px) scale(1.0) rotate(510deg);
-                opacity: 0.95;
-                filter: blur(0.4px) brightness(1.4);
-              }
-              90% {
-                transform: translate(120px, 80px) scale(1.1) rotate(540deg);
-                opacity: 0.9;
-                filter: blur(0.6px) brightness(1.3);
-              }
-              95% {
-                transform: translate(80px, 100px) scale(1.2) rotate(570deg);
-                opacity: 0.8;
-                filter: blur(0.8px) brightness(1.2);
+              70% { 
+                transform: translate(100px, -40px) scale(1.1) rotate(360deg); 
+                opacity: 1; 
               }
               100% { 
-                transform: translate(0px, 120px) scale(1.4) rotate(600deg); 
-                opacity: 0.6; 
-                filter: blur(1.2px) brightness(1.1);
+                transform: translate(0px, 0px) scale(1.5) rotate(540deg); 
+                opacity: 0.8; 
               }
             }
             
             @keyframes trainerPoint {
-              0%, 100% { 
-                transform: scale(1) translateY(0px); 
-                filter: brightness(1);
-              }
-              25% {
-                transform: scale(1.02) translateY(-2px);
-                filter: brightness(1.1);
-              }
-              50% { 
-                transform: scale(1.05) translateY(-4px); 
-                filter: brightness(1.15);
-              }
-              75% {
-                transform: scale(1.02) translateY(-2px);
-                filter: brightness(1.1);
-              }
+              0%, 100% { transform: scale(1); }
+              50% { transform: scale(1.05); }
             }
           `
                     } }), _jsxs("div", { className: "relative w-full h-full flex items-center justify-center", children: [_jsxs("div", { className: "absolute left-10 bottom-10 z-10", children: [_jsx("div", { style: { animation: 'trainerPoint 2s ease-in-out infinite' }, children: _jsx("img", { src: trainerData?.sprite, alt: "Entrenador", className: "w-32 opacity-60 drop-shadow-2xl", style: {
@@ -1019,7 +862,7 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
                                             aspectRatio: 'auto',
                                             maxHeight: '128px',
                                             objectFit: 'contain'
-                                        } }) }), _jsxs("div", { className: "absolute -top-8 left-16 text-white text-lg font-bold animate-pulse", children: ["\u00A1Ve, ", obtenerPokemonActual(gimnasios[gimnasioActual], combatienteActual, entrenadorActual, pokemonActual), "!"] })] }), _jsxs("div", { className: "w-20 h-20 z-20", style: { animation: 'throwBall 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite' }, children: [_jsx("img", { src: "/pokeball.png", alt: "Pokeball", className: "w-full h-full object-contain drop-shadow-2xl", style: { imageRendering: 'pixelated' }, onError: (e) => {
+                                        } }) }), _jsxs("div", { className: "absolute -top-8 left-16 text-white text-lg font-bold animate-pulse", children: ["\u00A1Ve, ", obtenerPokemonActual(gimnasios[gimnasioActual], combatienteActual, entrenadorActual, pokemonActual), "!"] })] }), _jsxs("div", { className: "w-20 h-20 z-20", style: { animation: 'throwBall 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite' }, children: [_jsx("img", { src: "/pokeball.png", alt: "Pokeball", className: "w-full h-full object-contain drop-shadow-2xl", style: { imageRendering: 'pixelated' }, onError: (e) => {
                                         e.currentTarget.style.display = 'none';
                                         const fallback = e.currentTarget.nextElementSibling;
                                         if (fallback) {
@@ -1027,11 +870,11 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
                                             fallback.classList.add('w-20', 'h-20', 'bg-red-500', 'rounded-full', 'border-4', 'border-white', 'items-center', 'justify-center', 'text-2xl');
                                             fallback.textContent = '⚫';
                                         }
-                                    } }), _jsx("div", { className: "hidden text-white" })] }), _jsx("div", { className: "absolute inset-0 overflow-hidden pointer-events-none", children: Array.from({ length: 8 }).map((_, i) => (_jsx("div", { className: "absolute w-2 h-2 bg-yellow-300 rounded-full animate-ping opacity-50", style: {
-                                    left: `${15 + i * 12}%`,
-                                    top: `${25 + i * 8}%`,
-                                    animationDelay: `${i * 0.2}s`,
-                                    animationDuration: `${1.2 + (i * 0.1)}s`
+                                    } }), _jsx("div", { className: "hidden text-white" })] }), _jsx("div", { className: "absolute inset-0 overflow-hidden pointer-events-none", children: Array.from({ length: 6 }).map((_, i) => (_jsx("div", { className: "absolute w-2 h-2 bg-yellow-300 rounded-full animate-ping opacity-40", style: {
+                                    left: `${20 + i * 15}%`,
+                                    top: `${30 + i * 10}%`,
+                                    animationDelay: `${i * 0.3}s`,
+                                    animationDuration: '1.5s'
                                 } }, i))) })] })] }));
     }
     // Fase de aparición del pokémon
@@ -1040,78 +883,43 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
                         __html: `
             @keyframes appearPokemon {
               0% { 
-                transform: scale(0.1) rotate(-20deg); 
+                transform: scale(0) rotate(-180deg); 
                 opacity: 0; 
-                filter: brightness(0.2) blur(3px); 
-              }
-              15% {
-                transform: scale(0.4) rotate(-10deg);
-                opacity: 0.3;
-                filter: brightness(0.5) blur(2px);
+                filter: brightness(0); 
               }
               30% { 
-                transform: scale(0.8) rotate(5deg); 
-                opacity: 0.6; 
-                filter: brightness(0.8) blur(1px); 
-              }
-              50% {
-                transform: scale(1.1) rotate(-2deg);
-                opacity: 0.8;
-                filter: brightness(1.1) blur(0px);
+                transform: scale(1.3) rotate(-90deg); 
+                opacity: 0.3; 
+                filter: brightness(0.5); 
               }
               70% { 
-                transform: scale(1.05) rotate(1deg); 
-                opacity: 0.9; 
-                filter: brightness(1.3) blur(0px); 
-              }
-              85% {
-                transform: scale(0.98) rotate(-0.5deg);
-                opacity: 0.95;
-                filter: brightness(1.2) blur(0px);
+                transform: scale(1.1) rotate(-30deg); 
+                opacity: 0.8; 
+                filter: brightness(1.2); 
               }
               100% { 
                 transform: scale(1) rotate(0deg); 
                 opacity: 1; 
-                filter: brightness(1) blur(0px); 
+                filter: brightness(1); 
               }
             }
             
             @keyframes pokemonGlow {
               0%, 100% { 
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 255, 255, 0.2); 
-                filter: brightness(1);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); 
               }
               50% { 
-                box-shadow: 0 0 50px rgba(255, 255, 255, 0.8), 0 0 100px rgba(255, 255, 255, 0.4); 
-                filter: brightness(1.1);
+                box-shadow: 0 0 40px rgba(255, 255, 255, 0.6); 
               }
             }
             
             @keyframes sparkle {
-              0%, 100% { 
-                opacity: 0; 
-                transform: scale(0) rotate(0deg); 
-                filter: brightness(1);
-              }
-              25% {
-                opacity: 0.6;
-                transform: scale(0.5) rotate(45deg);
-                filter: brightness(1.3);
-              }
-              50% { 
-                opacity: 1; 
-                transform: scale(1) rotate(180deg); 
-                filter: brightness(1.5);
-              }
-              75% {
-                opacity: 0.6;
-                transform: scale(0.5) rotate(270deg);
-                filter: brightness(1.3);
-              }
+              0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+              50% { opacity: 1; transform: scale(1) rotate(180deg); }
             }
           `
                     } }), _jsxs("div", { className: "text-center relative", children: [_jsxs("div", { className: "mb-6 relative inline-block rounded-full", style: {
-                                animation: 'appearPokemon 2s cubic-bezier(0.23, 1, 0.32, 1), pokemonGlow 3s ease-in-out infinite'
+                                animation: 'appearPokemon 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), pokemonGlow 2s ease-in-out infinite'
                             }, children: [_jsx("img", { src: getPokemonIconUrl(pokemonNombre), alt: pokemonNombre, className: "w-56 mx-auto drop-shadow-2xl", style: {
                                         imageRendering: 'pixelated',
                                         aspectRatio: 'auto',
@@ -1120,11 +928,11 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
                                     } }), Array.from({ length: 8 }).map((_, i) => (_jsx("div", { className: "absolute w-3 h-3 bg-yellow-300 rounded-full", style: {
                                         left: `${50 + 40 * Math.cos((i * Math.PI * 2) / 8)}%`,
                                         top: `${50 + 40 * Math.sin((i * Math.PI * 2) / 8)}%`,
-                                        animation: `sparkle 2s ease-in-out infinite`,
-                                        animationDelay: `${i * 0.25}s`
-                                    } }, i)))] }), _jsxs("div", { className: "bg-black/70 backdrop-blur-sm rounded-xl p-6 max-w-sm mx-auto border border-white/30 shadow-2xl", children: [_jsxs("p", { className: "text-white text-2xl font-bold mb-2 animate-pulse", children: ["\u00A1", pokemonNombre, " apareci\u00F3!"] }), _jsxs("p", { className: "text-gray-300 text-lg", children: ["Un ", gimnasios[gimnasioActual].tipo, " salvaje"] })] }), _jsx("div", { className: "absolute inset-0 pointer-events-none", children: Array.from({ length: 4 }).map((_, i) => (_jsx("div", { className: "absolute inset-0 border-4 border-white/15 rounded-full", style: {
-                                    animation: `ping 2s cubic-bezier(0.23, 1, 0.32, 1) infinite`,
-                                    animationDelay: `${i * 0.4}s`
+                                        animation: `sparkle 1.5s ease-in-out infinite`,
+                                        animationDelay: `${i * 0.2}s`
+                                    } }, i)))] }), _jsxs("div", { className: "bg-black/70 backdrop-blur-sm rounded-xl p-6 max-w-sm mx-auto border border-white/30 shadow-2xl", children: [_jsxs("p", { className: "text-white text-2xl font-bold mb-2 animate-pulse", children: ["\u00A1", pokemonNombre, " apareci\u00F3!"] }), _jsxs("p", { className: "text-gray-300 text-lg", children: ["Un ", gimnasios[gimnasioActual].tipo, " salvaje"] })] }), _jsx("div", { className: "absolute inset-0 pointer-events-none", children: Array.from({ length: 3 }).map((_, i) => (_jsx("div", { className: "absolute inset-0 border-4 border-white/20 rounded-full", style: {
+                                    animation: `ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite`,
+                                    animationDelay: `${i * 0.5}s`
                                 } }, i))) })] })] }));
     }
     // Fase de cuenta regresiva
@@ -1207,11 +1015,11 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
                                     objectFit: 'contain'
                                 } }) }) }), _jsx("div", { className: "mb-6 w-full max-w-md space-y-4", children: _jsxs("div", { className: "bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-white/20", children: [_jsxs("div", { className: "flex justify-between text-sm text-gray-200 mb-2", children: [_jsxs("span", { children: ["Progreso: ", tapsAcumulados, "/", tapsObjetivo] }), _jsxs("span", { children: ["Tiempo: ", tiempoRestante, "s"] })] }), _jsx("div", { className: "w-full bg-gray-600 rounded-full h-3 mb-2 overflow-hidden", children: _jsx("div", { className: "bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full transition-all duration-300 shadow-lg", style: { width: `${Math.min((tapsAcumulados / tapsObjetivo) * 100, 100)}%` } }) }), _jsx("div", { className: "w-full bg-gray-600 rounded-full h-2 overflow-hidden", children: _jsx("div", { className: "bg-gradient-to-r from-yellow-400 to-red-500 h-2 rounded-full transition-all duration-1000", style: { width: `${(tiempoRestante / calcularTiempoBase(combatienteActual, gimnasioActual)) * 100}%` } }) }), _jsxs("div", { className: "mt-3 pt-3 border-t border-white/20", children: [_jsxs("div", { className: "flex justify-between text-xs text-gray-300 mb-1", children: [_jsx("span", { children: "Ataque Cargado" }), _jsxs("span", { children: [tapsHistoricos % 100, "/100"] })] }), _jsx("div", { className: "w-full bg-gray-700 rounded-full h-2 overflow-hidden", children: _jsx("div", { className: `h-2 rounded-full transition-all duration-300 ${superTapDisponible
                                                     ? 'bg-gradient-to-r from-yellow-400 to-orange-500 animate-pulse'
-                                                    : 'bg-gradient-to-r from-purple-400 to-pink-500'}`, style: { width: `${superTapDisponible ? 100 : (tapsHistoricos % 100)}%` } }) }), superTapDisponible && (_jsx("div", { className: "text-center text-yellow-300 text-xs font-bold mt-1 animate-pulse", children: "\u26A1 \u00A1ATAQUE CARGADO LISTO! \u26A1" }))] })] }) }), _jsxs("div", { className: "mb-8 relative flex gap-6 items-center justify-center", children: [showTapIndicator && (_jsx("div", { className: "absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-8 z-20 animate-ping", children: _jsx("div", { className: "text-green-400 text-2xl font-bold", children: "\u2713" }) })), _jsxs("div", { className: "relative", children: [_jsx("button", { onClick: handleTap, onTouchStart: handleTouchStart, onTouchEnd: handleTouchEnd, disabled: !combateEnCurso, "data-game-button": "true", className: `relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl active:scale-95 touch-manipulation select-none ${combateEnCurso
+                                                    : 'bg-gradient-to-r from-purple-400 to-pink-500'}`, style: { width: `${superTapDisponible ? 100 : (tapsHistoricos % 100)}%` } }) }), superTapDisponible && (_jsx("div", { className: "text-center text-yellow-300 text-xs font-bold mt-1 animate-pulse", children: "\u26A1 \u00A1ATAQUE CARGADO LISTO! \u26A1" }))] })] }) }), _jsxs("div", { className: "mb-8 relative flex gap-6 items-center justify-center", children: [_jsxs("div", { className: "relative", children: [_jsx("button", { onClick: handleTap, disabled: !combateEnCurso, className: `relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl ${combateEnCurso
                                             ? ataqueInminente
                                                 ? 'bg-red-500 hover:bg-red-400 animate-pulse border-red-300 shadow-red-500/50'
                                                 : 'bg-blue-500 hover:bg-blue-400 border-blue-300 shadow-blue-500/50'
-                                            : 'bg-gray-500 cursor-not-allowed border-gray-400 shadow-gray-500/30'}`, style: { touchAction: 'manipulation', WebkitUserSelect: 'none' }, children: combateEnCurso ? '👊' : '🔄' }), _jsx("div", { className: "absolute -bottom-8 left-1/2 transform -translate-x-1/2", children: _jsx("span", { className: "text-white text-sm font-bold", children: "Tap Normal" }) })] }), superTapDisponible && (_jsxs("div", { className: "relative animate-in fade-in slide-in-from-right-5 duration-500", children: [_jsx("div", { className: "absolute inset-0 rounded-full bg-yellow-300 opacity-30 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-2 rounded-full bg-yellow-400 opacity-20 animate-pulse pointer-events-none" }), _jsx("div", { className: "absolute -inset-4 rounded-full bg-orange-400 opacity-10 animate-bounce pointer-events-none" }), _jsx("button", { onClick: handleSuperTap, onTouchStart: handleSuperTouchStart, onTouchEnd: handleSuperTouchEnd, disabled: !combateEnCurso, "data-game-button": "true", className: "relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 animate-pulse border-yellow-300 shadow-yellow-500/50 text-black active:scale-95 touch-manipulation select-none", style: { touchAction: 'manipulation', WebkitUserSelect: 'none' }, children: "\u26A1" }), _jsx("div", { className: "absolute -bottom-8 left-1/2 transform -translate-x-1/2", children: _jsx("span", { className: "text-yellow-300 text-sm font-bold animate-pulse", children: "Ataque Cargado" }) })] })), mostrarCritico && !mostrarSuperTap && (_jsxs("div", { className: "absolute -top-20 -left-32 transform z-20 pointer-events-none", children: [_jsxs("div", { className: "bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-6 py-3 rounded-lg shadow-2xl border-2 border-yellow-300 animate-bounce", children: [_jsx("div", { className: "text-lg font-extrabold drop-shadow-md whitespace-nowrap", children: mensajeCritico }), _jsx("div", { className: "text-sm font-bold text-center", children: "\u00A1x4 Da\u00F1o!" })] }), _jsx("div", { className: "absolute inset-0 bg-yellow-300 rounded-lg opacity-50 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-2 bg-yellow-400 rounded-lg opacity-30 animate-pulse pointer-events-none" })] })), mostrarSuperTap && (_jsxs("div", { className: "absolute -top-24 -left-36 transform z-20 pointer-events-none", children: [_jsxs("div", { className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold px-8 py-4 rounded-lg shadow-2xl border-2 border-purple-300 animate-bounce", children: [_jsxs("div", { className: "text-xl font-extrabold drop-shadow-md whitespace-nowrap", children: ["\u26A1 ", mensajeCritico, " \u26A1"] }), _jsx("div", { className: "text-sm font-bold text-center", children: "\u00A1+20 Taps!" })] }), _jsx("div", { className: "absolute inset-0 bg-purple-300 rounded-lg opacity-50 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-3 bg-pink-400 rounded-lg opacity-30 animate-pulse pointer-events-none" }), _jsx("div", { className: "absolute -inset-5 bg-yellow-400 rounded-lg opacity-20 animate-bounce pointer-events-none" })] }))] }), combateEnCurso && (_jsxs("div", { className: "mt-4 text-center bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20", children: [_jsxs("p", { className: "text-sm text-white drop-shadow-md", children: [tipoSeleccionado, " vs ", gimnasio.tipo] }), _jsx("p", { className: `text-xs font-bold drop-shadow-md ${calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'fuerte' ? 'text-green-400' :
+                                            : 'bg-gray-500 cursor-not-allowed border-gray-400 shadow-gray-500/30'}`, children: combateEnCurso ? '👊' : '🔄' }), _jsx("div", { className: "absolute -bottom-8 left-1/2 transform -translate-x-1/2", children: _jsx("span", { className: "text-white text-sm font-bold", children: "Tap Normal" }) })] }), superTapDisponible && (_jsxs("div", { className: "relative animate-in fade-in slide-in-from-right-5 duration-500", children: [_jsx("div", { className: "absolute inset-0 rounded-full bg-yellow-300 opacity-30 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-2 rounded-full bg-yellow-400 opacity-20 animate-pulse pointer-events-none" }), _jsx("div", { className: "absolute -inset-4 rounded-full bg-orange-400 opacity-10 animate-bounce pointer-events-none" }), _jsx("button", { onClick: handleSuperTap, disabled: !combateEnCurso, className: "relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 animate-pulse border-yellow-300 shadow-yellow-500/50 text-black", children: "\u26A1" }), _jsx("div", { className: "absolute -bottom-8 left-1/2 transform -translate-x-1/2", children: _jsx("span", { className: "text-yellow-300 text-sm font-bold animate-pulse", children: "Ataque Cargado" }) })] })), mostrarCritico && !mostrarSuperTap && (_jsxs("div", { className: "absolute -top-20 -left-32 transform z-20 pointer-events-none", children: [_jsxs("div", { className: "bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-6 py-3 rounded-lg shadow-2xl border-2 border-yellow-300 animate-bounce", children: [_jsx("div", { className: "text-lg font-extrabold drop-shadow-md whitespace-nowrap", children: mensajeCritico }), _jsx("div", { className: "text-sm font-bold text-center", children: "\u00A1x4 Da\u00F1o!" })] }), _jsx("div", { className: "absolute inset-0 bg-yellow-300 rounded-lg opacity-50 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-2 bg-yellow-400 rounded-lg opacity-30 animate-pulse pointer-events-none" })] })), mostrarSuperTap && (_jsxs("div", { className: "absolute -top-24 -left-36 transform z-20 pointer-events-none", children: [_jsxs("div", { className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold px-8 py-4 rounded-lg shadow-2xl border-2 border-purple-300 animate-bounce", children: [_jsxs("div", { className: "text-xl font-extrabold drop-shadow-md whitespace-nowrap", children: ["\u26A1 ", mensajeCritico, " \u26A1"] }), _jsx("div", { className: "text-sm font-bold text-center", children: "\u00A1+20 Taps!" })] }), _jsx("div", { className: "absolute inset-0 bg-purple-300 rounded-lg opacity-50 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-3 bg-pink-400 rounded-lg opacity-30 animate-pulse pointer-events-none" }), _jsx("div", { className: "absolute -inset-5 bg-yellow-400 rounded-lg opacity-20 animate-bounce pointer-events-none" })] }))] }), combateEnCurso && (_jsxs("div", { className: "mt-4 text-center bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20", children: [_jsxs("p", { className: "text-sm text-white drop-shadow-md", children: [tipoSeleccionado, " vs ", gimnasio.tipo] }), _jsx("p", { className: `text-xs font-bold drop-shadow-md ${calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'fuerte' ? 'text-green-400' :
                                     calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'debil' ? 'text-red-400' :
                                         'text-white'}`, children: calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'fuerte' ? 'Súper efectivo' :
                                     calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'debil' ? 'No muy efectivo' :

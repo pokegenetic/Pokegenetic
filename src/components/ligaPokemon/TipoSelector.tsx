@@ -46,12 +46,10 @@ export const TipoSelector: React.FC<TipoSelectorProps> = ({ tipoSeleccionado, se
       <div className="relative flex items-center justify-center space-x-2 md:space-x-4">
         <button
           onClick={navegarAnterior}
-          data-game-button="true"
           className={`w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full bg-gradient-to-br ${tipoActual.color} 
                      border-2 border-white flex items-center justify-center 
                      hover:scale-110 active:scale-95 transition-all duration-200 
-                     shadow-lg hover:shadow-xl group touch-manipulation select-none`}
-          style={{ touchAction: 'manipulation' }}
+                     shadow-lg hover:shadow-xl group`}
         >
           <span className="text-white font-bold text-lg md:text-xl lg:text-2xl drop-shadow-md group-hover:scale-110 transition-transform">‹</span>
         </button>
@@ -84,12 +82,10 @@ export const TipoSelector: React.FC<TipoSelectorProps> = ({ tipoSeleccionado, se
 
         <button
           onClick={navegarSiguiente}
-          data-game-button="true"
           className={`w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full bg-gradient-to-br ${tipoActual.color} 
                      border-2 border-white flex items-center justify-center 
                      hover:scale-110 active:scale-95 transition-all duration-200 
-                     shadow-lg hover:shadow-xl group touch-manipulation select-none`}
-          style={{ touchAction: 'manipulation' }}
+                     shadow-lg hover:shadow-xl group`}
         >
           <span className="text-white font-bold text-lg md:text-xl lg:text-2xl drop-shadow-md group-hover:scale-110 transition-transform">›</span>
         </button>

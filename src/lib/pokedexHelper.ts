@@ -1,12 +1,12 @@
 import { Pokedex, SpeciesData, GenderName } from '../data/sv/pokedex_module';
-import { Learnsets } from '../data/sv/learnsets';
+import { Learnsets } from '../data/sv/learnsets_module';
 
 // Interface updated to include types and abilities
 export interface PokemonDetails {
   gender: GenderName | undefined;
   moves: string[];
   types: string[] | undefined;
-  abilities: { [key: string]: string; H?: string; S?: string; } | undefined;
+  abilities: Record<string, string | undefined> | undefined;
 }
 
 /**

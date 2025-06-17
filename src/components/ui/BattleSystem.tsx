@@ -752,23 +752,8 @@ const BattleSystem: React.FC<BattleProps> = ({
   };
 
   // Manejar clics para sumar taps
-  // Estados para controlar el debounce en iOS
-  const [lastTapTime, setLastTapTime] = useState(0);
-  const [lastSuperTapTime, setLastSuperTapTime] = useState(0);
-  const [showTapIndicator, setShowTapIndicator] = useState(false);
-  const TAP_DEBOUNCE_MS = 50; // 50ms de debounce mínimo
-
   const handleTap = () => {
     if (!combateEnCurso) return;
-    
-    // Debounce para evitar taps duplicados en iOS
-    const now = Date.now();
-    if (now - lastTapTime < TAP_DEBOUNCE_MS) return;
-    setLastTapTime(now);
-    
-    // Mostrar indicador visual de tap exitoso
-    setShowTapIndicator(true);
-    setTimeout(() => setShowTapIndicator(false), 200);
     
     // Calcular si es un ataque crítico (2% de probabilidad)
     const esCritico = Math.random() < 0.02; // 2% de probabilidad
@@ -795,35 +780,9 @@ const BattleSystem: React.FC<BattleProps> = ({
     }
   };
 
-  // Funciones específicas para iOS - mejor detección táctil
-  const handleTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    if (!combateEnCurso) return;
-    
-    // Debounce para evitar múltiples registros
-    const now = Date.now();
-    if (now - lastTapTime < TAP_DEBOUNCE_MS) return;
-    
-    // Registrar el toque inmediatamente en touchstart
-    handleTap();
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    // No hacer nada más en touchend para evitar doble registro
-  };
-
   // Manejar Ataque Cargado (botón separado)
   const handleSuperTap = () => {
     if (!combateEnCurso || !superTapDisponible) return;
-    
-    // Debounce para evitar taps duplicados en iOS
-    const now = Date.now();
-    if (now - lastSuperTapTime < TAP_DEBOUNCE_MS) return;
-    setLastSuperTapTime(now);
     
     // Ataque Cargado: 20 taps de una vez
     playSoundEffect('superpower', 0.9); // Sonido especial para Ataque Cargado
@@ -839,27 +798,6 @@ const BattleSystem: React.FC<BattleProps> = ({
     setTimeout(() => {
       setMostrarSuperTap(false);
     }, 2000);
-  };
-
-  // Función específica para SuperTap en iOS
-  const handleSuperTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    if (!combateEnCurso || !superTapDisponible) return;
-    
-    // Debounce para evitar múltiples registros
-    const now = Date.now();
-    if (now - lastSuperTapTime < TAP_DEBOUNCE_MS) return;
-    
-    // Registrar el super toque inmediatamente en touchstart
-    handleSuperTap();
-  };
-
-  const handleSuperTouchEnd = (e: React.TouchEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    // No hacer nada más en touchend para evitar doble registro
   };
 
   // Verificar victoria automáticamente
@@ -952,8 +890,7 @@ const BattleSystem: React.FC<BattleProps> = ({
             </p>
             <button
               onClick={tipoDialogo === 'final' ? cerrarDialogoFinal : cerrarDialogoSiguiente}
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg touch-manipulation select-none"
-              style={{ touchAction: 'manipulation' }}
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg"
             >
               {tipoDialogo === 'final' ? '¡Obtener Recompensas!' : '¡Siguiente Pokémon!'}
             </button>
@@ -1016,8 +953,7 @@ const BattleSystem: React.FC<BattleProps> = ({
           </p>
           <button
             onClick={onVolverAlGimnasio}
-            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg active:scale-95 transition-all touch-manipulation select-none"
-            style={{ touchAction: 'manipulation' }}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg"
           >
             Volver al Gimnasio
           </button>
@@ -1202,129 +1138,26 @@ const BattleSystem: React.FC<BattleProps> = ({
           __html: `
             @keyframes throwBall {
               0% { 
-                transform: translate(-350px, 200px) scale(0.15) rotate(0deg); 
-                opacity: 0.85; 
-                filter: blur(1.5px) brightness(0.7);
+                transform: translate(-300px, 150px) scale(0.3) rotate(0deg); 
+                opacity: 1; 
               }
-              5% {
-                transform: translate(-320px, 160px) scale(0.2) rotate(30deg);
-                opacity: 0.9;
-                filter: blur(1.2px) brightness(0.8);
+              30% { 
+                transform: translate(-100px, -80px) scale(0.7) rotate(180deg); 
+                opacity: 1; 
               }
-              10% {
-                transform: translate(-290px, 120px) scale(0.25) rotate(60deg);
-                opacity: 0.92;
-                filter: blur(1px) brightness(0.85);
-              }
-              15% {
-                transform: translate(-260px, 85px) scale(0.3) rotate(90deg);
-                opacity: 0.95;
-                filter: blur(0.8px) brightness(0.9);
-              }
-              20% {
-                transform: translate(-230px, 50px) scale(0.35) rotate(120deg);
-                opacity: 0.97;
-                filter: blur(0.6px) brightness(0.95);
-              }
-              25% {
-                transform: translate(-200px, 20px) scale(0.4) rotate(150deg);
-                opacity: 0.98;
-                filter: blur(0.4px) brightness(1.0);
-              }
-              30% {
-                transform: translate(-170px, -5px) scale(0.45) rotate(180deg);
-                opacity: 1;
-                filter: blur(0.2px) brightness(1.05);
-              }
-              35% {
-                transform: translate(-140px, -25px) scale(0.5) rotate(210deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.1);
-              }
-              40% {
-                transform: translate(-110px, -40px) scale(0.55) rotate(240deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.15);
-              }
-              45% {
-                transform: translate(-80px, -50px) scale(0.6) rotate(270deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.2);
-              }
-              50% {
-                transform: translate(-50px, -55px) scale(0.65) rotate(300deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.25);
-              }
-              55% {
-                transform: translate(-20px, -55px) scale(0.7) rotate(330deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.3);
-              }
-              60% {
-                transform: translate(10px, -50px) scale(0.75) rotate(360deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.35);
-              }
-              65% {
-                transform: translate(40px, -40px) scale(0.8) rotate(390deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.4);
-              }
-              70% {
-                transform: translate(70px, -25px) scale(0.85) rotate(420deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.45);
-              }
-              75% {
-                transform: translate(100px, -5px) scale(0.9) rotate(450deg);
-                opacity: 1;
-                filter: blur(0px) brightness(1.5);
-              }
-              80% {
-                transform: translate(120px, 20px) scale(0.95) rotate(480deg);
-                opacity: 0.98;
-                filter: blur(0.2px) brightness(1.45);
-              }
-              85% {
-                transform: translate(130px, 50px) scale(1.0) rotate(510deg);
-                opacity: 0.95;
-                filter: blur(0.4px) brightness(1.4);
-              }
-              90% {
-                transform: translate(120px, 80px) scale(1.1) rotate(540deg);
-                opacity: 0.9;
-                filter: blur(0.6px) brightness(1.3);
-              }
-              95% {
-                transform: translate(80px, 100px) scale(1.2) rotate(570deg);
-                opacity: 0.8;
-                filter: blur(0.8px) brightness(1.2);
+              70% { 
+                transform: translate(100px, -40px) scale(1.1) rotate(360deg); 
+                opacity: 1; 
               }
               100% { 
-                transform: translate(0px, 120px) scale(1.4) rotate(600deg); 
-                opacity: 0.6; 
-                filter: blur(1.2px) brightness(1.1);
+                transform: translate(0px, 0px) scale(1.5) rotate(540deg); 
+                opacity: 0.8; 
               }
             }
             
             @keyframes trainerPoint {
-              0%, 100% { 
-                transform: scale(1) translateY(0px); 
-                filter: brightness(1);
-              }
-              25% {
-                transform: scale(1.02) translateY(-2px);
-                filter: brightness(1.1);
-              }
-              50% { 
-                transform: scale(1.05) translateY(-4px); 
-                filter: brightness(1.15);
-              }
-              75% {
-                transform: scale(1.02) translateY(-2px);
-                filter: brightness(1.1);
-              }
+              0%, 100% { transform: scale(1); }
+              50% { transform: scale(1.05); }
             }
           `
         }} />
@@ -1353,7 +1186,7 @@ const BattleSystem: React.FC<BattleProps> = ({
           {/* Poké Ball volando */}
           <div 
             className="w-20 h-20 z-20"
-            style={{ animation: 'throwBall 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite' }}
+            style={{ animation: 'throwBall 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite' }}
           >
             <img 
               src="/pokeball.png" 
@@ -1375,15 +1208,15 @@ const BattleSystem: React.FC<BattleProps> = ({
           
           {/* Efectos de partículas */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {Array.from({ length: 8 }).map((_, i) => (
+            {Array.from({ length: 6 }).map((_, i) => (
               <div
                 key={i}
-                className="absolute w-2 h-2 bg-yellow-300 rounded-full animate-ping opacity-50"
+                className="absolute w-2 h-2 bg-yellow-300 rounded-full animate-ping opacity-40"
                 style={{
-                  left: `${15 + i * 12}%`,
-                  top: `${25 + i * 8}%`,
-                  animationDelay: `${i * 0.2}s`,
-                  animationDuration: `${1.2 + (i * 0.1)}s`
+                  left: `${20 + i * 15}%`,
+                  top: `${30 + i * 10}%`,
+                  animationDelay: `${i * 0.3}s`,
+                  animationDuration: '1.5s'
                 }}
               />
             ))}
@@ -1401,74 +1234,39 @@ const BattleSystem: React.FC<BattleProps> = ({
           __html: `
             @keyframes appearPokemon {
               0% { 
-                transform: scale(0.1) rotate(-20deg); 
+                transform: scale(0) rotate(-180deg); 
                 opacity: 0; 
-                filter: brightness(0.2) blur(3px); 
-              }
-              15% {
-                transform: scale(0.4) rotate(-10deg);
-                opacity: 0.3;
-                filter: brightness(0.5) blur(2px);
+                filter: brightness(0); 
               }
               30% { 
-                transform: scale(0.8) rotate(5deg); 
-                opacity: 0.6; 
-                filter: brightness(0.8) blur(1px); 
-              }
-              50% {
-                transform: scale(1.1) rotate(-2deg);
-                opacity: 0.8;
-                filter: brightness(1.1) blur(0px);
+                transform: scale(1.3) rotate(-90deg); 
+                opacity: 0.3; 
+                filter: brightness(0.5); 
               }
               70% { 
-                transform: scale(1.05) rotate(1deg); 
-                opacity: 0.9; 
-                filter: brightness(1.3) blur(0px); 
-              }
-              85% {
-                transform: scale(0.98) rotate(-0.5deg);
-                opacity: 0.95;
-                filter: brightness(1.2) blur(0px);
+                transform: scale(1.1) rotate(-30deg); 
+                opacity: 0.8; 
+                filter: brightness(1.2); 
               }
               100% { 
                 transform: scale(1) rotate(0deg); 
                 opacity: 1; 
-                filter: brightness(1) blur(0px); 
+                filter: brightness(1); 
               }
             }
             
             @keyframes pokemonGlow {
               0%, 100% { 
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 255, 255, 0.2); 
-                filter: brightness(1);
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); 
               }
               50% { 
-                box-shadow: 0 0 50px rgba(255, 255, 255, 0.8), 0 0 100px rgba(255, 255, 255, 0.4); 
-                filter: brightness(1.1);
+                box-shadow: 0 0 40px rgba(255, 255, 255, 0.6); 
               }
             }
             
             @keyframes sparkle {
-              0%, 100% { 
-                opacity: 0; 
-                transform: scale(0) rotate(0deg); 
-                filter: brightness(1);
-              }
-              25% {
-                opacity: 0.6;
-                transform: scale(0.5) rotate(45deg);
-                filter: brightness(1.3);
-              }
-              50% { 
-                opacity: 1; 
-                transform: scale(1) rotate(180deg); 
-                filter: brightness(1.5);
-              }
-              75% {
-                opacity: 0.6;
-                transform: scale(0.5) rotate(270deg);
-                filter: brightness(1.3);
-              }
+              0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+              50% { opacity: 1; transform: scale(1) rotate(180deg); }
             }
           `
         }} />
@@ -1476,7 +1274,7 @@ const BattleSystem: React.FC<BattleProps> = ({
           <div 
             className="mb-6 relative inline-block rounded-full"
             style={{ 
-              animation: 'appearPokemon 2s cubic-bezier(0.23, 1, 0.32, 1), pokemonGlow 3s ease-in-out infinite' 
+              animation: 'appearPokemon 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), pokemonGlow 2s ease-in-out infinite' 
             }}
           >
             <img 
@@ -1499,8 +1297,8 @@ const BattleSystem: React.FC<BattleProps> = ({
                 style={{
                   left: `${50 + 40 * Math.cos((i * Math.PI * 2) / 8)}%`,
                   top: `${50 + 40 * Math.sin((i * Math.PI * 2) / 8)}%`,
-                  animation: `sparkle 2s ease-in-out infinite`,
-                  animationDelay: `${i * 0.25}s`
+                  animation: `sparkle 1.5s ease-in-out infinite`,
+                  animationDelay: `${i * 0.2}s`
                 }}
               />
             ))}
@@ -1517,13 +1315,13 @@ const BattleSystem: React.FC<BattleProps> = ({
           
           {/* Ondas de impacto */}
           <div className="absolute inset-0 pointer-events-none">
-            {Array.from({ length: 4 }).map((_, i) => (
+            {Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="absolute inset-0 border-4 border-white/15 rounded-full"
+                className="absolute inset-0 border-4 border-white/20 rounded-full"
                 style={{
-                  animation: `ping 2s cubic-bezier(0.23, 1, 0.32, 1) infinite`,
-                  animationDelay: `${i * 0.4}s`
+                  animation: `ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite`,
+                  animationDelay: `${i * 0.5}s`
                 }}
               />
             ))}
@@ -1741,29 +1539,18 @@ const BattleSystem: React.FC<BattleProps> = ({
 
         {/* Área de tap */}
         <div className="mb-8 relative flex gap-6 items-center justify-center">
-          {/* Indicador de tap exitoso */}
-          {showTapIndicator && (
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-8 z-20 animate-ping">
-              <div className="text-green-400 text-2xl font-bold">✓</div>
-            </div>
-          )}
-          
           {/* Botón de tap normal */}
           <div className="relative">
             <button
               onClick={handleTap}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
               disabled={!combateEnCurso}
-              data-game-button="true"
-              className={`relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl active:scale-95 touch-manipulation select-none ${
+              className={`relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl ${
                 combateEnCurso
                   ? ataqueInminente
                     ? 'bg-red-500 hover:bg-red-400 animate-pulse border-red-300 shadow-red-500/50'
                     : 'bg-blue-500 hover:bg-blue-400 border-blue-300 shadow-blue-500/50'
                   : 'bg-gray-500 cursor-not-allowed border-gray-400 shadow-gray-500/30'
               }`}
-              style={{ touchAction: 'manipulation', WebkitUserSelect: 'none' }}
             >
               {combateEnCurso ? '👊' : '🔄'}
             </button>
@@ -1784,12 +1571,8 @@ const BattleSystem: React.FC<BattleProps> = ({
               
               <button
                 onClick={handleSuperTap}
-                onTouchStart={handleSuperTouchStart}
-                onTouchEnd={handleSuperTouchEnd}
                 disabled={!combateEnCurso}
-                data-game-button="true"
-                className="relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 animate-pulse border-yellow-300 shadow-yellow-500/50 text-black active:scale-95 touch-manipulation select-none"
-                style={{ touchAction: 'manipulation', WebkitUserSelect: 'none' }}
+                className="relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 animate-pulse border-yellow-300 shadow-yellow-500/50 text-black"
               >
                 ⚡
               </button>

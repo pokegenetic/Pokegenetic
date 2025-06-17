@@ -35,15 +35,15 @@ export const GIMNASIOS_KANTO: Gimnasio[] = [
     tipo: 'Agua',
     color: 'from-blue-400 to-cyan-600',
     pokemon: ['Staryu', 'Psyduck', 'Goldeen', 'Starmie'],
-    sprite: 'https://archives.bulbagarden.net/media/upload/e/ed/Spr_B2W2_Misty.png',
+    sprite: 'https://archives.bulbagarden.net/media/upload/b/b1/Spr_B2W2_Misty.png',
     medalla: {
       nombre: 'Medalla Cascada',
       emoji: '💧',
       sprite: CascadeBadge
     },
     entrenadores: [
-      { nombre: 'Nadador Luis', pokemon: ['Tentacool', 'Horsea'], sprite: 'https://archives.bulbagarden.net/media/upload/e/e2/Spr_B2W2_Swimmer_M.png' },
-      { nombre: 'Nadadora María', pokemon: ['Goldeen', 'Seaking'], sprite: 'https://archives.bulbagarden.net/media/upload/8/82/Spr_B2W2_Swimmer_F.png' }
+      { nombre: 'Nadador Luis', pokemon: ['Tentacool', 'Horsea'], sprite: 'https://archives.bulbagarden.net/media/upload/4/4e/Spr_B2W2_Swimmer_M.png' },
+      { nombre: 'Nadadora María', pokemon: ['Goldeen', 'Seaking'], sprite: 'https://archives.bulbagarden.net/media/upload/8/88/Spr_B2W2_Swimmer_F.png' }
     ],
     recompensas: { pokeballs: 2, fichas: 18 }
   },
@@ -53,15 +53,15 @@ export const GIMNASIOS_KANTO: Gimnasio[] = [
     tipo: 'Eléctrico', 
     color: 'from-yellow-400 to-amber-500',
     pokemon: ['Pikachu', 'Voltorb', 'Magnemite', 'Raichu'],
-    sprite: 'https://archives.bulbagarden.net/media/upload/d/df/Spr_B2W2_Lt_Surge.png',
+    sprite: 'https://archives.bulbagarden.net/media/upload/7/7a/Spr_B2W2_Lt_Surge.png',
     medalla: {
       nombre: 'Medalla Trueno',
       emoji: '⚡',
       sprite: ThunderBadge
     },
     entrenadores: [
-      { nombre: 'Ingeniero Pedro', pokemon: ['Magnemite', 'Voltorb'], sprite: 'https://archives.bulbagarden.net/media/upload/1/1b/Spr_BW_Worker.png' },
-      { nombre: 'Soldado Rick', pokemon: ['Pikachu', 'Electabuzz'], sprite: 'http://archives.bulbagarden.net/media/upload/7/73/Spr_BW_Depot_Agent.png' }
+      { nombre: 'Ingeniero Pedro', pokemon: ['Magnemite', 'Voltorb'], sprite: 'https://archives.bulbagarden.net/media/upload/a/a5/Spr_B2W2_Engineer.png' },
+      { nombre: 'Soldado Rick', pokemon: ['Pikachu', 'Electabuzz'], sprite: 'https://archives.bulbagarden.net/media/upload/f/ff/Spr_B2W2_Gentleman.png' }
     ],
     recompensas: { pokeballs: 2, fichas: 20 }
   },

@@ -1,7 +1,7 @@
 // pokemonValidator.ts
 // Validador centralizado para Pokémon especiales según basepokemonData
 
-import { basepokemonData } from '../data/sv/basepokemon';
+import { basepokemonData } from '../data/sv/basepokemon_module';
 
 // 1. Parsear basepokemonData a objetos automáticamente
 export interface BasePokemonRestriction {
@@ -141,7 +141,7 @@ export function validatePokemon(pokemon: any): string[] {
   
   // Validar IVs fijos
   if (r.fixedIVs && pokemon.IVs) {
-    const statNames = { hp: 'HP', atk: 'Ataque', def: 'Defensa', spa: 'Ataque Esp.', spd: 'Defensa Esp.', spe: 'Velocidad' };
+    const statNames: Record<string, string> = { hp: 'HP', atk: 'Ataque', def: 'Defensa', spa: 'Ataque Esp.', spd: 'Defensa Esp.', spe: 'Velocidad' };
     for (const [stat, expectedValue] of Object.entries(r.fixedIVs)) {
       if (pokemon.IVs[stat] !== undefined && pokemon.IVs[stat] !== expectedValue) {
         errors.push(`${r.name} debe tener ${expectedValue} IV en ${statNames[stat] || stat}.`);

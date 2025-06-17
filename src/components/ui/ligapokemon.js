@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { playSoundEffect } from '@/lib/soundEffects';
 import { useUser } from '../../context/UserContext';
 import { addPokemonToTeam } from '@/lib/equipoStorage';
-import { updateUserPokeballs, updateUserFichas, saveLigaPokemonProgress, getLigaPokemonProgress } from '@/lib/userData';
+import { updateUserPokeballs, updateUserFichas } from '@/lib/userData';
 import LoginRequired from './LoginRequired';
 import BattleSystem from './BattleSystem';
 import { REGION_KANTO, TIPOS_JUGADOR, LEGENDARIOS_FINALES } from '../../data/ligaPokemon';
@@ -118,99 +118,27 @@ export default function LigaPokemon() {
     }, [showIntro]);
     // Cargar progreso e inicializar tipo por defecto
     useEffect(() => {
-        const cargarProgreso = async () => {
-            if (user?.uid && user?.email) {
-                try {
-                    const progreso = await getLigaPokemonProgress(user.uid, user.email);
-                    if (progreso) {
-                        setMedallasObtenidas(progreso.medallasObtenidas);
-                        setEntrenadoresVencidos(progreso.entrenadoresVencidos);
-                        console.log('🎮 Progreso Liga Pokémon cargado desde Firestore');
-                    }
-                    else {
-                        // Fallback a localStorage si no hay datos en Firestore
-                        const localProgreso = localStorage.getItem('ligaPokemonProgreso');
-                        if (localProgreso) {
-                            try {
-                                const data = JSON.parse(localProgreso);
-                                setMedallasObtenidas(data.medallasObtenidas || []);
-                                setEntrenadoresVencidos(data.entrenadoresVencidos || {});
-                                // Migrar datos locales a Firestore
-                                await saveLigaPokemonProgress(user.uid, user.email, data.medallasObtenidas || [], data.entrenadoresVencidos || {});
-                                console.log('📦 Progreso migrado de localStorage a Firestore');
-                            }
-                            catch (error) {
-                                console.error('Error cargando progreso local:', error);
-                            }
-                        }
-                    }
-                }
-                catch (error) {
-                    console.error('Error cargando progreso desde Firestore:', error);
-                    // Fallback a localStorage en caso de error
-                    const localProgreso = localStorage.getItem('ligaPokemonProgreso');
-                    if (localProgreso) {
-                        try {
-                            const data = JSON.parse(localProgreso);
-                            setMedallasObtenidas(data.medallasObtenidas || []);
-                            setEntrenadoresVencidos(data.entrenadoresVencidos || {});
-                        }
-                        catch (error) {
-                            console.error('Error cargando progreso local:', error);
-                        }
-                    }
-                }
+        const progreso = localStorage.getItem('ligaPokemonProgreso');
+        if (progreso) {
+            try {
+                const data = JSON.parse(progreso);
+                setMedallasObtenidas(data.medallasObtenidas || []);
+                setEntrenadoresVencidos(data.entrenadoresVencidos || {});
             }
-        };
-        if (user?.uid) {
-            cargarProgreso();
+            catch (error) {
+                console.error('Error cargando progreso:', error);
+            }
         }
         if (!tipoSeleccionado && TIPOS_JUGADOR.length > 0) {
             setTipoSeleccionado(TIPOS_JUGADOR[0].nombre);
         }
-    }, [user, tipoSeleccionado]);
-    // Efecto para resetear carrusel cuando se carga el progreso
-    useEffect(() => {
-        // Cuando se carga el progreso, determinar el gimnasio correcto y el índice del carrusel
-        if (user?.uid && medallasObtenidas.length >= 0) {
-            const gimnasioCorreto = determinarGimnasioActual(medallasObtenidas);
-            // Solo cambiar el gimnasio si es diferente al actual
-            if (gimnasioCorreto !== gimnasioActual) {
-                console.log('🏟️ Cambiando gimnasio:', { de: gimnasioActual, a: gimnasioCorreto });
-                setGimnasioActual(gimnasioCorreto);
-                return; // Salir early para evitar ejecutar el resto hasta que se actualice el gimnasio
-            }
-            // Determinar el índice correcto del carrusel para el gimnasio actual
-            const proximoIndex = getProximoEntrenadorDisponible(gimnasioActual);
-            const carruselCorreto = proximoIndex === -1 ?
-                REGION_KANTO.gimnasios[gimnasioActual].entrenadores.length : // Líder disponible
-                proximoIndex; // Próximo entrenador disponible
-            setCarruselIndex(carruselCorreto);
-            console.log('🔄 Progreso cargado, ajustando posición:', {
-                gimnasioActual,
-                proximoIndex,
-                carruselCorreto
-            });
-        }
-    }, [medallasObtenidas, entrenadoresVencidos, user?.uid, gimnasioActual]);
+    }, []);
     // Guardar progreso
-    const guardarProgreso = async (medallas, entrenadoresVencidosData) => {
-        const datosEntrenadores = entrenadoresVencidosData || entrenadoresVencidos;
-        // Guardar en localStorage como backup
+    const guardarProgreso = (medallas, entrenadoresVencidosData) => {
         localStorage.setItem('ligaPokemonProgreso', JSON.stringify({
             medallasObtenidas: medallas,
-            entrenadoresVencidos: datosEntrenadores
+            entrenadoresVencidos: entrenadoresVencidosData || entrenadoresVencidos
         }));
-        // Guardar en Firestore si el usuario está logueado
-        if (user?.uid && user?.email) {
-            try {
-                await saveLigaPokemonProgress(user.uid, user.email, medallas, datosEntrenadores);
-                console.log('💾 Progreso guardado en Firestore y localStorage');
-            }
-            catch (error) {
-                console.error('❌ Error guardando en Firestore, mantenido en localStorage:', error);
-            }
-        }
     };
     // Dar recompensas del gimnasio
     const darRecompensas = async (gimnasioIndex) => {
@@ -281,10 +209,7 @@ export default function LigaPokemon() {
             else {
                 // Victoria completa contra el entrenador
                 const entrenadorKey = `gym${gimnasioActual}_trainer${entrenadorActual}`;
-                const nuevosEntrenadoresVencidos = { ...entrenadoresVencidos, [entrenadorKey]: true };
-                setEntrenadoresVencidos(nuevosEntrenadoresVencidos);
-                // Guardar progreso inmediatamente
-                await guardarProgreso(medallasObtenidas, nuevosEntrenadoresVencidos);
+                setEntrenadoresVencidos(prev => ({ ...prev, [entrenadorKey]: true }));
                 // Dar recompensas del entrenador
                 await darRecompensasEntrenador(gimnasioActual, entrenadorActual);
                 // Mostrar modal de victoria
@@ -312,11 +237,10 @@ export default function LigaPokemon() {
             else {
                 // Victoria contra el líder - marcar líder como vencido también
                 const liderKey = `gym${gimnasioActual}_leader`;
-                const nuevosEntrenadoresVencidos = { ...entrenadoresVencidos, [liderKey]: true };
-                setEntrenadoresVencidos(nuevosEntrenadoresVencidos);
+                setEntrenadoresVencidos(prev => ({ ...prev, [liderKey]: true }));
                 const nuevasMedallas = [...medallasObtenidas, gimnasioActual];
                 setMedallasObtenidas(nuevasMedallas);
-                await guardarProgreso(nuevasMedallas, nuevosEntrenadoresVencidos);
+                guardarProgreso(nuevasMedallas);
                 await darRecompensas(gimnasioActual);
                 // Mostrar modal de victoria para líder
                 const gimnasio = REGION_KANTO.gimnasios[gimnasioActual];
@@ -401,17 +325,6 @@ export default function LigaPokemon() {
         }
         return true;
     };
-    // Función para determinar el gimnasio actual basado en el progreso
-    const determinarGimnasioActual = (medallasObtenidas) => {
-        // Encontrar el primer gimnasio donde no se ha obtenido la medalla
-        for (let i = 0; i < REGION_KANTO.gimnasios.length; i++) {
-            if (!medallasObtenidas.includes(i)) {
-                return i;
-            }
-        }
-        // Si todas las medallas están obtenidas, quedarse en el último gimnasio
-        return REGION_KANTO.gimnasios.length - 1;
-    };
     // Función para obtener el próximo entrenador disponible (desbloqueado y no vencido)
     const getProximoEntrenadorDisponible = (gimnasioIndex) => {
         const gimnasio = REGION_KANTO.gimnasios[gimnasioIndex];
@@ -427,30 +340,6 @@ export default function LigaPokemon() {
         // Si todos los entrenadores están vencidos, devolver -1 (líder disponible)
         return -1;
     };
-    // Función para verificar si un combatiente está habilitado para pelear
-    const isCombatienteHabilitado = (gimnasioIndex, combatienteIndex) => {
-        const gimnasio = REGION_KANTO.gimnasios[gimnasioIndex];
-        const esLider = combatienteIndex >= gimnasio.entrenadores.length;
-        if (esLider) {
-            // El líder está habilitado solo si todos los entrenadores están vencidos
-            const liderKey = `gym${gimnasioIndex}_leader`;
-            const isLiderVencido = entrenadoresVencidos[liderKey];
-            if (isLiderVencido)
-                return false; // Si ya está vencido, no está habilitado
-            const todosEntrenadoresVencidos = gimnasio.entrenadores.every((_, index) => {
-                const entrenadorKey = `gym${gimnasioIndex}_trainer${index}`;
-                return entrenadoresVencidos[entrenadorKey];
-            });
-            return todosEntrenadoresVencidos;
-        }
-        else {
-            // Para entrenadores, verificar que esté desbloqueado y no vencido
-            const entrenadorKey = `gym${gimnasioIndex}_trainer${combatienteIndex}`;
-            const isVencido = entrenadoresVencidos[entrenadorKey];
-            const isDesbloqueado = isEntrenadorDesbloqueado(gimnasioIndex, combatienteIndex);
-            return !isVencido && isDesbloqueado;
-        }
-    };
     // Función para navegar en el carrusel
     const navegarCarrusel = (direccion) => {
         const gimnasio = REGION_KANTO.gimnasios[gimnasioActual];
@@ -465,13 +354,8 @@ export default function LigaPokemon() {
     };
     // Función para resetear el carrusel al cambiar de gimnasio
     const resetCarrusel = () => {
-        // Al cambiar de gimnasio manualmente, ir al próximo entrenador disponible
         const proximoIndex = getProximoEntrenadorDisponible(gimnasioActual);
-        const carruselInicial = proximoIndex === -1 ?
-            REGION_KANTO.gimnasios[gimnasioActual].entrenadores.length : // Líder disponible
-            proximoIndex; // Próximo entrenador disponible
-        setCarruselIndex(carruselInicial);
-        console.log('🎯 Carrusel reseteado:', { gimnasioActual, proximoIndex, carruselInicial });
+        setCarruselIndex(proximoIndex === -1 ? REGION_KANTO.gimnasios[gimnasioActual].entrenadores.length : proximoIndex);
     };
     // Efecto para resetear carrusel cuando cambia el gimnasio
     useEffect(() => {
@@ -533,10 +417,7 @@ export default function LigaPokemon() {
             else {
                 // Victoria completa contra el entrenador
                 const entrenadorKey = `gym${gimnasioActual}_trainer${entrenadorActual}`;
-                const nuevosEntrenadoresVencidos = { ...entrenadoresVencidos, [entrenadorKey]: true };
-                setEntrenadoresVencidos(nuevosEntrenadoresVencidos);
-                // Guardar progreso inmediatamente
-                await guardarProgreso(medallasObtenidas, nuevosEntrenadoresVencidos);
+                setEntrenadoresVencidos(prev => ({ ...prev, [entrenadorKey]: true }));
                 await darRecompensasEntrenador(gimnasioActual, entrenadorActual);
                 const entrenador = gimnasio.entrenadores[entrenadorActual];
                 const recompensasPokeballs = Math.ceil(gimnasio.recompensas.pokeballs / 2);
@@ -563,11 +444,10 @@ export default function LigaPokemon() {
             else {
                 // Victoria contra el líder - marcar líder como vencido también
                 const liderKey = `gym${gimnasioActual}_leader`;
-                const nuevosEntrenadoresVencidos = { ...entrenadoresVencidos, [liderKey]: true };
-                setEntrenadoresVencidos(nuevosEntrenadoresVencidos);
+                setEntrenadoresVencidos(prev => ({ ...prev, [liderKey]: true }));
                 const nuevasMedallas = [...medallasObtenidas, gimnasioActual];
                 setMedallasObtenidas(nuevasMedallas);
-                await guardarProgreso(nuevasMedallas, nuevosEntrenadoresVencidos);
+                guardarProgreso(nuevasMedallas);
                 await darRecompensas(gimnasioActual);
                 const gimnasio = REGION_KANTO.gimnasios[gimnasioActual];
                 setDatosVictoria({
@@ -631,10 +511,7 @@ export default function LigaPokemon() {
                 else {
                     // Victoria completa contra el entrenador
                     const entrenadorKey = `gym${gimnasioActual}_trainer${entrenadorActual}`;
-                    const nuevosEntrenadoresVencidos = { ...entrenadoresVencidos, [entrenadorKey]: true };
-                    setEntrenadoresVencidos(nuevosEntrenadoresVencidos);
-                    // Guardar progreso inmediatamente
-                    await guardarProgreso(medallasObtenidas, nuevosEntrenadoresVencidos);
+                    setEntrenadoresVencidos(prev => ({ ...prev, [entrenadorKey]: true }));
                     await darRecompensasEntrenador(gimnasioActual, entrenadorActual);
                     const entrenador = gimnasio.entrenadores[entrenadorActual];
                     const recompensasPokeballs = Math.ceil(gimnasio.recompensas.pokeballs / 2);
@@ -660,11 +537,10 @@ export default function LigaPokemon() {
                 else {
                     // Victoria contra el líder - marcar líder como vencido también
                     const liderKey = `gym${gimnasioActual}_leader`;
-                    const nuevosEntrenadoresVencidos = { ...entrenadoresVencidos, [liderKey]: true };
-                    setEntrenadoresVencidos(nuevosEntrenadoresVencidos);
+                    setEntrenadoresVencidos(prev => ({ ...prev, [liderKey]: true }));
                     const nuevasMedallas = [...medallasObtenidas, gimnasioActual];
                     setMedallasObtenidas(nuevasMedallas);
-                    await guardarProgreso(nuevasMedallas, nuevosEntrenadoresVencidos);
+                    guardarProgreso(nuevasMedallas);
                     await darRecompensas(gimnasioActual);
                     const gimnasio = REGION_KANTO.gimnasios[gimnasioActual];
                     setDatosVictoria({
@@ -803,13 +679,13 @@ export default function LigaPokemon() {
                                                         pokemon: REGION_KANTO.gimnasios[gimnasioActual].pokemon,
                                                         isLeader: true
                                                     }];
-                                                return (_jsxs("div", { children: [_jsxs("div", { className: "flex items-center justify-between mb-2", children: [_jsx("button", { onClick: () => setCarruselIndex(Math.max(0, carruselIndex - 1)), disabled: carruselIndex === 0, className: `p-3 rounded-full transition-all touch-manipulation select-none ${carruselIndex === 0
+                                                return (_jsxs("div", { children: [_jsxs("div", { className: "flex items-center justify-between mb-2", children: [_jsx("button", { onClick: () => setCarruselIndex(Math.max(0, carruselIndex - 1)), disabled: carruselIndex === 0, className: `p-2 rounded-full transition-all ${carruselIndex === 0
                                                                         ? 'bg-gray-400/30 text-gray-600 cursor-not-allowed'
-                                                                        : 'bg-white/20 hover:bg-white/30 text-white hover:scale-110 active:scale-95'}`, style: { touchAction: 'manipulation' }, children: "\u2190" }), _jsx("div", { className: "flex items-center gap-3", children: allCombatants.map((_, index) => (_jsx("button", { onClick: () => setCarruselIndex(index), className: `w-4 h-4 rounded-full transition-all touch-manipulation select-none ${index === carruselIndex
+                                                                        : 'bg-white/20 hover:bg-white/30 text-white hover:scale-110'}`, children: "\u2190" }), _jsx("div", { className: "flex items-center gap-2", children: allCombatants.map((_, index) => (_jsx("button", { onClick: () => setCarruselIndex(index), className: `w-3 h-3 rounded-full transition-all ${index === carruselIndex
                                                                             ? 'bg-blue-500 scale-125'
-                                                                            : 'bg-white/30 hover:bg-white/50 active:scale-90'}`, style: { touchAction: 'manipulation' } }, index))) }), _jsx("button", { onClick: () => setCarruselIndex(Math.min(allCombatants.length - 1, carruselIndex + 1)), disabled: carruselIndex === allCombatants.length - 1, className: `p-3 rounded-full transition-all touch-manipulation select-none ${carruselIndex === allCombatants.length - 1
+                                                                            : 'bg-white/30 hover:bg-white/50'}` }, index))) }), _jsx("button", { onClick: () => setCarruselIndex(Math.min(allCombatants.length - 1, carruselIndex + 1)), disabled: carruselIndex === allCombatants.length - 1, className: `p-2 rounded-full transition-all ${carruselIndex === allCombatants.length - 1
                                                                         ? 'bg-gray-400/30 text-gray-600 cursor-not-allowed'
-                                                                        : 'bg-white/20 hover:bg-white/30 text-white hover:scale-110 active:scale-95'}`, style: { touchAction: 'manipulation' }, children: "\u2192" })] }), _jsx("div", { className: "relative rounded-lg", children: (() => {
+                                                                        : 'bg-white/20 hover:bg-white/30 text-white hover:scale-110'}`, children: "\u2192" })] }), _jsx("div", { className: "relative rounded-lg", children: (() => {
                                                                 const currentCombatant = allCombatants[carruselIndex];
                                                                 const isLeader = 'isLeader' in currentCombatant && currentCombatant.isLeader;
                                                                 if (isLeader) {
@@ -959,21 +835,20 @@ export default function LigaPokemon() {
                                                         const entrenadorKey = `gym${gimnasioActual}_trainer${index}`;
                                                         return entrenadoresVencidos[entrenadorKey];
                                                     });
-                                                    const isHabilitado = isCombatienteHabilitado(gimnasioActual, carruselIndex);
                                                     return (_jsx("button", { onClick: () => {
                                                             if (!tipoSeleccionado) {
                                                                 playSoundEffect('error', 0.2);
                                                                 alert('¡Selecciona un tipo primero!');
                                                                 return;
                                                             }
-                                                            if (!isHabilitado) {
+                                                            if (!todosEntrenadoresVencidos) {
                                                                 playSoundEffect('error', 0.2);
-                                                                if (isLiderVencido) {
-                                                                    alert('Ya has vencido a este líder!');
-                                                                }
-                                                                else {
-                                                                    alert('¡Debes vencer a todos los entrenadores antes de enfrentar al líder!');
-                                                                }
+                                                                alert('¡Debes vencer a todos los entrenadores antes de enfrentar al líder!');
+                                                                return;
+                                                            }
+                                                            if (isLiderVencido) {
+                                                                playSoundEffect('error', 0.2);
+                                                                alert('Ya has vencido a este líder!');
                                                                 return;
                                                             }
                                                             playSoundEffect('notification', 0.2);
@@ -981,14 +856,14 @@ export default function LigaPokemon() {
                                                             // Cambiar directamente al estado del líder para que BattleSystem se haga cargo
                                                             setCombatienteActual('lider');
                                                             setEstado('lider');
-                                                        }, disabled: !tipoSeleccionado || !isHabilitado, className: `w-full py-3 rounded-lg font-bold transition-all duration-300 ${isLiderVencido
+                                                        }, disabled: !tipoSeleccionado || !todosEntrenadoresVencidos || isLiderVencido, className: `w-full py-3 rounded-lg font-bold transition-all duration-300 ${isLiderVencido
                                                             ? 'bg-yellow-600 text-yellow-200 cursor-not-allowed opacity-50'
-                                                            : !isHabilitado
+                                                            : !todosEntrenadoresVencidos
                                                                 ? 'bg-gray-500 text-gray-300 cursor-not-allowed opacity-50'
                                                                 : tipoSeleccionado
                                                                     ? 'bg-gradient-to-r from-yellow-400 to-red-500 hover:from-yellow-500 hover:to-red-600 text-white hover:scale-[1.02] shadow-lg hover:shadow-xl'
                                                                     : 'bg-gray-400 cursor-not-allowed opacity-50 text-white'}`, children: isLiderVencido ? `👑 ${currentCombatant.nombre} (Vencido)` :
-                                                            !isHabilitado ? '🔒 Vence a todos los entrenadores primero' :
+                                                            !todosEntrenadoresVencidos ? '🔒 Vence a todos los entrenadores primero' :
                                                                 !tipoSeleccionado ? '⚠️ Selecciona un tipo' :
                                                                     `👑 ¡Enfrentar al Líder ${currentCombatant.nombre}!` }));
                                                 }
@@ -998,32 +873,32 @@ export default function LigaPokemon() {
                                                     const entrenadorKey = `gym${gimnasioActual}_trainer${index}`;
                                                     const isVencido = entrenadoresVencidos[entrenadorKey];
                                                     const isDesbloqueado = isEntrenadorDesbloqueado(gimnasioActual, index);
-                                                    const isHabilitado = isCombatienteHabilitado(gimnasioActual, index);
                                                     // Determinar el estado del botón
                                                     let buttonState = '';
                                                     let buttonText = '';
+                                                    let canClick = false;
                                                     if (isVencido) {
                                                         buttonState = 'bg-gray-600 text-gray-300 cursor-not-allowed opacity-50';
                                                         buttonText = `✓ ${index + 1}. ${currentCombatant.nombre} (Vencido)`;
+                                                        canClick = false;
                                                     }
                                                     else if (!isDesbloqueado) {
                                                         buttonState = 'bg-red-500 text-red-200 cursor-not-allowed opacity-50';
                                                         buttonText = `🔒 ${index + 1}. ${currentCombatant.nombre} (Bloqueado)`;
+                                                        canClick = false;
                                                     }
                                                     else if (!tipoSeleccionado) {
                                                         buttonState = 'bg-gray-400 cursor-not-allowed opacity-50 text-white';
                                                         buttonText = '⚠️ Selecciona un tipo';
-                                                    }
-                                                    else if (isHabilitado) {
-                                                        buttonState = 'bg-gradient-to-r from-blue-400 to-purple-500 hover:from-blue-500 hover:to-purple-600 text-white hover:scale-[1.02] shadow-lg hover:shadow-xl';
-                                                        buttonText = `⚔️ ${index + 1}. Enfrentar a ${currentCombatant.nombre}`;
+                                                        canClick = false;
                                                     }
                                                     else {
-                                                        buttonState = 'bg-gray-500 text-gray-300 cursor-not-allowed opacity-50';
-                                                        buttonText = `❌ ${index + 1}. ${currentCombatant.nombre} (No disponible)`;
+                                                        buttonState = 'bg-gradient-to-r from-blue-400 to-purple-500 hover:from-blue-500 hover:to-purple-600 text-white hover:scale-[1.02] shadow-lg hover:shadow-xl';
+                                                        buttonText = `⚔️ ${index + 1}. Enfrentar a ${currentCombatant.nombre}`;
+                                                        canClick = true;
                                                     }
                                                     return (_jsx("button", { onClick: () => {
-                                                            if (!tipoSeleccionado || !isHabilitado) {
+                                                            if (!canClick) {
                                                                 playSoundEffect('error', 0.2);
                                                                 if (isVencido) {
                                                                     alert('Ya has vencido a este entrenador!');
@@ -1036,9 +911,6 @@ export default function LigaPokemon() {
                                                                 else if (!tipoSeleccionado) {
                                                                     alert('¡Selecciona un tipo primero!');
                                                                 }
-                                                                else {
-                                                                    alert('Este entrenador no está disponible en este momento.');
-                                                                }
                                                                 return;
                                                             }
                                                             playSoundEffect('notification', 0.2);
@@ -1047,7 +919,7 @@ export default function LigaPokemon() {
                                                             // Cambiar directamente al estado del entrenador para que BattleSystem se haga cargo
                                                             setCombatienteActual('entrenador');
                                                             setEstado('entrenador');
-                                                        }, disabled: !tipoSeleccionado || !isHabilitado, className: `w-full py-3 rounded-lg font-semibold transition-all duration-300 touch-manipulation select-none active:scale-95 ${buttonState}`, style: { touchAction: 'manipulation' }, children: buttonText }));
+                                                        }, disabled: !canClick, className: `w-full py-2 rounded-lg font-semibold transition-all duration-300 ${buttonState}`, children: buttonText }));
                                                 }
-                                            })() })] }) })), (estado === 'entrenador' || estado === 'lider' || estado === 'elite' || estado === 'campeon' || estado === 'derrota') && (_jsx(BattleSystem, { gimnasioActual: gimnasioActual, entrenadorActual: entrenadorActual, pokemonActual: pokemonActual, combatienteActual: combatienteActual, tipoSeleccionado: tipoSeleccionado, gimnasios: REGION_KANTO.gimnasios, eliteFour: REGION_KANTO.eliteFour, campeon: REGION_KANTO.campeon, onVictoria: handleVictoria, onDerrota: handleDerrota, onVolverAlGimnasio: handleVolverAlGimnasio, estado: estado })), estado === 'final' && !legendarioSeleccionado && (_jsxs("div", { className: "bg-white/70 backdrop-blur-md rounded-xl p-6 border border-slate-200/60 text-center mb-8", children: [_jsx("div", { className: "text-6xl mb-4", children: "\uD83C\uDFC6" }), _jsx("h2", { className: "text-3xl font-bold bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500 bg-clip-text text-transparent mb-4", children: "\u00A1LIGA POK\u00C9MON COMPLETADA!" }), _jsx("p", { className: "text-lg mb-6", children: "\u00A1Felicitaciones! Elige tu recompensa legendaria:" }), _jsx("div", { className: "grid md:grid-cols-3 gap-4 mb-6", children: LEGENDARIOS_FINALES.map((legendario) => (_jsxs("button", { onClick: () => seleccionarLegendario(legendario), className: `bg-gradient-to-br ${legendario.color} text-white p-4 rounded-xl hover:scale-105 active:scale-95 transition-all shadow-lg touch-manipulation select-none`, style: { touchAction: 'manipulation' }, children: [_jsx("div", { className: "text-4xl mb-2", children: legendario.emoji }), _jsx("div", { className: "font-bold text-lg", children: legendario.nombre }), _jsx("div", { className: "text-sm opacity-90", children: legendario.descripcion }), _jsx("div", { className: "mt-2 text-xs bg-white/20 rounded-full px-2 py-1", children: "\u2728 Shiny" })] }, legendario.nombre))) })] })), estado === 'final' && legendarioSeleccionado && (_jsxs("div", { className: "bg-white/70 backdrop-blur-md rounded-xl p-6 border border-slate-200/60 text-center mb-8", children: [_jsx("div", { className: "text-6xl mb-4", children: "\u2728" }), _jsxs("h2", { className: "text-2xl font-bold text-purple-600 mb-4", children: ["\u00A1", legendarioSeleccionado, " Shiny obtenido!"] }), _jsx("p", { className: "mb-6", children: "El legendario ha sido agregado a tu equipo. \u00A1Eres oficialmente un Maestro Pok\u00E9mon!" }), _jsx("button", { onClick: volverAlMenu, className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-lg font-bold hover:scale-105 active:scale-95 transition-all touch-manipulation select-none", style: { touchAction: 'manipulation' }, children: "\u00A1Regresar a MiniGames!" })] }))] })), mostrarModalVictoria && datosVictoria && (_jsx("div", { className: "fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4", children: _jsx("div", { className: "bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl border-4 border-yellow-400", children: _jsxs("div", { className: "text-center", children: [_jsx("div", { className: "text-6xl mb-4", children: "\uD83C\uDF89" }), _jsx("h2", { className: "text-2xl font-bold text-yellow-600 mb-2", children: "\u00A1VICTORIA!" }), _jsxs("p", { className: "text-lg mb-4 text-gray-700", children: ["\u00A1Has vencido a ", _jsx("span", { className: "font-bold text-blue-600", children: datosVictoria.nombre }), "!"] }), _jsxs("div", { className: "bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 mb-6", children: [_jsx("h3", { className: "font-bold text-gray-800 mb-3", children: "\uD83C\uDF81 Recompensas obtenidas:" }), _jsxs("div", { className: "space-y-2", children: [_jsxs("div", { className: "flex items-center justify-center gap-2", children: [_jsx("span", { className: "text-red-500", children: "\u26BD" }), _jsxs("span", { className: "font-semibold", children: [datosVictoria.recompensas.pokeballs, " Pok\u00E9balls"] })] }), _jsxs("div", { className: "flex items-center justify-center gap-2", children: [_jsx("span", { className: "text-yellow-500", children: "\uD83E\uDE99" }), _jsxs("span", { className: "font-semibold", children: [datosVictoria.recompensas.fichas, " Fichas"] })] }), datosVictoria.recompensas.medalla && (_jsxs("div", { className: "flex items-center justify-center gap-2", children: [_jsx("span", { className: "text-purple-500", children: "\uD83C\uDFC5" }), _jsxs("span", { className: "font-semibold", children: ["Medalla ", datosVictoria.recompensas.medalla] })] }))] })] }), _jsx("button", { onClick: cerrarModalVictoria, className: "w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white py-3 px-6 rounded-xl font-bold transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-lg touch-manipulation select-none", style: { touchAction: 'manipulation' }, children: "\u00A1Continuar!" })] }) }) }))] })] }));
+                                            })() })] }) })), (estado === 'entrenador' || estado === 'lider' || estado === 'elite' || estado === 'campeon' || estado === 'derrota') && (_jsx(BattleSystem, { gimnasioActual: gimnasioActual, entrenadorActual: entrenadorActual, pokemonActual: pokemonActual, combatienteActual: combatienteActual, tipoSeleccionado: tipoSeleccionado, gimnasios: REGION_KANTO.gimnasios, eliteFour: REGION_KANTO.eliteFour, campeon: REGION_KANTO.campeon, onVictoria: handleVictoria, onDerrota: handleDerrota, onVolverAlGimnasio: handleVolverAlGimnasio, estado: estado })), estado === 'final' && !legendarioSeleccionado && (_jsxs("div", { className: "bg-white/70 backdrop-blur-md rounded-xl p-6 border border-slate-200/60 text-center mb-8", children: [_jsx("div", { className: "text-6xl mb-4", children: "\uD83C\uDFC6" }), _jsx("h2", { className: "text-3xl font-bold bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-500 bg-clip-text text-transparent mb-4", children: "\u00A1LIGA POK\u00C9MON COMPLETADA!" }), _jsx("p", { className: "text-lg mb-6", children: "\u00A1Felicitaciones! Elige tu recompensa legendaria:" }), _jsx("div", { className: "grid md:grid-cols-3 gap-4 mb-6", children: LEGENDARIOS_FINALES.map((legendario) => (_jsxs("button", { onClick: () => seleccionarLegendario(legendario), className: `bg-gradient-to-br ${legendario.color} text-white p-4 rounded-xl hover:scale-105 transition-all shadow-lg`, children: [_jsx("div", { className: "text-4xl mb-2", children: legendario.emoji }), _jsx("div", { className: "font-bold text-lg", children: legendario.nombre }), _jsx("div", { className: "text-sm opacity-90", children: legendario.descripcion }), _jsx("div", { className: "mt-2 text-xs bg-white/20 rounded-full px-2 py-1", children: "\u2728 Shiny" })] }, legendario.nombre))) })] })), estado === 'final' && legendarioSeleccionado && (_jsxs("div", { className: "bg-white/70 backdrop-blur-md rounded-xl p-6 border border-slate-200/60 text-center mb-8", children: [_jsx("div", { className: "text-6xl mb-4", children: "\u2728" }), _jsxs("h2", { className: "text-2xl font-bold text-purple-600 mb-4", children: ["\u00A1", legendarioSeleccionado, " Shiny obtenido!"] }), _jsx("p", { className: "mb-6", children: "El legendario ha sido agregado a tu equipo. \u00A1Eres oficialmente un Maestro Pok\u00E9mon!" }), _jsx("button", { onClick: volverAlMenu, className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-lg font-bold hover:scale-105 transition-all", children: "\u00A1Regresar a MiniGames!" })] }))] })), mostrarModalVictoria && datosVictoria && (_jsx("div", { className: "fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4", children: _jsx("div", { className: "bg-white rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl border-4 border-yellow-400", children: _jsxs("div", { className: "text-center", children: [_jsx("div", { className: "text-6xl mb-4", children: "\uD83C\uDF89" }), _jsx("h2", { className: "text-2xl font-bold text-yellow-600 mb-2", children: "\u00A1VICTORIA!" }), _jsxs("p", { className: "text-lg mb-4 text-gray-700", children: ["\u00A1Has vencido a ", _jsx("span", { className: "font-bold text-blue-600", children: datosVictoria.nombre }), "!"] }), _jsxs("div", { className: "bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-4 mb-6", children: [_jsx("h3", { className: "font-bold text-gray-800 mb-3", children: "\uD83C\uDF81 Recompensas obtenidas:" }), _jsxs("div", { className: "space-y-2", children: [_jsxs("div", { className: "flex items-center justify-center gap-2", children: [_jsx("span", { className: "text-red-500", children: "\u26BD" }), _jsxs("span", { className: "font-semibold", children: [datosVictoria.recompensas.pokeballs, " Pok\u00E9balls"] })] }), _jsxs("div", { className: "flex items-center justify-center gap-2", children: [_jsx("span", { className: "text-yellow-500", children: "\uD83E\uDE99" }), _jsxs("span", { className: "font-semibold", children: [datosVictoria.recompensas.fichas, " Fichas"] })] }), datosVictoria.recompensas.medalla && (_jsxs("div", { className: "flex items-center justify-center gap-2", children: [_jsx("span", { className: "text-purple-500", children: "\uD83C\uDFC5" }), _jsxs("span", { className: "font-semibold", children: ["Medalla ", datosVictoria.recompensas.medalla] })] }))] })] }), _jsx("button", { onClick: cerrarModalVictoria, className: "w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white py-3 px-6 rounded-xl font-bold transition-all duration-300 hover:scale-[1.02] shadow-lg", children: "\u00A1Continuar!" })] }) }) }))] })] }));
 }
