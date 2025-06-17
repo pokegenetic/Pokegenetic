@@ -1,0 +1,18 @@
+Charmander (M) @ Heal Ball
+Ability: Blaze
+Shiny: Yes
+Tera Type: Fire
+Adamant Nature
+- incinerate
+- flamecharge
+- fireblast
+- swagger
+
+Charizard (M) @ Malicious Armor
+Ability: Solar Power
+Tera Type: Fire
+Adamant Nature
+- swordsdance
+- acrobatics
+- aircutter
+- dragontail
