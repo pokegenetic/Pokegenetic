@@ -19,7 +19,7 @@ import packSetup from './packsetup'; // Import the pack setup configuration
 import { parseShowdownText, parseShowdownTextToArray } from '@/lib/parseShowdown';
 import { getPokemonTeam, setPokemonTeam, addHomePackToTeam } from '@/lib/equipoStorage';
 import type { PackEntry, HomePackEntry } from './equipo';
-import paldeaFullImg from '@/img/packhome/paldeafull.png';
+import paldeaFullImg from '@/img/packhome/Paldeafull.png';
 import { playSoundEffect } from '@/lib/soundEffects';
 
 function capitalizeFirst(str: string) {
@@ -202,7 +202,7 @@ export default function Paquetes() {
       trainerName,
       isShiny,
       price: 12000, // O el precio que corresponda
-      gameIcon: '/img/packhome/paldeafull.png',
+      gameIcon: '/img/packhome/Paldeafull.png',
     };
     addHomePackToTeam(homePack);
   }
