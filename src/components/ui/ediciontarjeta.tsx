@@ -26,6 +26,7 @@ import MoveSelectorSlot from '@/components/EdicionTarjeta/MoveSelectorSlot';
 import { getPokemonTeam, setPokemonTeam } from '../../lib/equipoStorage';
 import { useGame } from '@/context/GameContext';
 import { validatePokemon } from '../../lib/pokemonValidator';
+import { playSoundEffect } from '@/lib/soundEffects';
 
 // Define CSS for prismatic effect animation
 import './prismatic.css';
@@ -149,9 +150,9 @@ const Edicion: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const audio = new Audio('/src/sounds/sfx/pc.mp3');
-    audio.volume = 0.1; // Volumen al 10%
-    audio.play().catch(error => console.error("Error playing sound:", error));
+    // Reproducir sonido de PC al entrar en edición
+    playSoundEffect('pc', 0.1);
+    
     // Delay visibility to sync with sound
     const timer = setTimeout(() => {
       setIsVisible(true);
@@ -161,9 +162,7 @@ const Edicion: React.FC = () => {
 
   // Function to play sound on saving Pokémon edits
   const playSaveSound = () => {
-    const audio = new Audio('/src/sounds/sfx/pokeballcatch.mp3');
-    audio.volume = 0.1; // Volumen al 10%
-    audio.play().catch(error => console.error("Error playing pokeballcatch.mp3:", error));
+    playSoundEffect('pokeballcatch', 0.1);
   };
 
   const location = useLocation()
@@ -324,6 +323,7 @@ const Edicion: React.FC = () => {
   const handleTeraChange = (value: string) => {
     setTeraAnimating(true);
     setChosenTera(value);
+    playSoundEffect('notification', 0.15); // Sonido al cambiar tera type
     // Reset animation state after animation duration
     setTimeout(() => setTeraAnimating(false), 800);
   };
@@ -526,6 +526,9 @@ const Edicion: React.FC = () => {
 
   // Guardar cambios: actualiza el texto showdown del equipo y vuelve
   async function handleSave() {
+    // Reproducir sonido de guardado
+    playSaveSound();
+    
     // Verificar errores de validación antes de guardar
     const pokemonToValidate = {
       name: entry?.name || '',
@@ -846,7 +849,10 @@ const Edicion: React.FC = () => {
                     <button 
                       id="shiny-toggle"
                       type="button" 
-                      onClick={() => setIsShiny(!isShiny)} 
+                      onClick={() => {
+                        setIsShiny(!isShiny);
+                        playSoundEffect('shiny', 0.2); // Sonido al activar/desactivar shiny
+                      }} 
                       className={cn(
                         'w-12 h-6 flex items-center rounded-full transition-colors p-1',
                         isShiny ? 'bg-yellow-300' : 'bg-gray-300 dark:bg-gray-600'
@@ -870,7 +876,10 @@ const Edicion: React.FC = () => {
                     <button 
                       id="gender-toggle"
                       type="button" 
-                      onClick={() => setGender(gender === 'M' ? 'F' : 'M')} 
+                      onClick={() => {
+                        setGender(gender === 'M' ? 'F' : 'M');
+                        playSoundEffect('notification', 0.1); // Sonido al cambiar género
+                      }} 
                       className={cn(
                         'w-12 h-6 flex items-center rounded-full transition-colors p-1',
                         gender === 'F' ? 'bg-pink-300' : 'bg-blue-300'
@@ -934,7 +943,10 @@ const Edicion: React.FC = () => {
                   <select
                     id="ability-select"
                     value={chosenAbility}
-                    onChange={e => setChosenAbility(e.target.value)}
+                    onChange={e => {
+                      setChosenAbility(e.target.value);
+                      playSoundEffect('notification', 0.08); // Sonido al cambiar habilidad
+                    }}
                     className="w-full px-2 py-1 rounded-lg border border-gray-300 bg-white/80 dark:bg-gray-800/80 text-gray-900 dark:text-white text-xs font-medium focus:outline-none focus:ring-1 focus:ring-blue-400"
                   >
                     {entry.abilities && Object.entries(entry.abilities).map(([key, ab]) => (
@@ -950,7 +962,10 @@ const Edicion: React.FC = () => {
                   <select
                     id="nature-select"
                     value={chosenNature}
-                    onChange={e => setChosenNature(e.target.value)}
+                    onChange={e => {
+                      setChosenNature(e.target.value);
+                      playSoundEffect('notification', 0.08); // Sonido al cambiar naturaleza
+                    }}
                     className="w-full px-2 py-1 rounded-lg border border-gray-300 bg-white/80 dark:bg-gray-800/80 text-gray-900 dark:text-white text-xs font-medium focus:outline-none focus:ring-1 focus:ring-blue-400"
                   >
                     {natureEntries.map((nature, idx) => {

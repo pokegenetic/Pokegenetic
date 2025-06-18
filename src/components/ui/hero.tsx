@@ -133,6 +133,12 @@ export default function Hero() {
           >
             🎮 Test Pokémon Catch
           </button>
+          <button
+            className="px-4 py-2 rounded-full bg-gradient-to-r from-orange-400 to-red-500 text-white font-bold shadow-lg text-sm hover:scale-105 transition-transform"
+            onClick={() => navigate('/final-audio-test', { state: { from: location.pathname } })}
+          >
+            🎵 Test Final Audio
+          </button>
         </div>
       </div>
 

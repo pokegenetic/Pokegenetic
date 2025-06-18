@@ -370,10 +370,10 @@ export const getAvailableSounds = () => Object.keys(localSounds);
 
 // FUNCIONES HELPER ESPECÍFICAS PARA POKEMONCATCH
 
-// Para cuando se inicia el proceso de captura (pokemoncatch)
+// Para cuando se inicia el proceso de captura (usa catchmusicgo)
 export const playPokemonCatchMusic = (volume: number = 1.0): HTMLAudioElement | null => {
-    console.log('🎵 Iniciando música de captura Pokémon...');
-    return playSoundEffect('pokemoncatch', volume, true); // loop = true para música de fondo
+    console.log('🎵 Iniciando música de captura Pokémon (catchmusicgo)...');
+    return playSoundEffect('catchmusicgo', volume, true); // loop = true para música de fondo
 };
 
 // Para cuando se captura exitosamente un Pokémon  
@@ -388,6 +388,23 @@ export const stopPokemonCatchMusic = (audioElement: HTMLAudioElement | null): vo
         audioElement.pause();
         audioElement.currentTime = 0;
         console.log('⏹️ Música de captura detenida');
+    }
+};
+
+// FUNCIONES HELPER ESPECÍFICAS PARA LIGA POKÉMON
+
+// Para cuando se entra a Liga Pokémon (música de gimnasio)
+export const playLigaPokemonMusic = (volume: number = 0.1): HTMLAudioElement | null => {
+    console.log('🏟️ Iniciando música de Liga Pokémon (pokemongym)...');
+    return playSoundEffect('pokemongym', volume, true); // loop = true para música de fondo
+};
+
+// Para detener la música de Liga Pokémon
+export const stopLigaPokemonMusic = (audioElement: HTMLAudioElement | null): void => {
+    if (audioElement) {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+        console.log('⏹️ Música de Liga Pokémon detenida');
     }
 };
 

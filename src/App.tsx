@@ -27,6 +27,7 @@ import SimpleAudioTest from './components/ui/SimpleAudioTest'; // Probador simpl
 import BasicAudioTest from './components/ui/BasicAudioTest'; // Probador básico
 import SimpleAudioPage from './components/ui/SimpleAudioPage'; // Probador simple funcional
 import AudioRefactorTest from './components/ui/AudioRefactorTest'; // Test del refactor de audio
+import FinalAudioTest from './components/ui/FinalAudioTest';
 import { AnimatePresence, motion } from 'framer-motion';
 import Login from './components/ui/Login';
 import { useUser } from './context/UserContext';
@@ -160,6 +161,7 @@ function App() {
               <Route path="/incubators" element={<Incubators />} />
               <Route path="/ligapokemon" element={<LigaPokemon />} />
               <Route path="/audio-refactor-test" element={<AudioRefactorTest />} />
+              <Route path="/final-audio-test" element={<FinalAudioTest />} />
             </Routes>
           </motion.div>
         </AnimatePresence>

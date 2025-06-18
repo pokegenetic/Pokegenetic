@@ -360,11 +360,9 @@ export default function PokemonCatchGo() {
     }, [pokemon, initialCryPlayed, showAppearMessage]);
     // --- Música de fondo ---
     useEffect(() => {
-        const audio = new Audio('https://play.pokemonshowdown.com/audio/xy-rival.ogg');
-        audio.loop = true;
-        audio.volume = 0.03;
+        // Reproducir catchmusicgo como música de fondo automática
+        const audio = playSoundEffect('catchmusicgo', 0.03, true);
         backgroundMusicRef.current = audio;
-        audio.play().catch(() => { });
         return () => {
             if (backgroundMusicRef.current) {
                 backgroundMusicRef.current.pause();
@@ -636,8 +634,13 @@ export default function PokemonCatchGo() {
             if (success) {
                 setShowParticles(true);
                 setShowFlash(true);
-                playSoundEffect('pokeballcatch', 0.8);
-                setTimeout(() => playSoundEffect('catchmusic', 0.6), 500);
+                // Detener música de fondo y reproducir sonidos de captura exitosa
+                if (backgroundMusicRef.current) {
+                    backgroundMusicRef.current.pause();
+                    backgroundMusicRef.current.currentTime = 0;
+                }
+                playSoundEffect('catchedgo', 0.2);
+                playSoundEffect('pokeballcatch', 0.3); // Sonido adicional de pokeball
                 setCaught(true);
                 setSuccessMessage(`¡Genial! Capturaste a ${pokemon?.name ? pokemon.name[0].toUpperCase() + pokemon.name.slice(1) : 'un Pokémon'}.
 Será agregado a tu equipo`);
@@ -674,8 +677,8 @@ Será agregado a tu equipo`);
             }
             else {
                 setFailMessage(failMessages[Math.floor(Math.random() * failMessages.length)]);
-                // Captura fallida - la lógica está en useEffect para pokeballAnim === 'fail'
-                // No es necesario hacer nada más aquí, solo cambiar el estado.
+                // Captura fallida - NO detener música para que pueda seguir intentando
+                // La lógica está en useEffect para pokeballAnim === 'fail'
             }
         }
         setThrowProgress(0);

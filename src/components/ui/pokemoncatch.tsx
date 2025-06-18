@@ -112,6 +112,7 @@ export default function PokemonCatchGo() {
   const pokeballRef = useRef(null);
   const areaRef = useRef(null);
   const backgroundMusicRef = useRef(null);
+  const catchMusicRef = useRef(null); // Nueva referencia para la música de captura
   const [pokeballLandingPos, setPokeballLandingPos] = useState<{x:number, y:number}|null>(null);
   const [showBallFailFlash, setShowBallFailFlash] = useState(false); // Nueva variable de estado
   const [failMessage, setFailMessage] = useState(''); // Estado para el mensaje de fallo
@@ -374,15 +375,16 @@ export default function PokemonCatchGo() {
     }
   }, [pokemon, initialCryPlayed, showAppearMessage]);
 
-  // --- Música de fondo ---
+  // --- Música de fondo automática al entrar ---
   useEffect(() => {
-    // Usar la nueva función helper para música de captura con archivo local
-    const audio = playPokemonCatchMusic(0.03); // Mismo volumen pero con archivo local
+    // Reproducir catchmusicgo como música de fondo automática
+    const audio = playSoundEffect('catchmusicgo', 0.03, true);
     backgroundMusicRef.current = audio;
     
     return () => {
       if (backgroundMusicRef.current) {
-        stopPokemonCatchMusic(backgroundMusicRef.current);
+        backgroundMusicRef.current.pause();
+        backgroundMusicRef.current.currentTime = 0;
         backgroundMusicRef.current = null;
       }
     };
@@ -448,6 +450,10 @@ export default function PokemonCatchGo() {
     setShowFlash(false);
     setZoomToBall(false);
     // setBrokenBall(false); // REMOVED
+    
+    // Reproducir música de fondo de captura
+    catchMusicRef.current = playSoundEffect('catchmusicgo', 0.3, true); // loop = true para música de fondo
+    // Reproducir sonido de lanzamiento
     playSoundEffect('pokeballthrow', 0.7);
     const start = getPokeballCenter();
     const end = getPokemonCenter();
@@ -639,8 +645,10 @@ export default function PokemonCatchGo() {
       if (success) {
         setShowParticles(true);
         setShowFlash(true);
-        // Usar la nueva función helper para captura exitosa
-        playPokemonCatchSuccess(0.8);
+        // Detener música de fondo y reproducir sonidos de captura exitosa
+        stopPokemonCatchMusic(catchMusicRef.current);
+        playSoundEffect('catchedgo', 0.2);
+        playSoundEffect('pokeballcatch', 0.3); // Sonido adicional de pokeball
         setCaught(true);
         setSuccessMessage(`¡Genial! Capturaste a ${pokemon?.name ? pokemon.name[0].toUpperCase() + pokemon.name.slice(1) : 'un Pokémon'}.
 Será agregado a tu equipo`);
@@ -678,8 +686,8 @@ Será agregado a tu equipo`);
         }
       } else {
         setFailMessage(failMessages[Math.floor(Math.random() * failMessages.length)]);
-        // Captura fallida - la lógica está en useEffect para pokeballAnim === 'fail'
-        // No es necesario hacer nada más aquí, solo cambiar el estado.
+        // Captura fallida - NO detener música para que pueda seguir intentando
+        // La lógica está en useEffect para pokeballAnim === 'fail'
       }
     }
 

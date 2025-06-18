@@ -1,14 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { playSoundEffect, isAudioReady, forceAudioInitialization, getPendingAudioCount } from '@/lib/soundEffects';
+import { playSoundEffect, isAudioReady, forceAudioInitialization, getPendingAudioCount, playLigaPokemonMusic, stopLigaPokemonMusic } from '@/lib/soundEffects';
 
-// Función para obtener URL de audio usando rutas locales (más confiables)
-const getAudioUrl = (key: string): string | null => {
-  const soundEffectUrls: Record<string, string> = {
-    pokemongym: '/pokemongym.mp3', // Ruta local directa
-  };
-  return soundEffectUrls[key] || null;
-};
 import { useUser } from '../../context/UserContext';
 import { addPokemonToTeam } from '@/lib/equipoStorage';
 import { updateUserPokeballs, updateUserFichas } from '@/lib/userData';
@@ -69,12 +62,10 @@ export default function LigaPokemon() {
       }
     });
 
-    // Reproducir música de gimnasio al entrar usando elemento HTML audio nativo
-    if (gymAudioRef.current && getAudioUrl('pokemongym')) {
-      gymAudioRef.current.src = getAudioUrl('pokemongym')!;
-      gymAudioRef.current.volume = 0.1;
-      gymAudioRef.current.loop = true;
-      gymAudioRef.current.play().catch(console.error);
+    // Reproducir música de gimnasio al entrar usando el helper específico
+    const gymMusic = playLigaPokemonMusic(0.1);
+    if (gymMusic) {
+      gymAudioRef.current = gymMusic;
     }
   }, []);
 
@@ -109,13 +100,9 @@ export default function LigaPokemon() {
   // Cargar progreso al montar el componente y manejar cleanup
   useEffect(() => {
     return () => {
-      // Cleanup cuando el componente se desmonta - solo limpiar música de gimnasio
-      if (gymAudioRef.current) {
-        gymAudioRef.current.pause();
-        gymAudioRef.current.currentTime = 0;
-        gymAudioRef.current.src = '';
-        gymAudioRef.current = null;
-      }
+      // Cleanup cuando el componente se desmonta - usar helper para limpiar música
+      stopLigaPokemonMusic(gymAudioRef.current);
+      gymAudioRef.current = null;
     };
   }, []);
 
