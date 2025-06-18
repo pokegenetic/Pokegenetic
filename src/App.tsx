@@ -21,6 +21,7 @@ import Memorice from './components/ui/memorice';
 import Incubators from './components/ui/incubators';
 import LigaPokemon from './components/ui/ligapokemon';
 import AudioTester from './components/ui/AudioTester'; // Probador temporal
+import AudioTest from './components/ui/AudioTest'; // Debug temporal
 import { AnimatePresence, motion } from 'framer-motion';
 import Login from './components/ui/Login';
 import { useUser } from './context/UserContext';
@@ -43,6 +44,7 @@ function App() {
             <Routes location={location}>
               <Route path="/" element={<Hero />} />
               <Route path="/test-audio" element={<AudioTester />} />
+              <Route path="/debug-audio" element={<AudioTest />} />
               <Route path="/laboratorio" element={<Laboratorio />} />
               <Route path="/crear" element={<Crear />} />
               <Route path="/edicion" element={<Edicion />} />

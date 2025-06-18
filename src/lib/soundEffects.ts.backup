@@ -176,14 +176,50 @@ const playAudioWithFallback = async (soundType: string, volume: number = 1.0, lo
         }
     }
 };
+const initializeAudioForMobile = (): Promise<void> => {
+    return new Promise((resolve) => {
+        try {
+            if (typeof window !== 'undefined' && window.AudioContext) {
+                audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+                
+                audioContext.resume().then(() => {
+                    console.log('🎵 AudioContext inicializado para móvil');
+                    audioInitialized = true;
+                    firstInteractionDone = true;
+                    
+                    // Reproducir sonidos pendientes
+                    pendingAudioQueue.forEach(({ soundType, volume, loop }) => {
+                        playAudioDirectly(soundType, volume, loop);
+                    });
+                    pendingAudioQueue = [];
+                    
+                    resolve();
+                }).catch((error) => {
+                    console.warn('⚠️ Error inicializando audio:', error);
+                    audioInitialized = true;
+                    firstInteractionDone = true;
+                    resolve();
+                });
+            } else {
+                audioInitialized = true;
+                firstInteractionDone = true;
+                resolve();
+            }
+        } catch (error) {
+            console.warn('⚠️ Error configurando sistema de audio:', error);
+            audioInitialized = true;
+            firstInteractionDone = true;
+            resolve();
+        }
+    });
+};
 
 // Función de inicialización simplificada para móviles
 const initializeAudioForMobile = (): Promise<void> => {
     return new Promise((resolve) => {
         try {
             // Crear contexto de audio con la interacción del usuario
-            if (!audioContext && 'AudioContext' in window) {
-                // @ts-ignore - webkitAudioContext para Safari
+            if (!audioContext && typeof AudioContext !== 'undefined') {
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 audioContext.resume().then(() => {
                     if (audioContext?.state === 'running') {
@@ -221,9 +257,56 @@ const initializeAudioForMobile = (): Promise<void> => {
     });
 };
 
+// Función simplificada para reproducir audio directamente (DEPRECATED - usar playAudioWithFallback)
+const playAudioDirectly = (soundType: string, volume: number = 1.0, loop: boolean = false): HTMLAudioElement | null => {
+    // Verificar si el tipo de sonido es válido
+    if (!getSoundUrl(soundType, false) && !getSoundUrl(soundType, true)) {
+        console.warn(`Tipo de sonido "${soundType}" no encontrado`);
+        return null;
+    }
+
+    try {
+        // Obtener la URL del sonido (primero CDN)
+        const soundUrl = getSoundUrl(soundType, false);
+        
+        if (!soundUrl) {
+            console.warn(`URL no encontrada para el sonido "${soundType}"`);
+            return null;
+        }
+
+        // Crear un nuevo objeto Audio
+        const audio = new Audio(soundUrl);
+        
+        // Configurar el volumen
+        audio.volume = Math.max(0, Math.min(1, volume));
+        
+        // Configurar el loop
+        audio.loop = loop;
+        
+        // Reproducir el sonido
+        const playPromise = audio.play();
+        
+        // Manejar la promesa de reproducción
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    console.log(`🔊 Sonido "${soundType}" reproducido exitosamente`);
+                })
+                .catch(error => {
+                    console.warn(`⚠️ Error al reproducir sonido "${soundType}":`, error);
+                });
+        }
+        
+        return audio;
+    } catch (error) {
+        console.error(`❌ Error al crear el objeto Audio para "${soundType}":`, error);
+        return null;
+    }
+};
+
 // Función que replica el patrón de pokemoncatch (que SÍ funciona)
 export const playDirectAudio = (soundType: string, volume: number = 1.0, loop: boolean = false): HTMLAudioElement | null => {
-    const soundUrl = getSoundUrl(soundType, false);
+    const soundUrl = soundEffects[soundType as keyof typeof soundEffects];
     
     if (!soundUrl) {
         console.warn(`Sonido "${soundType}" no encontrado en GitHub Pages CDN`);
@@ -255,9 +338,8 @@ export const playSoundEffect = (soundType: string, volume: number = 1.0, loop: b
         return null;
     }
     
-    // Reproducir el audio directamente con fallback
-    playAudioWithFallback(soundType, volume, loop);
-    return null; // playAudioWithFallback es async, no retornamos el audio directamente
+    // Reproducir el audio directamente
+    return playAudioDirectly(soundType, volume, loop);
 };
 
 // Función para verificar si el audio está inicializado
@@ -271,29 +353,54 @@ const setupFirstInteractionListeners = () => {
     
     const events = ['touchstart', 'touchend', 'mousedown', 'keydown', 'click'];
     
-    const handleFirstInteraction = () => {
-        if (!firstInteractionDone) {
-            console.log('👆 Primera interacción detectada, inicializando sistema de audio...');
-            firstInteractionDone = true;
-            
-            // Remover listeners
-            events.forEach(event => {
-                document.removeEventListener(event, handleFirstInteraction, true);
-            });
-            
-            // Inicializar sistema de audio
+    const handleFirstInteraction = (event: Event) => {
+        if (firstInteractionDone) return;
+        
+        console.log('🎯 Primera interacción detectada:', event.type);
+        
+        // Remover todos los listeners
+        events.forEach(eventType => {
+            document.removeEventListener(eventType, handleFirstInteraction, true);
+        });
+        
+        // Inicializar audio si estamos en móvil
+        if (isMobileDevice()) {
             initializeAudioForMobile();
+        } else {
+            // En desktop, marcar como inicializado directamente
+            audioInitialized = true;
+            firstInteractionDone = true;
         }
     };
     
-    // Agregar listeners para detectar la primera interacción
-    events.forEach(event => {
-        document.addEventListener(event, handleFirstInteraction, true);
+    // Agregar listeners para capturar la primera interacción
+    events.forEach(eventType => {
+        document.addEventListener(eventType, handleFirstInteraction, { capture: true, once: true });
     });
+    
+    console.log('🎵 Listeners de audio configurados para primera interacción');
 };
 
-// Función para inicializar el sistema de audio (llamada manualmente)
-export const initializeAudio = (): Promise<void> => {
+// Auto-inicializar los listeners cuando se carga el módulo
+if (typeof window !== 'undefined') {
+    // En desktop, inicializar directamente
+    if (!isMobileDevice()) {
+        audioInitialized = true;
+        firstInteractionDone = true;
+        console.log('🖥️ Desktop detectado: Audio habilitado directamente');
+    } else {
+        setupFirstInteractionListeners();
+        console.log('📱 Móvil detectado: Esperando primera interacción para habilitar audio');
+    }
+}
+
+// Exportar funciones utilitarias adicionales
+export const getAvailableSounds = () => Object.keys(soundEffects);
+export const getPendingAudioCount = () => pendingAudioQueue.length;
+
+// Funciones para compatibilidad con código existente
+export const isAudioReady = () => audioInitialized;
+export const forceAudioInitialization = () => {
     if (isMobileDevice() && !audioInitialized) {
         return initializeAudioForMobile();
     }
@@ -304,11 +411,3 @@ export const initializeAudio = (): Promise<void> => {
 export const playBackgroundMusic = (soundType: string, volume: number = 0.03): HTMLAudioElement | null => {
     return playDirectAudio(soundType, volume, true); // loop = true para música de fondo
 };
-
-// Función para obtener todos los sonidos disponibles
-export const getAvailableSounds = () => Object.keys(githubCDNSounds);
-
-// Auto-inicializar listeners cuando se carga el módulo
-if (typeof window !== 'undefined') {
-    setupFirstInteractionListeners();
-}
