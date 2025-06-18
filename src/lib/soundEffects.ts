@@ -10,89 +10,58 @@ export const isMobileDevice = () => {
            (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
 };
 
-// URLs de efectos de sonido locales (todos servidos desde public/)
+// URLs de efectos de sonido desde GitHub Pages CDN (sin problemas de CORS)
 const soundEffects = {
     // Efectos de PC
-    pc: '/sfx/pc.mp3',
+    pc: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/pc.mp3',
     
     // Efectos de Pokéball
-    pokeballcatch: '/sfx/pokeballcatch.mp3',
-    pokeballthrow: '/sfx/pokeballthrow.mp3',
-    pokeballexplode: '/sfx/pokeballexplode.mp3',
-    pokeballwait: '/sfx/pokeballwait.mp3',
-    pokeballreturn: '/sfx/pokeballreturn.mp3',
-    pokeballopen: '/sfx/pokeballopen.mp3',
-    pokeballwaiting: '/sfx/pokeballwaiting.mp3',
-    pokeballthrowmasterball: '/sfx/pokeballthrowmasterball.mp3',
+    pokeballcatch: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/pokeballcatch.mp3',
+    pokeballthrow: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/pokeballthrow.mp3',
+    pokeballexplode: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/pokeballexplode.mp3',
+    pokeballwait: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/pokeballwait.mp3',
+    pokeballreturn: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/pokeballreturn.mp3',
+    pokeballopen: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/pokeballopen.mp3',
+    pokeballwaiting: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/pokeballwaiting.mp3',
+    pokeballthrowmasterball: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/pokeballthrowmasterball.mp3',
     
     // Música de captura
-    catchmusic: '/sfx/catchmusic.mp3',
-    catchmusicgo: '/catchmusicgo.mp3',
-    catchedgo: '/sfx/catchedgo.mp3',
+    catchmusic: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/catchmusic.mp3',
+    catchmusicgo: 'https://pokegenetic.github.io/pokegenetic-audio/audio/catchmusicgo.mp3',
+    catchedgo: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/catchedgo.mp3',
     
     // Efectos especiales
-    superpower: '/sfx/superpower.wav',
-    heal: '/sfx/heal.mp3',
-    levelup: '/sfx/levelup.mp3',
-    shiny: '/sfx/shiny.mp3',
-    victory: '/sfx/victory.mp3',
-    win: '/sfx/win.mp3',
+    superpower: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/superpower.wav',
+    heal: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/heal.mp3',
+    levelup: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/levelup.mp3',
+    shiny: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/shiny.mp3',
+    victory: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/victory.mp3',
+    win: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/win.mp3',
     
     // Efectos de notificación
-    notification: '/notification.mp3',
-    pop: '/notification.mp3',
+    notification: 'https://pokegenetic.github.io/pokegenetic-audio/audio/notification.mp3',
+    pop: 'https://pokegenetic.github.io/pokegenetic-audio/audio/notification.mp3',
     
     // Música de fondo
-    pokechillmusic: '/pokechillmusic.mp3',
-    pokemongym: '/pokemongym.mp3',
-    wintrainer: '/wintrainer.mp3',
-    gymbattle: '/gymbattle.mp3',
-    trainerbattle: '/trainerbattle.mp3',
-    wingym: '/wingym.mp3',
-    obtainbadge: '/obtainbadge.mp3',
-    casino: '/casino.mp3',
+    pokechillmusic: 'https://pokegenetic.github.io/pokegenetic-audio/audio/pokechillmusic.mp3',
+    pokemongym: 'https://pokegenetic.github.io/pokegenetic-audio/audio/pokemongym.mp3',
+    wintrainer: 'https://pokegenetic.github.io/pokegenetic-audio/audio/wintrainer.mp3',
+    gymbattle: 'https://pokegenetic.github.io/pokegenetic-audio/audio/gymbattle.mp3',
+    trainerbattle: 'https://pokegenetic.github.io/pokegenetic-audio/audio/trainerbattle.mp3',
+    wingym: 'https://pokegenetic.github.io/pokegenetic-audio/audio/wingym.mp3',
+    obtainbadge: 'https://pokegenetic.github.io/pokegenetic-audio/audio/obtainbadge.mp3',
+    casino: 'https://pokegenetic.github.io/pokegenetic-audio/audio/casino.mp3',
     
     // Juegos específicos
-    memorice: '/sfx/memorice.mp3',
-    whosthat: '/sfx/whosthat.mp3',
-    winrewards: '/sfx/winrewards.mp3',
-    misterygift: '/sfx/misterygift.mp3',
-    slot: '/sfx/slot.wav',
-    nothing: '/sfx/nothing.mp3',
+    memorice: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/memorice.mp3',
+    whosthat: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/whosthat.mp3',
+    winrewards: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/winrewards.mp3',
+    misterygift: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/misterygift.mp3',
+    slot: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/slot.wav',
+    nothing: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/nothing.mp3',
     
     // Efecto de error (añadiendo para compatibilidad)
-    error: '/notification.mp3'
-};
-
-// URLs de Dropbox para uso directo (patrón pokemoncatch que SÍ funciona)
-const dropboxSounds = {
-    // Efectos de PC
-    pc: 'https://www.dropbox.com/scl/fi/1mckierjvgwjv7l8uslw0/pc.mp3?rlkey=acjk8hri7yakxop1izlcknh6r&st=a6lhfx48&dl=1',
-    
-    // Efectos de Pokéball
-    pokeballcatch: 'https://www.dropbox.com/scl/fi/jtkdfelt160gted4lol9u/pokeballcatch.mp3?rlkey=3704j7ajyy39qjtegmwwyxev6&st=xp7hn9hz&dl=1',
-    pokeballthrow: 'https://www.dropbox.com/scl/fi/ojvypu5200ja4k43yzoav/pokeballthrow.mp3?rlkey=b5cjw8fr2bl40quauu07170na&st=4zapubcb&dl=1',
-    pokeballexplode: 'https://www.dropbox.com/scl/fi/zfpe4xa9vbt8wiomtztae/pokeballexplode.mp3?rlkey=81f51bbdainiwd5kkiswhml8s&st=mygdk7cj&dl=1',
-    pokeballwait: 'https://www.dropbox.com/scl/fi/uwemzdkabhoducgn5d8qq/pokeballwait.mp3?rlkey=bspli4ihepe8n9rnfk9k9xxhm&st=oun68cpr&dl=1',
-    pokeballreturn: 'https://www.dropbox.com/scl/fi/cdvy0a0nmblgqx8awvx7x/pokeballreturn.mp3?rlkey=fw4rxk3bwd2o5afu0m25cuzyo&st=dg3s2izc&dl=1',
-    
-    // Música de captura
-    catchmusic: 'https://www.dropbox.com/scl/fi/p6hl0rgxw1grsenl8nqpx/catchmusic.mp3?rlkey=6cqu58vjpkx5k7ddjsn3749pq&st=h0v0uwid&dl=1',
-    
-    // Efectos especiales
-    superpower: 'https://www.dropbox.com/scl/fi/647lmyvmwld8k6yqet96x/superpower.mp3?rlkey=kl2m8dhzva57fh1qs9ly7tvek&st=z65llvre&dl=1',
-    heal: 'https://www.dropbox.com/scl/fi/pq3m5zs407n8lilmtq0n9/heal.mp3?rlkey=tj9u24fb0pgywcdz0phzh7b4g&st=74513ari&dl=1',
-    
-    // Música de fondo
-    pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1',
-    wintrainer: 'https://www.dropbox.com/scl/fi/knul5jzv7ymcerkk1lc47/wintrainer.mp3?rlkey=z7qlv2415yke4ox1y546fod76&st=4zul5uwe&dl=1',
-    gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1',
-    trainerbattle: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1',
-    wingym: 'https://www.dropbox.com/scl/fi/w5r8r2vsp0pt51g67gn3b/wingym.mp3?rlkey=kd5ffs8rvplqg7i4anq2y8wmd&st=v5uzpegp&dl=1',
-    obtainbadge: 'https://www.dropbox.com/scl/fi/7cq8v51e967tbe54jvrei/obtainbadge.mp3?rlkey=grkimuyje3f5omglu4uzveto3&st=to1x4gtx&dl=1',
-    
-    // Efectos de notificación (usar el local)
-    notification: '/notification.mp3'
+    error: 'https://pokegenetic.github.io/pokegenetic-audio/audio/notification.mp3'
 };
 
 // Función de inicialización simplificada para móviles
@@ -183,10 +152,10 @@ const playAudioDirectly = (soundType: string, volume: number = 1.0, loop: boolea
 
 // Función que replica el patrón de pokemoncatch (que SÍ funciona)
 export const playDirectAudio = (soundType: string, volume: number = 1.0, loop: boolean = false): HTMLAudioElement | null => {
-    const soundUrl = dropboxSounds[soundType as keyof typeof dropboxSounds];
+    const soundUrl = soundEffects[soundType as keyof typeof soundEffects];
     
     if (!soundUrl) {
-        console.warn(`Sonido "${soundType}" no encontrado en Dropbox`);
+        console.warn(`Sonido "${soundType}" no encontrado en GitHub Pages CDN`);
         return null;
     }
     
@@ -196,7 +165,7 @@ export const playDirectAudio = (soundType: string, volume: number = 1.0, loop: b
         audio.volume = Math.max(0, Math.min(1, volume));
         audio.loop = loop;
         audio.play().catch(() => {
-            console.warn(`Error reproduciendo sonido "${soundType}" desde Dropbox`);
+            console.warn(`Error reproduciendo sonido "${soundType}" desde GitHub Pages CDN`);
         });
         
         return audio;
