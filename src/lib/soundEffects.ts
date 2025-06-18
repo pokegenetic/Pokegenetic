@@ -246,18 +246,53 @@ export const playDirectAudio = (soundType: string, volume: number = 1.0, loop: b
     }
 };
 
-// Función principal para reproducir efectos de sonido
+// Función principal para reproducir efectos de sonido (SIMPLIFICADA - igual que playDirectAudio)
 export const playSoundEffect = (soundType: string, volume: number = 1.0, loop: boolean = false): HTMLAudioElement | null => {
-    // Si el audio no está inicializado y estamos en un dispositivo móvil, agregar a la cola
-    if (!audioInitialized && isMobileDevice()) {
-        pendingAudioQueue.push({ soundType, volume, loop });
-        console.log(`📋 Sonido "${soundType}" agregado a la cola (esperando inicialización)`);
-        return null;
+    console.log(`🔊 playSoundEffect llamado para "${soundType}"`);
+    
+    // Usar el mismo patrón exacto que playDirectAudio que SÍ funciona
+    const soundUrl = getSoundUrl(soundType, false);
+    
+    if (!soundUrl) {
+        console.warn(`Sonido "${soundType}" no encontrado en GitHub Pages CDN`);
+        
+        // Intentar fallback local
+        const localUrl = getSoundUrl(soundType, true);
+        if (!localUrl) {
+            console.error(`Tampoco hay fallback local para "${soundType}"`);
+            return null;
+        }
+        
+        try {
+            console.log(`🔄 Usando fallback local para "${soundType}": ${localUrl}`);
+            const audio = new Audio(localUrl);
+            audio.volume = Math.max(0, Math.min(1, volume));
+            audio.loop = loop;
+            audio.play().catch(() => {
+                console.warn(`Error reproduciendo sonido "${soundType}" desde archivo local`);
+            });
+            return audio;
+        } catch (error) {
+            console.error(`Error creando audio local para "${soundType}":`, error);
+            return null;
+        }
     }
     
-    // Reproducir el audio directamente con fallback
-    playAudioWithFallback(soundType, volume, loop);
-    return null; // playAudioWithFallback es async, no retornamos el audio directamente
+    try {
+        // Mismo patrón exacto que pokemoncatch y playDirectAudio
+        console.log(`🔊 Reproduciendo "${soundType}" desde CDN: ${soundUrl}`);
+        const audio = new Audio(soundUrl);
+        audio.volume = Math.max(0, Math.min(1, volume));
+        audio.loop = loop;
+        audio.play().catch(() => {
+            console.warn(`Error reproduciendo sonido "${soundType}" desde GitHub Pages CDN`);
+        });
+        
+        return audio;
+    } catch (error) {
+        console.error(`Error creando audio para "${soundType}":`, error);
+        return null;
+    }
 };
 
 // Función para verificar si el audio está inicializado
