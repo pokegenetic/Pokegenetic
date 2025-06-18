@@ -38,7 +38,7 @@ const githubCDNSounds = {
     victory: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/victory.mp3',
     win: 'https://pokegenetic.github.io/pokegenetic-audio/audio/sfx/win.mp3',
     
-    // Efectos de notificación (CORREGIDO - ahora existe en el CDN)
+    // Efectos de notificación
     notification: 'https://pokegenetic.github.io/pokegenetic-audio/audio/notification.mp3',
     pop: 'https://pokegenetic.github.io/pokegenetic-audio/audio/notification.mp3',
     
@@ -62,14 +62,6 @@ const githubCDNSounds = {
     
     // Efecto de error (añadiendo para compatibilidad)
     error: 'https://pokegenetic.github.io/pokegenetic-audio/audio/notification.mp3'
-};
-
-// URLs de Pokémon Showdown como fallback adicional (sabemos que funcionan)
-const pokemonShowdownSounds = {
-    // Solo los que sabemos que existen y funcionan
-    notification: 'https://play.pokemonshowdown.com/audio/notification.wav',
-    // Música de fondo que sabemos que funciona (patrón pokemoncatch)
-    backgroundmusic: 'https://play.pokemonshowdown.com/audio/xy-rival.ogg',
 };
 
 // Fallback a archivos locales (Vite los procesa automáticamente)
@@ -126,59 +118,63 @@ const localSounds = {
     error: '/notification.mp3'
 };
 
-// Función para obtener la URL del sonido con sistema de fallback múltiple
-const getSoundUrl = (soundType: string, fallbackLevel: number = 0): string | null => {
-    switch (fallbackLevel) {
-        case 0:
-            // Primer intento: CDN de GitHub Pages
-            return githubCDNSounds[soundType as keyof typeof githubCDNSounds] || null;
-        case 1:
-            // Segundo intento: Pokémon Showdown (para ciertos sonidos)
-            return pokemonShowdownSounds[soundType as keyof typeof pokemonShowdownSounds] || null;
-        case 2:
-            // Tercer intento: archivos locales
-            return localSounds[soundType as keyof typeof localSounds] || null;
-        default:
-            return null;
-    }
+// Función para obtener la URL del sonido con sistema de fallback
+const getSoundUrl = (soundType: string, useLocal: boolean = false): string | null => {
+    const soundMap = useLocal ? localSounds : githubCDNSounds;
+    return soundMap[soundType as keyof typeof soundMap] || null;
 };
 
-// Función mejorada para reproducir audio con sistema de fallback múltiple
+// Función mejorada para reproducir audio con sistema de fallback automático
 const playAudioWithFallback = async (soundType: string, volume: number = 1.0, loop: boolean = false): Promise<HTMLAudioElement | null> => {
-    // Intentar con todos los niveles de fallback
-    for (let fallbackLevel = 0; fallbackLevel <= 2; fallbackLevel++) {
-        const soundUrl = getSoundUrl(soundType, fallbackLevel);
-        
-        if (!soundUrl) {
-            continue; // Pasar al siguiente nivel de fallback
-        }
+    // Intentar primero con CDN de GitHub
+    let soundUrl = getSoundUrl(soundType, false);
+    
+    if (!soundUrl) {
+        console.warn(`Tipo de sonido "${soundType}" no encontrado`);
+        return null;
+    }
 
+    try {
+        console.log(`🔊 Intentando reproducir "${soundType}" desde CDN: ${soundUrl}`);
+        const audio = new Audio(soundUrl);
+        audio.volume = Math.max(0, Math.min(1, volume));
+        audio.loop = loop;
+        
+        // Configurar timeout para el CDN
+        const playPromise = audio.play();
+        const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('CDN timeout')), 3000);
+        });
+        
+        await Promise.race([playPromise, timeoutPromise]);
+        console.log(`✅ Sonido "${soundType}" reproducido desde CDN`);
+        return audio;
+        
+    } catch (error) {
+        console.warn(`⚠️ Error con CDN para "${soundType}":`, error);
+        
+        // Fallback a archivo local
+        const localUrl = getSoundUrl(soundType, true);
+        if (!localUrl) {
+            console.error(`❌ No hay fallback local para "${soundType}"`);
+            return null;
+        }
+        
         try {
-            const fallbackNames = ['CDN GitHub', 'Pokémon Showdown', 'Local'];
-            console.log(`🔊 Intentando reproducir "${soundType}" desde ${fallbackNames[fallbackLevel]}: ${soundUrl}`);
+            console.log(`🔄 Intentando fallback local para "${soundType}": ${localUrl}`);
+            const localAudio = new Audio(localUrl);
+            localAudio.volume = Math.max(0, Math.min(1, volume));
+            localAudio.loop = loop;
             
-            const audio = new Audio(soundUrl);
-            audio.volume = Math.max(0, Math.min(1, volume));
-            audio.loop = loop;
+            await localAudio.play();
+            console.log(`✅ Sonido "${soundType}" reproducido desde archivo local`);
+            return localAudio;
             
-            // Configurar timeout para la carga
-            const playPromise = audio.play();
-            const timeoutPromise = new Promise((_, reject) => {
-                setTimeout(() => reject(new Error('Timeout')), 2000);
-            });
-            
-            await Promise.race([playPromise, timeoutPromise]);
-            console.log(`✅ Sonido "${soundType}" reproducido desde ${fallbackNames[fallbackLevel]}`);
-            return audio;
-            
-        } catch (error) {
-            console.warn(`⚠️ Error con fallback nivel ${fallbackLevel} para "${soundType}":`, error);
-            continue; // Intentar el siguiente fallback
+        } catch (localError) {
+            console.error(`❌ Error también con archivo local para "${soundType}":`, localError);
+            return null;
         }
     }
-    
-    console.error(`❌ Todos los fallbacks fallaron para "${soundType}"`);
-    return null;
 };
 
 // Función de inicialización simplificada para móviles
@@ -227,7 +223,7 @@ const initializeAudioForMobile = (): Promise<void> => {
 
 // Función que replica el patrón de pokemoncatch (que SÍ funciona)
 export const playDirectAudio = (soundType: string, volume: number = 1.0, loop: boolean = false): HTMLAudioElement | null => {
-    const soundUrl = getSoundUrl(soundType, 0); // Nivel 0: CDN GitHub
+    const soundUrl = getSoundUrl(soundType, false);
     
     if (!soundUrl) {
         console.warn(`Sonido "${soundType}" no encontrado en GitHub Pages CDN`);
@@ -250,70 +246,18 @@ export const playDirectAudio = (soundType: string, volume: number = 1.0, loop: b
     }
 };
 
-// Función principal para reproducir efectos de sonido (SIMPLIFICADA - igual que playDirectAudio)
+// Función principal para reproducir efectos de sonido
 export const playSoundEffect = (soundType: string, volume: number = 1.0, loop: boolean = false): HTMLAudioElement | null => {
-    console.log(`🔊 playSoundEffect llamado para "${soundType}"`);
-    
-    // Usar el mismo patrón exacto que playDirectAudio que SÍ funciona
-    const soundUrl = getSoundUrl(soundType, 0); // Nivel 0: CDN GitHub
-    
-    if (!soundUrl) {
-        console.warn(`Sonido "${soundType}" no encontrado en GitHub Pages CDN`);
-        
-        // Intentar fallback de Pokémon Showdown
-        const pokemonShowdownUrl = getSoundUrl(soundType, 1); // Nivel 1: Pokémon Showdown
-        if (pokemonShowdownUrl) {
-            try {
-                console.log(`🔄 Usando Pokémon Showdown para "${soundType}": ${pokemonShowdownUrl}`);
-                const audio = new Audio(pokemonShowdownUrl);
-                audio.volume = Math.max(0, Math.min(1, volume));
-                audio.loop = loop;
-                audio.play().catch(() => {
-                    console.warn(`Error reproduciendo sonido "${soundType}" desde Pokémon Showdown`);
-                });
-                return audio;
-            } catch (error) {
-                console.error(`Error creando audio Pokémon Showdown para "${soundType}":`, error);
-            }
-        }
-        
-        // Intentar fallback local
-        const localUrl = getSoundUrl(soundType, 2); // Nivel 2: Local
-        if (!localUrl) {
-            console.error(`Tampoco hay fallback local para "${soundType}"`);
-            return null;
-        }
-        
-        try {
-            console.log(`🔄 Usando fallback local para "${soundType}": ${localUrl}`);
-            const audio = new Audio(localUrl);
-            audio.volume = Math.max(0, Math.min(1, volume));
-            audio.loop = loop;
-            audio.play().catch(() => {
-                console.warn(`Error reproduciendo sonido "${soundType}" desde archivo local`);
-            });
-            return audio;
-        } catch (error) {
-            console.error(`Error creando audio local para "${soundType}":`, error);
-            return null;
-        }
-    }
-    
-    try {
-        // Mismo patrón exacto que pokemoncatch y playDirectAudio
-        console.log(`🔊 Reproduciendo "${soundType}" desde CDN: ${soundUrl}`);
-        const audio = new Audio(soundUrl);
-        audio.volume = Math.max(0, Math.min(1, volume));
-        audio.loop = loop;
-        audio.play().catch(() => {
-            console.warn(`Error reproduciendo sonido "${soundType}" desde GitHub Pages CDN`);
-        });
-        
-        return audio;
-    } catch (error) {
-        console.error(`Error creando audio para "${soundType}":`, error);
+    // Si el audio no está inicializado y estamos en un dispositivo móvil, agregar a la cola
+    if (!audioInitialized && isMobileDevice()) {
+        pendingAudioQueue.push({ soundType, volume, loop });
+        console.log(`📋 Sonido "${soundType}" agregado a la cola (esperando inicialización)`);
         return null;
     }
+    
+    // Reproducir el audio directamente con fallback
+    playAudioWithFallback(soundType, volume, loop);
+    return null; // playAudioWithFallback es async, no retornamos el audio directamente
 };
 
 // Función para verificar si el audio está inicializado
