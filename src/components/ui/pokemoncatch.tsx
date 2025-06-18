@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { getShowdownCryUrl } from '@/lib/getShowdownCryUrl';
-import { playSoundEffect } from '@/lib/soundEffects';
+import { playSoundEffect, playPokemonCatchMusic, playPokemonCatchSuccess, stopPokemonCatchMusic } from '@/lib/soundEffects';
 import { addPokemonToTeam } from '@/lib/equipoStorage';
 import { getRandomMovesForSpecies, getPokemonDetails } from '@/lib/pokedexHelper';
 import pokemonList from '@/data/sv/pokemon-sv.json';
@@ -374,14 +374,13 @@ export default function PokemonCatchGo() {
 
   // --- Música de fondo ---
   useEffect(() => {
-    const audio = new Audio('https://play.pokemonshowdown.com/audio/xy-rival.ogg');
-    audio.loop = true;
-    audio.volume = 0.03;
+    // Usar la nueva función helper para música de captura con archivo local
+    const audio = playPokemonCatchMusic(0.03); // Mismo volumen pero con archivo local
     backgroundMusicRef.current = audio;
-    audio.play().catch(() => {});
+    
     return () => {
       if (backgroundMusicRef.current) {
-        backgroundMusicRef.current.pause();
+        stopPokemonCatchMusic(backgroundMusicRef.current);
         backgroundMusicRef.current = null;
       }
     };
@@ -390,7 +389,7 @@ export default function PokemonCatchGo() {
   // --- Detener música al capturar ---
   useEffect(() => {
     if (caught && backgroundMusicRef.current) {
-      backgroundMusicRef.current.pause();
+      stopPokemonCatchMusic(backgroundMusicRef.current);
     }
   }, [caught]);
 
@@ -638,8 +637,8 @@ export default function PokemonCatchGo() {
       if (success) {
         setShowParticles(true);
         setShowFlash(true);
-        playSoundEffect('pokeballcatch', 0.8);
-        setTimeout(() => playSoundEffect('catchmusic', 0.6), 500);
+        // Usar la nueva función helper para captura exitosa
+        playPokemonCatchSuccess(0.8);
         setCaught(true);
         setSuccessMessage(`¡Genial! Capturaste a ${pokemon?.name ? pokemon.name[0].toUpperCase() + pokemon.name.slice(1) : 'un Pokémon'}.
 Será agregado a tu equipo`);
