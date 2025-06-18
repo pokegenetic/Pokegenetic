@@ -10,90 +10,39 @@ export const isMobileDevice = () => {
            (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
 };
 
-// URLs de efectos de sonido con sistema de fallback (Dropbox principal, local como respaldo)
+// URLs de efectos de sonido (Dropbox con descarga directa)
 const soundEffects = {
     // Efectos de PC
-    pc: {
-        primary: 'https://www.dropbox.com/scl/fi/hhgzpvfbvjpwfxjqzjh9z/pc.mp3?rlkey=xjpqmwjdtmj3h2bvqhkqxrj6b&dl=1',
-        fallback: '/pc.mp3'
-    },
+    pc: 'https://www.dropbox.com/scl/fi/hhgzpvfbvjpwfxjqzjh9z/pc.mp3?rlkey=xjpqmwjdtmj3h2bvqhkqxrj6b&dl=1',
     
     // Efectos de Pokéball
-    pokeballcatch: {
-        primary: 'https://www.dropbox.com/scl/fi/2y5v4xfkcj2u1qrb7b0m9/pokeballcatch.mp3?rlkey=mrhxqnc4n1o7rqgfblxk0nqo8&dl=1',
-        fallback: '/pokeballcatch.mp3'
-    },
-    pokeballthrow: {
-        primary: 'https://www.dropbox.com/scl/fi/1aqrb4lhvqnvhgqfxfzje/pokeballthrow.mp3?rlkey=uj4l7bwtyb5ztxjuuqsj8wqp0&dl=1',
-        fallback: '/pokeballthrow.mp3'
-    },
-    pokeballexplode: {
-        primary: 'https://www.dropbox.com/scl/fi/iqy7y8jzmlgfqo1p3h0hx/pokeballexplode.mp3?rlkey=vqr4q9uh1e8b6cxcmqpjdafk9&dl=1',
-        fallback: '/pokeballexplode.mp3'
-    },
-    pokeballwait: {
-        primary: 'https://www.dropbox.com/scl/fi/qj0yrdmxwejxjdl5cxsxh/pokeballwait.mp3?rlkey=ej2mfbr2y4j7f6ynzxm8mqmf4&dl=1',
-        fallback: '/pokeballwait.mp3'
-    },
-    pokeballreturn: {
-        primary: 'https://www.dropbox.com/scl/fi/0ks8uqnxcvqcalqfh8hpn/pokeballreturn.mp3?rlkey=uw1a9mh3c7p4m6gxg8s2hkvy2&dl=1',
-        fallback: '/pokeballreturn.mp3'
-    },
+    pokeballcatch: 'https://www.dropbox.com/scl/fi/2y5v4xfkcj2u1qrb7b0m9/pokeballcatch.mp3?rlkey=mrhxqnc4n1o7rqgfblxk0nqo8&dl=1',
+    pokeballthrow: 'https://www.dropbox.com/scl/fi/1aqrb4lhvqnvhgqfxfzje/pokeballthrow.mp3?rlkey=uj4l7bwtyb5ztxjuuqsj8wqp0&dl=1',
+    pokeballexplode: 'https://www.dropbox.com/scl/fi/iqy7y8jzmlgfqo1p3h0hx/pokeballexplode.mp3?rlkey=vqr4q9uh1e8b6cxcmqpjdafk9&dl=1',
+    pokeballwait: 'https://www.dropbox.com/scl/fi/qj0yrdmxwejxjdl5cxsxh/pokeballwait.mp3?rlkey=ej2mfbr2y4j7f6ynzxm8mqmf4&dl=1',
+    pokeballreturn: 'https://www.dropbox.com/scl/fi/0ks8uqnxcvqcalqfh8hpn/pokeballreturn.mp3?rlkey=uw1a9mh3c7p4m6gxg8s2hkvy2&dl=1',
     
     // Música de captura
-    catchmusic: {
-        primary: 'https://www.dropbox.com/scl/fi/dkfqe9pfbdyh9oqxbqhb9/catchmusic.mp3?rlkey=3cg0x8mt7xmjgfnl4vkmfqhgq&dl=1',
-        fallback: '/catchmusic.mp3'
-    },
+    catchmusic: 'https://www.dropbox.com/scl/fi/dkfqe9pfbdyh9oqxbqhb9/catchmusic.mp3?rlkey=3cg0x8mt7xmjgfnl4vkmfqhgq&dl=1',
     
     // Efectos especiales
-    superpower: {
-        primary: 'https://www.dropbox.com/scl/fi/8bqhfs3hxfmf5jqhcqx6j/superpower.mp3?rlkey=3oqxdxzt6hv8vwg4tkwxwxjh4&dl=1',
-        fallback: '/superpower.mp3'
-    },
-    heal: {
-        primary: 'https://www.dropbox.com/scl/fi/2ot6qgvjfz7fkxywsb5dg/heal.mp3?rlkey=9y3xcmgkxh2xmhfvkgq3vq3w8&dl=1',
-        fallback: '/heal.mp3'
-    },
+    superpower: 'https://www.dropbox.com/scl/fi/8bqhfs3hxfmf5jqhcqx6j/superpower.mp3?rlkey=3oqxdxzt6hv8vwg4tkwxwxjh4&dl=1',
+    heal: 'https://www.dropbox.com/scl/fi/2ot6qgvjfz7fkxywsb5dg/heal.mp3?rlkey=9y3xcmgkxh2xmhfvkgq3vq3w8&dl=1',
     
     // Efectos de notificación
-    notification: {
-        primary: 'https://www.dropbox.com/scl/fi/0qxcxkj8y7qgkxp8qt6tx/notification.mp3?rlkey=1yj9y9mxjpg7vk6qhvqg4fkx2&dl=1',
-        fallback: '/notification.mp3'
-    },
-    pop: {
-        primary: 'https://www.dropbox.com/scl/fi/0qxcxkj8y7qgkxp8qt6tx/notification.mp3?rlkey=1yj9y9mxjpg7vk6qhvqg4fkx2&dl=1',
-        fallback: '/notification.mp3'
-    },
+    notification: 'https://www.dropbox.com/scl/fi/0qxcxkj8y7qgkxp8qt6tx/notification.mp3?rlkey=1yj9y9mxjpg7vk6qhvqg4fkx2&dl=1',
+    pop: 'https://www.dropbox.com/scl/fi/0qxcxkj8y7qgkxp8qt6tx/notification.mp3?rlkey=1yj9y9mxjpg7vk6qhvqg4fkx2&dl=1',
     
-    // Música de fondo y efectos largos (algunos mantienen Google Drive por ahora)
+    // Música de fondo y efectos largos
     pokechillmusic: 'https://drive.google.com/uc?export=download&id=1aOrgCcsHiFmOVRDYw6tccofd6zhk2gwB',
     memorice: 'https://drive.google.com/uc?export=download&id=1gblwRk0CVTrvz6ohr1EhCqXAfeRKCFEO',
     winrewards: 'https://drive.google.com/uc?export=download&id=1LcOm1fMFPtP-soBT4XfIkVLP7djPdYM3',
-    pokemongym: {
-        primary: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1',
-        fallback: '/pokemongym.mp3'
-    },
-    wintrainer: {
-        primary: 'https://www.dropbox.com/scl/fi/knul5jzv7ymcerkk1lc47/wintrainer.mp3?rlkey=z7qlv2415yke4ox1y546fod76&st=4zul5uwe&dl=1',
-        fallback: '/wintrainer.mp3'
-    },
-    gymbattle: {
-        primary: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1',
-        fallback: '/gymbattle.mp3'
-    },
-    trainerbattle: {
-        primary: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1',
-        fallback: '/trainerbattle.mp3'
-    },
-    wingym: {
-        primary: 'https://www.dropbox.com/scl/fi/w5r8r2vsp0pt51g67gn3b/wingym.mp3?rlkey=kd5ffs8rvplqg7i4anq2y8wmd&st=v5uzpegp&dl=1',
-        fallback: '/wingym.mp3'
-    },
-    obtainbadge: {
-        primary: 'https://www.dropbox.com/scl/fi/7cq8v51e967tbe54jvrei/obtainbadge.mp3?rlkey=grkimuyje3f5omglu4uzveto3&st=to1x4gtx&dl=1',
-        fallback: '/obtainbadge.mp3'
-    },
+    pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1',
+    wintrainer: 'https://www.dropbox.com/scl/fi/knul5jzv7ymcerkk1lc47/wintrainer.mp3?rlkey=z7qlv2415yke4ox1y546fod76&st=4zul5uwe&dl=1',
+    gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1',
+    trainerbattle: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1',
+    wingym: 'https://www.dropbox.com/scl/fi/w5r8r2vsp0pt51g67gn3b/wingym.mp3?rlkey=kd5ffs8rvplqg7i4anq2y8wmd&st=v5uzpegp&dl=1',
+    obtainbadge: 'https://www.dropbox.com/scl/fi/7cq8v51e967tbe54jvrei/obtainbadge.mp3?rlkey=grkimuyje3f5omglu4uzveto3&st=to1x4gtx&dl=1',
     casino: 'https://drive.google.com/uc?export=download&id=1f332jqpnji2h28El80PgEkVD-rfGcuVa',
     catchmusicgo: '/sounds/catchmusicgo.mp3'
 };
@@ -159,36 +108,7 @@ export const initializeAudioForMobile = () => {
     });
 };
 
-// Función para obtener la URL del sonido (con fallback si es necesario)
-const getSoundUrl = (soundType) => {
-    const soundConfig = soundEffects[soundType];
-    
-    // Si es un string simple, devolverlo directamente
-    if (typeof soundConfig === 'string') {
-        return soundConfig;
-    }
-    
-    // Si tiene sistema de fallback, devolver la URL principal
-    if (soundConfig && soundConfig.primary) {
-        return soundConfig.primary;
-    }
-    
-    return null;
-};
-
-// Función para obtener la URL de fallback del sonido
-const getFallbackUrl = (soundType) => {
-    const soundConfig = soundEffects[soundType];
-    
-    // Solo devolver fallback si existe
-    if (soundConfig && soundConfig.fallback) {
-        return soundConfig.fallback;
-    }
-    
-    return null;
-};
-
-// Función interna para reproducir audio directamente con sistema de fallback
+// Función interna para reproducir audio directamente
 const playAudioDirectly = (soundType, volume = 1.0, loop = false) => {
     // Verificar si el tipo de sonido es válido
     if (!soundEffects[soundType]) {
@@ -197,17 +117,8 @@ const playAudioDirectly = (soundType, volume = 1.0, loop = false) => {
     }
 
     try {
-        // Obtener la URL principal del sonido
-        const primaryUrl = getSoundUrl(soundType);
-        const fallbackUrl = getFallbackUrl(soundType);
-        
-        if (!primaryUrl) {
-            console.warn(`URL no encontrada para el sonido "${soundType}"`);
-            return null;
-        }
-
-        // Crear un nuevo objeto Audio con la URL principal
-        const audio = new Audio(primaryUrl);
+        // Crear un nuevo objeto Audio
+        const audio = new Audio(soundEffects[soundType]);
         
         // Configurar el volumen
         audio.volume = Math.max(0, Math.min(1, volume));
@@ -218,44 +129,17 @@ const playAudioDirectly = (soundType, volume = 1.0, loop = false) => {
         // Configurar crossOrigin para evitar problemas de CORS
         audio.crossOrigin = 'anonymous';
         
-        // Configurar el fallback si existe
-        if (fallbackUrl) {
-            audio.onerror = () => {
-                console.warn(`⚠️ Error cargando desde URL principal para "${soundType}", intentando fallback...`);
-                
-                // Crear un nuevo audio con la URL de fallback
-                const fallbackAudio = new Audio(fallbackUrl);
-                fallbackAudio.volume = audio.volume;
-                fallbackAudio.loop = audio.loop;
-                
-                // No necesita crossOrigin para archivos locales
-                // fallbackAudio.crossOrigin = 'anonymous';
-                
-                const fallbackPlayPromise = fallbackAudio.play();
-                if (fallbackPlayPromise !== undefined) {
-                    fallbackPlayPromise
-                        .then(() => {
-                            console.log(`🔊 Sonido "${soundType}" reproducido exitosamente desde fallback local`);
-                        })
-                        .catch(fallbackError => {
-                            console.error(`❌ Error al reproducir fallback para "${soundType}":`, fallbackError);
-                        });
-                }
-            };
-        }
-        
-        // Reproducir el sonido principal
+        // Reproducir el sonido
         const playPromise = audio.play();
         
         // Manejar la promesa de reproducción
         if (playPromise !== undefined) {
             playPromise
                 .then(() => {
-                    console.log(`🔊 Sonido "${soundType}" reproducido exitosamente desde URL principal`);
+                    console.log(`🔊 Sonido "${soundType}" reproducido exitosamente`);
                 })
                 .catch(error => {
-                    console.warn(`⚠️ Error al reproducir sonido principal "${soundType}":`, error);
-                    // El manejador de onerror se encargará del fallback si existe
+                    console.warn(`⚠️ Error al reproducir sonido "${soundType}":`, error);
                 });
         }
         
@@ -333,4 +217,5 @@ if (typeof window !== 'undefined') {
 
 // Exportar funciones utilitarias adicionales
 export const getAvailableSounds = () => Object.keys(soundEffects);
+export const getSoundUrl = (soundType) => soundEffects[soundType] || null;
 export const getPendingAudioCount = () => pendingAudioQueue.length;
