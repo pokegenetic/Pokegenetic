@@ -1,7 +1,7 @@
 // Sistema de gestión de audio optimizado para móviles y desktop
-let audioContext: AudioContext | null = null;
+let audioContext = null;
 let audioInitialized = false;
-let pendingAudioQueue: Array<{soundType: string, volume: number, loop: boolean}> = [];
+let pendingAudioQueue = [];
 let firstInteractionDone = false;
 
 // Detectar si es un dispositivo móvil
@@ -64,43 +64,12 @@ const soundEffects = {
     error: '/notification.mp3'
 };
 
-// URLs de Dropbox para uso directo (patrón pokemoncatch que SÍ funciona)
-const dropboxSounds = {
-    // Efectos de PC
-    pc: 'https://www.dropbox.com/scl/fi/1mckierjvgwjv7l8uslw0/pc.mp3?rlkey=acjk8hri7yakxop1izlcknh6r&st=a6lhfx48&dl=1',
-    
-    // Efectos de Pokéball
-    pokeballcatch: 'https://www.dropbox.com/scl/fi/jtkdfelt160gted4lol9u/pokeballcatch.mp3?rlkey=3704j7ajyy39qjtegmwwyxev6&st=xp7hn9hz&dl=1',
-    pokeballthrow: 'https://www.dropbox.com/scl/fi/ojvypu5200ja4k43yzoav/pokeballthrow.mp3?rlkey=b5cjw8fr2bl40quauu07170na&st=4zapubcb&dl=1',
-    pokeballexplode: 'https://www.dropbox.com/scl/fi/zfpe4xa9vbt8wiomtztae/pokeballexplode.mp3?rlkey=81f51bbdainiwd5kkiswhml8s&st=mygdk7cj&dl=1',
-    pokeballwait: 'https://www.dropbox.com/scl/fi/uwemzdkabhoducgn5d8qq/pokeballwait.mp3?rlkey=bspli4ihepe8n9rnfk9k9xxhm&st=oun68cpr&dl=1',
-    pokeballreturn: 'https://www.dropbox.com/scl/fi/cdvy0a0nmblgqx8awvx7x/pokeballreturn.mp3?rlkey=fw4rxk3bwd2o5afu0m25cuzyo&st=dg3s2izc&dl=1',
-    
-    // Música de captura
-    catchmusic: 'https://www.dropbox.com/scl/fi/p6hl0rgxw1grsenl8nqpx/catchmusic.mp3?rlkey=6cqu58vjpkx5k7ddjsn3749pq&st=h0v0uwid&dl=1',
-    
-    // Efectos especiales
-    superpower: 'https://www.dropbox.com/scl/fi/647lmyvmwld8k6yqet96x/superpower.mp3?rlkey=kl2m8dhzva57fh1qs9ly7tvek&st=z65llvre&dl=1',
-    heal: 'https://www.dropbox.com/scl/fi/pq3m5zs407n8lilmtq0n9/heal.mp3?rlkey=tj9u24fb0pgywcdz0phzh7b4g&st=74513ari&dl=1',
-    
-    // Música de fondo
-    pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1',
-    wintrainer: 'https://www.dropbox.com/scl/fi/knul5jzv7ymcerkk1lc47/wintrainer.mp3?rlkey=z7qlv2415yke4ox1y546fod76&st=4zul5uwe&dl=1',
-    gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1',
-    trainerbattle: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1',
-    wingym: 'https://www.dropbox.com/scl/fi/w5r8r2vsp0pt51g67gn3b/wingym.mp3?rlkey=kd5ffs8rvplqg7i4anq2y8wmd&st=v5uzpegp&dl=1',
-    obtainbadge: 'https://www.dropbox.com/scl/fi/7cq8v51e967tbe54jvrei/obtainbadge.mp3?rlkey=grkimuyje3f5omglu4uzveto3&st=to1x4gtx&dl=1',
-    
-    // Efectos de notificación (usar el local)
-    notification: '/notification.mp3'
-};
-
 // Función de inicialización simplificada para móviles
-const initializeAudioForMobile = (): Promise<void> => {
+const initializeAudioForMobile = () => {
     return new Promise((resolve) => {
         try {
             if (typeof window !== 'undefined' && window.AudioContext) {
-                audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 
                 audioContext.resume().then(() => {
                     console.log('🎵 AudioContext inicializado para móvil');
@@ -135,16 +104,16 @@ const initializeAudioForMobile = (): Promise<void> => {
 };
 
 // Función simplificada para reproducir audio directamente
-const playAudioDirectly = (soundType: string, volume: number = 1.0, loop: boolean = false): HTMLAudioElement | null => {
+const playAudioDirectly = (soundType, volume = 1.0, loop = false) => {
     // Verificar si el tipo de sonido es válido
-    if (!soundEffects[soundType as keyof typeof soundEffects]) {
+    if (!soundEffects[soundType]) {
         console.warn(`Tipo de sonido "${soundType}" no encontrado`);
         return null;
     }
 
     try {
         // Obtener la URL del sonido
-        const soundUrl = soundEffects[soundType as keyof typeof soundEffects];
+        const soundUrl = soundEffects[soundType];
         
         if (!soundUrl) {
             console.warn(`URL no encontrada para el sonido "${soundType}"`);
@@ -181,33 +150,8 @@ const playAudioDirectly = (soundType: string, volume: number = 1.0, loop: boolea
     }
 };
 
-// Función que replica el patrón de pokemoncatch (que SÍ funciona)
-export const playDirectAudio = (soundType: string, volume: number = 1.0, loop: boolean = false): HTMLAudioElement | null => {
-    const soundUrl = dropboxSounds[soundType as keyof typeof dropboxSounds];
-    
-    if (!soundUrl) {
-        console.warn(`Sonido "${soundType}" no encontrado en Dropbox`);
-        return null;
-    }
-    
-    try {
-        // Mismo patrón que pokemoncatch
-        const audio = new Audio(soundUrl);
-        audio.volume = Math.max(0, Math.min(1, volume));
-        audio.loop = loop;
-        audio.play().catch(() => {
-            console.warn(`Error reproduciendo sonido "${soundType}" desde Dropbox`);
-        });
-        
-        return audio;
-    } catch (error) {
-        console.error(`Error creando audio para "${soundType}":`, error);
-        return null;
-    }
-};
-
 // Función principal para reproducir efectos de sonido
-export const playSoundEffect = (soundType: string, volume: number = 1.0, loop: boolean = false): HTMLAudioElement | null => {
+export const playSoundEffect = (soundType, volume = 1.0, loop = false) => {
     // Si el audio no está inicializado y estamos en un dispositivo móvil, agregar a la cola
     if (!audioInitialized && isMobileDevice()) {
         pendingAudioQueue.push({ soundType, volume, loop });
@@ -230,7 +174,7 @@ const setupFirstInteractionListeners = () => {
     
     const events = ['touchstart', 'touchend', 'mousedown', 'keydown', 'click'];
     
-    const handleFirstInteraction = (event: Event) => {
+    const handleFirstInteraction = (event) => {
         if (firstInteractionDone) return;
         
         console.log('🎯 Primera interacción detectada:', event.type);
@@ -282,9 +226,4 @@ export const forceAudioInitialization = () => {
         return initializeAudioForMobile();
     }
     return Promise.resolve();
-};
-
-// Función para crear música de fondo (patrón pokemoncatch)
-export const playBackgroundMusic = (soundType: string, volume: number = 0.03): HTMLAudioElement | null => {
-    return playDirectAudio(soundType, volume, true); // loop = true para música de fondo
 };
