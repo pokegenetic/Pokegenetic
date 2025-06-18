@@ -22,6 +22,10 @@ import Incubators from './components/ui/incubators';
 import LigaPokemon from './components/ui/ligapokemon';
 import AudioTester from './components/ui/AudioTester'; // Probador temporal
 import AudioTest from './components/ui/AudioTest'; // Debug temporal
+import AudioDebugPage from './components/ui/AudioDebugPage'; // Nuevo probador completo
+import SimpleAudioTest from './components/ui/SimpleAudioTest'; // Probador simple
+import BasicAudioTest from './components/ui/BasicAudioTest'; // Probador básico
+import SimpleAudioPage from './components/ui/SimpleAudioPage'; // Probador simple funcional
 import { AnimatePresence, motion } from 'framer-motion';
 import Login from './components/ui/Login';
 import { useUser } from './context/UserContext';
@@ -45,6 +49,97 @@ function App() {
               <Route path="/" element={<Hero />} />
               <Route path="/test-audio" element={<AudioTester />} />
               <Route path="/debug-audio" element={<AudioTest />} />
+              <Route path="/audio-debug" element={<AudioDebugPage />} />
+              <Route path="/simple-audio" element={<SimpleAudioTest />} />
+              <Route path="/test-simple" element={<SimpleAudioPage />} />
+              <Route path="/basic-audio" element={
+                <div className="p-8 max-w-4xl mx-auto">
+                  <h1 className="text-3xl font-bold text-center mb-8">🔊 Probador de Audio Básico</h1>
+                  
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                    <button 
+                      onClick={() => {
+                        console.log('Probando notification...');
+                        const audio = new Audio('/notification.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(e => console.error('Error:', e));
+                      }}
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      🔔 Notification
+                    </button>
+                    
+                    <button 
+                      onClick={() => {
+                        console.log('Probando levelup...');
+                        const audio = new Audio('/sfx/levelup.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(e => console.error('Error:', e));
+                      }}
+                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      ⬆️ Level Up
+                    </button>
+                    
+                    <button 
+                      onClick={() => {
+                        console.log('Probando whosthat...');
+                        const audio = new Audio('/whosthat.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(e => console.error('Error:', e));
+                      }}
+                      className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      ❓ Who's That
+                    </button>
+                    
+                    <button 
+                      onClick={() => {
+                        console.log('Probando victory...');
+                        const audio = new Audio('/sfx/victory.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(e => console.error('Error:', e));
+                      }}
+                      className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      🏆 Victory
+                    </button>
+                    
+                    <button 
+                      onClick={() => {
+                        console.log('Probando pokeballcatch...');
+                        const audio = new Audio('/sfx/pokeballcatch.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(e => console.error('Error:', e));
+                      }}
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      ⚾ Pokeball Catch
+                    </button>
+                    
+                    <button 
+                      onClick={() => {
+                        console.log('Probando heal...');
+                        const audio = new Audio('/sfx/heal.mp3');
+                        audio.volume = 0.5;
+                        audio.play().catch(e => console.error('Error:', e));
+                      }}
+                      className="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      💚 Heal
+                    </button>
+                  </div>
+                  
+                  <div className="bg-gray-100 p-4 rounded-lg">
+                    <h3 className="font-bold mb-2">📋 Instrucciones:</h3>
+                    <ul className="list-disc list-inside space-y-1">
+                      <li>Haz clic en cada botón para probar el sonido</li>
+                      <li>Abre la consola del navegador (F12) para ver logs</li>
+                      <li>En móviles: toca la pantalla primero para habilitar audio</li>
+                    </ul>
+                  </div>
+                </div>
+              } />
               <Route path="/laboratorio" element={<Laboratorio />} />
               <Route path="/crear" element={<Crear />} />
               <Route path="/edicion" element={<Edicion />} />
