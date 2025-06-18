@@ -4,9 +4,11 @@ import pokemonList from '@/data/sv/pokemon-sv.json';
 import { playSoundEffect } from '@/lib/soundEffects'; // Se mantiene por si se usa en otros lados o para el click
 import { useUser } from '../../context/UserContext';
 import { getUserPokeballs, setUserPokeballs } from './pokeballs';
-import whosThatAudio from '../../sounds/sfx/whosthat.mp3';
-import levelUpSoundFile from '../../sounds/sfx/levelup.mp3'; // Importar sonido de acierto
-import nothingSoundFile from '../../sounds/sfx/nothing.mp3'; // Importar sonido de error
+
+// Usar rutas locales directas (más confiables)
+const whosThatAudio = '/sfx/whosthat.mp3';
+const levelUpSoundFile = '/sfx/levelup.mp3';
+const nothingSoundFile = '/sfx/nothing.mp3';
 // Filtered list of Pokémon without hyphens in their names
 const simplePokemonList = pokemonList.filter(pokemon => !pokemon.name.includes('-'));
 function getRandomPokemon() {

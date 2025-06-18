@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { playSoundEffect, isAudioReady, forceAudioInitialization, getPendingAudioCount } from '@/lib/soundEffects';
 
-// Función para obtener URL de audio desde soundEffects
+// Función para obtener URL de audio usando rutas locales (más confiables)
 const getAudioUrl = (key: string): string | null => {
   const soundEffectUrls: Record<string, string> = {
-    pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1',
+    pokemongym: '/pokemongym.mp3', // Ruta local directa
   };
   return soundEffectUrls[key] || null;
 };

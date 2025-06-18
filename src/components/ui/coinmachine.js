@@ -14,12 +14,12 @@ const tryImportAudio = (path) => {
   }
 };
 
-// Import audio assets with fallback
-const casinoAudio = tryImportAudio('../../sounds/casino.mp3');
-const winAudio = tryImportAudio('../../sounds/sfx/win.mp3');
-const victoryAudio = tryImportAudio('../../sounds/sfx/victory.mp3');
-const nothingAudio = tryImportAudio('../../sounds/sfx/nothing.mp3');
-const slotAudio = tryImportAudio('../../sounds/sfx/slot.wav');
+// Usar rutas locales directas (más confiables)
+const casinoAudio = { valid: true, audio: '/casino.mp3' };
+const winAudio = { valid: true, audio: '/sfx/win.mp3' };
+const victoryAudio = { valid: true, audio: '/sfx/victory.mp3' };
+const nothingAudio = { valid: true, audio: '/sfx/nothing.mp3' };
+const slotAudio = { valid: true, audio: '/sfx/slot.wav' };
 
 // Safely play audio with fallback
 const playAudioSafely = (audioImport, volume = 0.3) => {

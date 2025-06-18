@@ -118,6 +118,22 @@ export default function Hero() {
         >
           MiniGames
         </button>
+        
+        {/* Botones de Test de Audio */}
+        <div className="flex flex-wrap gap-2 justify-center">
+          <button
+            className="px-4 py-2 rounded-full bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold shadow-lg text-sm hover:scale-105 transition-transform"
+            onClick={() => navigate('/test-simple', { state: { from: location.pathname } })}
+          >
+            🔊 Test Audio
+          </button>
+          <button
+            className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-500 text-white font-bold shadow-lg text-sm hover:scale-105 transition-transform"
+            onClick={() => navigate('/audio-refactor-test', { state: { from: location.pathname } })}
+          >
+            🎮 Test Pokémon Catch
+          </button>
+        </div>
       </div>
 
       {/* Separador */}

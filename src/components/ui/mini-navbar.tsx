@@ -1,20 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import logo from '@/img/logopokegenetic.png';
-
-// Import audio files with error handling
-const tryImportAudio = (path: string) => {
-  try {
-    return { valid: true, audio: path };
-  } catch (error) {
-    console.warn(`Could not import audio: ${path}`, error);
-    return { valid: false, audio: '' };
-  }
-};
-
-// Safe import with fallback
-const pokechillmusic = tryImportAudio('@/sounds/pokechillmusic.mp3');
-
 import { Volume2, VolumeX } from 'lucide-react';
 import { useGame } from '@/context/GameContext';
 import { useUser } from '@/context/UserContext';
@@ -25,6 +11,9 @@ import arceus from '@/img/legends-arceus.png';
 import bdsp from '@/img/diamond-pearl.png';
 import letsgo from '@/img/lets-go.png';
 import { playSoundEffect } from '@/lib/soundEffects';
+
+// Usar ruta local directa (más confiable)
+const pokechillmusic = { valid: true, audio: '/pokechillmusic.mp3' };
 import { teamToShowdownText } from './equipo';
 import { getPokemonTeam, setPokemonTeam } from '../../lib/equipoStorage';
 

@@ -10,8 +10,10 @@ import pokeballImg from '@/img/pokeballs/pokeball.png';
 import superballImg from '@/img/pokeballs/superball.png';
 import ultraballImg from '@/img/pokeballs/ultraball.png';
 import masterballImg from '@/img/pokeballs/masterball.png';
-import pokeballWaitSfx from '@/sounds/sfx/pokeballwait.mp3';
-import pokeballExplodeSfx from '@/sounds/sfx/pokeballexplode.mp3';
+
+// Usar rutas locales directas (más confiables) - ya no necesitamos importar estos
+// const pokeballWaitSfx = '/sfx/pokeballwait.mp3';
+// const pokeballExplodeSfx = '/sfx/pokeballexplode.mp3';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 

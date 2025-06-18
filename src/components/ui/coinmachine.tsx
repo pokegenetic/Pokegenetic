@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useUser } from '../../context/UserContext';
 import { playSoundEffect } from '../../lib/soundEffects';
 import { getUserPokeballs, setUserPokeballs } from './pokeballs';
-import casinoAudio from '../../sounds/casino.mp3';
-import winAudio from '../../sounds/sfx/win.mp3';
-import victoryAudio from '../../sounds/sfx/victory.mp3';
-import nothingAudio from '../../sounds/sfx/nothing.mp3';
-import slotAudio from '../../sounds/sfx/slot.wav';
+
+// Usar rutas locales directas (más confiables)
+const casinoAudio = '/casino.mp3';
+const winAudio = '/sfx/win.mp3';
+const victoryAudio = '/sfx/victory.mp3';
+const nothingAudio = '/sfx/nothing.mp3';
+const slotAudio = '/sfx/slot.wav';
 
 // Importar imágenes de pokéballs
 import pokeballImg from '../../img/pokeballs/pokeball.png';

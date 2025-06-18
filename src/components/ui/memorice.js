@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react';
 import { useUser } from '@/context/UserContext';
 import pokemonList from '@/data/sv/pokemon-sv.json';
 import { getUserPokeballs, setUserPokeballs } from './pokeballs';
-import levelUpSoundFile from '../../sounds/sfx/levelup.mp3';
-import nothingSoundFile from '../../sounds/sfx/nothing.mp3';
-import memoriceSoundFile from '../../sounds/sfx/memorice.mp3';
+
+// Usar rutas locales directas (más confiables)
+const levelUpSoundFile = '/sfx/levelup.mp3';
+const nothingSoundFile = '/sfx/nothing.mp3';
+const memoriceSoundFile = '/sfx/memorice.mp3';
 import './memorice-animations.css';
 // Filtered list of Pokémon without hyphens in their names
 const simplePokemonList = pokemonList.filter(pokemon => !pokemon.name.includes('-'));
