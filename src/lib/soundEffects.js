@@ -40,28 +40,35 @@ const externalAudioUrls = {
 const soundEffectUrls = {
     notification: 'https://play.pokemonshowdown.com/audio/notification.wav',
     error: 'https://play.pokemonshowdown.com/audio/errorwaiting.wav', // Sonido de error
+    
+    // Sonidos de Pokéball desde Dropbox
+    pc: 'https://www.dropbox.com/scl/fi/1mckierjvgwjv7l8uslw0/pc.mp3?rlkey=acjk8hri7yakxop1izlcknh6r&st=a6lhfx48&dl=1',
+    pokeballcatch: 'https://www.dropbox.com/scl/fi/jtkdfelt160gted4lol9u/pokeballcatch.mp3?rlkey=3704j7ajyy39qjtegmwwyxev6&st=xp7hn9hz&dl=1',
+    pokeballthrow: 'https://www.dropbox.com/scl/fi/ojvypu5200ja4k43yzoav/pokeballthrow.mp3?rlkey=b5cjw8fr2bl40quauu07170na&st=4zapubcb&dl=1',
+    pokeballexplode: 'https://www.dropbox.com/scl/fi/zfpe4xa9vbt8wiomtztae/pokeballexplode.mp3?rlkey=81f51bbdainiwd5kkiswhml8s&st=mygdk7cj&dl=1',
+    pokeballwait: 'https://www.dropbox.com/scl/fi/uwemzdkabhoducgn5d8qq/pokeballwait.mp3?rlkey=bspli4ihepe8n9rnfk9k9xxhm&st=oun68cpr&dl=1',
+    pokeballreturn: 'https://www.dropbox.com/scl/fi/cdvy0a0nmblgqx8awvx7x/pokeballreturn.mp3?rlkey=fw4rxk3bwd2o5afu0m25cuzyo&st=dg3s2izc&dl=1',
+    catchmusic: 'https://www.dropbox.com/scl/fi/p6hl0rgxw1grsenl8nqpx/catchmusic.mp3?rlkey=6cqu58vjpkx5k7ddjsn3749pq&st=h0v0uwid&dl=1',
+    superpower: 'https://www.dropbox.com/scl/fi/647lmyvmwld8k6yqet96x/superpower.mp3?rlkey=kl2m8dhzva57fh1qs9ly7tvek&st=z65llvre&dl=1',
+    heal: 'https://www.dropbox.com/scl/fi/pq3m5zs407n8lilmtq0n9/heal.mp3?rlkey=tj9u24fb0pgywcdz0phzh7b4g&st=74513ari&dl=1',
+    
+    // Pop se usa notification para navegación
+    pop: 'https://play.pokemonshowdown.com/audio/notification.wav',
+    
+    // Sonidos adicionales que ya estaban configurados localmente
     pokeballopen: '/sounds/sfx/pokeballopen.mp3', // Direct path as requested
-    pokeballthrow: '/sounds/sfx/pokeballthrow.mp3',
-    pokeballwait: '/sounds/sfx/pokeballwait.mp3',
-    pokeballcatch: '/sounds/sfx/pokeballcatch.mp3', // Sonido de captura exitosa
-    pokeballexplode: '/sounds/sfx/pokeballexplode.mp3', // Sonido de explosión cuando la captura falla
-    catchmusic: '/sounds/sfx/catchmusic.mp3', // Sonido de música de captura exitosa
-    heal: '/sounds/sfx/heal.mp3', // Sonido de curación para laboratorio
-    superpower: '/sounds/sfx/superpower.wav', // Sonido de Ataque Cargado
     levelup: '/sounds/sfx/levelup.mp3', // Sonido de subida de nivel
     shiny: '/sounds/sfx/shiny.mp3', // Sonido de Pokémon shiny
-    pc: '/sounds/sfx/pc.mp3', // Sonido de PC
     slot: '/sounds/sfx/slot.wav', // Sonido para tragamonedas
     nothing: '/sounds/sfx/nothing.mp3', // Sonido para tragamonedas - nada
     win: '/sounds/sfx/win.mp3', // Sonido para tragamonedas - victoria
     victory: '/sounds/sfx/victory.mp3', // Sonido para tragamonedas - victoria grande
     whosthat: '/sounds/sfx/whosthat.mp3', // Sonido para juego "Who's that Pokemon"
-    pop: 'https://play.pokemonshowdown.com/audio/notification.wav', // Sonido para navegación
+    
     // Otros efectos de sonido pequeños
     misterygift: '/sounds/sfx/misterygift.mp3',
     pokeballthrowmasterball: '/sounds/sfx/pokeballthrowmasterball.mp3',
     pokeballwaiting: '/sounds/sfx/pokeballwaiting.mp3',
-    pokeballreturn: '/sounds/sfx/pokeballreturn.mp3',
     catchedgo: '/sounds/sfx/catchedgo.mp3'
 };
 /**
@@ -99,19 +106,33 @@ export function playSoundEffect(key, volume = 1, loop = false) {
         
         // Agregar un manejador de errores más detallado
         audio.onerror = (e) => {
-            console.warn(`Error cargando audio ${key} desde ${url}:`, e);
+            console.error(`Error cargando audio ${key} desde ${url}:`, e);
         };
         
-        // Reproducir el audio con manejo de errores
+        // Configurar CORS para URLs externas
+        if (url.includes('dropbox.com') || url.includes('pokemonshowdown.com')) {
+            audio.crossOrigin = 'anonymous';
+        }
+        
+        // Reproducir el audio con manejo de errores mejorado
         const playPromise = audio.play();
         if (playPromise !== undefined) {
             playPromise.catch(error => {
-                console.warn(`Error reproduciendo sonido ${key}:`, error);
+                console.error(`Error reproduciendo sonido ${key}:`, error.name, error.message);
                 
-                // Si hay un error con el formato de URL de Google Drive, intentar con URL alternativa
-                if (url.includes('drive.google.com') && error.name === 'NotSupportedError') {
-                    console.log(`Intentando URL alternativa para ${key}`);
-                    // Implementar lógica de URL alternativa si es necesario
+                // Si es un error de CORS o formato, intentar sin crossOrigin
+                if (error.name === 'NotSupportedError' || error.name === 'AbortError') {
+                    console.log(`Intentando reproducir ${key} sin crossOrigin...`);
+                    try {
+                        const fallbackAudio = new window.Audio(url);
+                        fallbackAudio.volume = volume;
+                        fallbackAudio.loop = loop;
+                        fallbackAudio.play().catch(fallbackError => {
+                            console.error(`Error en fallback para ${key}:`, fallbackError);
+                        });
+                    } catch (fallbackError) {
+                        console.error(`Error creando audio de fallback para ${key}:`, fallbackError);
+                    }
                 }
             });
         }
@@ -147,11 +168,15 @@ export function playLoopingMusic(key, volume = 0.1) {
         const audio = new window.Audio(url);
         audio.volume = volume;
         audio.loop = true;
-        // Removido crossOrigin para evitar problemas CORS con Dropbox
+        
+        // Configurar CORS para URLs externas
+        if (url.includes('dropbox.com') || url.includes('pokemonshowdown.com')) {
+            audio.crossOrigin = 'anonymous';
+        }
         
         // Agregar manejador de errores
         audio.onerror = (e) => {
-            console.warn(`Error cargando música ${key} desde ${url}:`, e);
+            console.error(`Error cargando música ${key} desde ${url}:`, e);
         };
         
         // Reproducir con manejo de errores
@@ -197,11 +222,15 @@ export function createAudio(key, options = {}) {
         const audio = new window.Audio(url);
         audio.volume = volume;
         audio.loop = loop;
-        // Removido crossOrigin para evitar problemas CORS con Dropbox/URLs externas
+        
+        // Configurar CORS para URLs externas
+        if (url.includes('dropbox.com') || url.includes('pokemonshowdown.com')) {
+            audio.crossOrigin = 'anonymous';
+        }
         
         // Agregar manejadores de eventos para depuración
         audio.onerror = (e) => {
-            console.warn(`Error cargando audio ${key} desde ${url}:`, e);
+            console.error(`Error cargando audio ${key} desde ${url}:`, e);
         };
         
         audio.oncanplaythrough = () => {
