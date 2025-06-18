@@ -1,53 +1,229 @@
-// src/lib/soundEffects.ts
+// Sistema de gestión de audio optimizado para móviles y desktop
+let audioContext = null;
+let audioInitialized = false;
+let pendingAudioQueue = [];
+let firstInteractionDone = false;
 
-const soundEffectUrls: Record<string, string> = {
-  notification: 'https://play.pokemonshowdown.com/audio/notification.wav',
-  error: 'https://play.pokemonshowdown.com/audio/errorwaiting.wav', // Sonido de error
-  pokeballopen: '/src/sounds/sfx/pokeballopen.mp3', // Direct path as requested
-  pokeballthrow: '/src/sounds/sfx/pokeballthrow.mp3',
-  pokeballwait: '/src/sounds/sfx/pokeballwait.mp3',
-  pokeballcatch: '/src/sounds/sfx/pokeballcatch.mp3', // Sonido de captura exitosa
-  pokeballexplode: '/src/sounds/sfx/pokeballexplode.mp3', // Sonido de explosión cuando la captura falla
-  catchmusic: '/src/sounds/sfx/catchmusic.mp3', // Sonido de música de captura exitosa
-  heal: '/src/sounds/sfx/heal.mp3', // Sonido de curación para laboratorio
-  superpower: '/src/sounds/sfx/superpower.mp3', // Sonido de Ataque Cargado
-  pokemongym: 'https://www.dropbox.com/scl/fi/qqo6mosag3s7rwukfnla9/pokemongym.mp3?rlkey=rp0zp5oaddnh0np06qtez9gbx&st=pmao4i07&dl=1', // Música de gimnasio Pokémon desde Dropbox
-  wintrainer: 'https://www.dropbox.com/scl/fi/knul5jzv7ymcerkk1lc47/wintrainer.mp3?rlkey=z7qlv2415yke4ox1y546fod76&st=4zul5uwe&dl=1', // Música de victoria contra entrenador desde Dropbox
-  gymbattle: 'https://www.dropbox.com/scl/fi/qmr61ipkl3pqhxb88ojul/gymbattle.mp3?rlkey=z64xxr230pdwyc6hw04g0g476&st=su3gd1e5&dl=1', // Música de batalla contra líder de gimnasio desde Dropbox
-  trainerbattle: 'https://www.dropbox.com/scl/fi/xy9ghyc0mcrpbn2aft4z7/trainerbattle.mp3?rlkey=pfqy1b99mzvl3rk7oespt8hp6&st=dzde7u7s&dl=1', // Música de batalla contra entrenador desde Dropbox
-  wingym: 'https://www.dropbox.com/scl/fi/w5r8r2vsp0pt51g67gn3b/wingym.mp3?rlkey=kd5ffs8rvplqg7i4anq2y8wmd&st=v5uzpegp&dl=1', // Música de victoria en gimnasio desde Dropbox
-  obtainbadge: 'https://www.dropbox.com/scl/fi/7cq8v51e967tbe54jvrei/obtainbadge.mp3?rlkey=grkimuyje3f5omglu4uzveto3&st=to1x4gtx&dl=1', // Sonido de obtener medalla desde Dropbox
-  pokeballreturn: '/src/sounds/sfx/pokeballreturn.mp3', // Sonido cuando un Pokémon es derrotado
-  pop: 'https://play.pokemonshowdown.com/audio/notification.wav', // Sonido para navegación
-  pokechillmusic: 'https://www.dropbox.com/scl/fi/rf5wcwn0dlq9qs6vvgjvu/pokechillmusic.mp3?rlkey=ex3zevbk8s21l3jntflpfcykn&st=r101jruf&dl=1', // Música de fondo principal desde Dropbox
-  // Puedes agregar más sonidos aquí, por ejemplo:
-  // success: 'url',
+// Detectar si es un dispositivo móvil
+export const isMobileDevice = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+           (navigator.maxTouchPoints && navigator.maxTouchPoints > 1);
 };
 
-export function playSoundEffect(key: string, volume: number = 1) {
-  const url = soundEffectUrls[key];
-  if (!url) return;
-  const audio = new window.Audio(url);
-  audio.volume = volume; // Use provided volume
-  
-  // Rastrear audios de victoria globalmente para poder detenerlos después
-  if (key === 'wintrainer' || key === 'wingym') {
-    (window as any).currentVictoryAudio = audio;
-  }
-  
-  audio.play();
+// URLs de efectos de sonido locales (todos servidos desde public/)
+const soundEffects = {
+    // Efectos de PC
+    pc: '/sfx/pc.mp3',
+    
+    // Efectos de Pokéball
+    pokeballcatch: '/sfx/pokeballcatch.mp3',
+    pokeballthrow: '/sfx/pokeballthrow.mp3',
+    pokeballexplode: '/sfx/pokeballexplode.mp3',
+    pokeballwait: '/sfx/pokeballwait.mp3',
+    pokeballreturn: '/sfx/pokeballreturn.mp3',
+    pokeballopen: '/sfx/pokeballopen.mp3',
+    pokeballwaiting: '/sfx/pokeballwaiting.mp3',
+    pokeballthrowmasterball: '/sfx/pokeballthrowmasterball.mp3',
+    
+    // Música de captura
+    catchmusic: '/sfx/catchmusic.mp3',
+    catchmusicgo: '/catchmusicgo.mp3',
+    catchedgo: '/sfx/catchedgo.mp3',
+    
+    // Efectos especiales
+    superpower: '/sfx/superpower.wav',
+    heal: '/sfx/heal.mp3',
+    levelup: '/sfx/levelup.mp3',
+    shiny: '/sfx/shiny.mp3',
+    victory: '/sfx/victory.mp3',
+    win: '/sfx/win.mp3',
+    
+    // Efectos de notificación
+    notification: '/notification.mp3',
+    pop: '/notification.mp3',
+    
+    // Música de fondo
+    pokechillmusic: '/pokechillmusic.mp3',
+    pokemongym: '/pokemongym.mp3',
+    wintrainer: '/wintrainer.mp3',
+    gymbattle: '/gymbattle.mp3',
+    trainerbattle: '/trainerbattle.mp3',
+    wingym: '/wingym.mp3',
+    obtainbadge: '/obtainbadge.mp3',
+    casino: '/casino.mp3',
+    
+    // Juegos específicos
+    memorice: '/sfx/memorice.mp3',
+    whosthat: '/sfx/whosthat.mp3',
+    winrewards: '/sfx/winrewards.mp3',
+    misterygift: '/sfx/misterygift.mp3',
+    slot: '/sfx/slot.wav',
+    nothing: '/sfx/nothing.mp3',
+    
+    // Efecto de error (añadiendo para compatibilidad)
+    error: '/notification.mp3'
+};
+
+// Función de inicialización simplificada para móviles
+const initializeAudioForMobile = () => {
+    return new Promise((resolve) => {
+        try {
+            if (typeof window !== 'undefined' && window.AudioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                audioContext.resume().then(() => {
+                    console.log('🎵 AudioContext inicializado para móvil');
+                    audioInitialized = true;
+                    firstInteractionDone = true;
+                    
+                    // Reproducir sonidos pendientes
+                    pendingAudioQueue.forEach(({ soundType, volume, loop }) => {
+                        playAudioDirectly(soundType, volume, loop);
+                    });
+                    pendingAudioQueue = [];
+                    
+                    resolve();
+                }).catch((error) => {
+                    console.warn('⚠️ Error inicializando audio:', error);
+                    audioInitialized = true;
+                    firstInteractionDone = true;
+                    resolve();
+                });
+            } else {
+                audioInitialized = true;
+                firstInteractionDone = true;
+                resolve();
+            }
+        } catch (error) {
+            console.warn('⚠️ Error configurando sistema de audio:', error);
+            audioInitialized = true;
+            firstInteractionDone = true;
+            resolve();
+        }
+    });
+};
+
+// Función simplificada para reproducir audio directamente
+const playAudioDirectly = (soundType, volume = 1.0, loop = false) => {
+    // Verificar si el tipo de sonido es válido
+    if (!soundEffects[soundType]) {
+        console.warn(`Tipo de sonido "${soundType}" no encontrado`);
+        return null;
+    }
+
+    try {
+        // Obtener la URL del sonido
+        const soundUrl = soundEffects[soundType];
+        
+        if (!soundUrl) {
+            console.warn(`URL no encontrada para el sonido "${soundType}"`);
+            return null;
+        }
+
+        // Crear un nuevo objeto Audio
+        const audio = new Audio(soundUrl);
+        
+        // Configurar el volumen
+        audio.volume = Math.max(0, Math.min(1, volume));
+        
+        // Configurar el loop
+        audio.loop = loop;
+        
+        // Reproducir el sonido
+        const playPromise = audio.play();
+        
+        // Manejar la promesa de reproducción
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    console.log(`🔊 Sonido "${soundType}" reproducido exitosamente`);
+                })
+                .catch(error => {
+                    console.warn(`⚠️ Error al reproducir sonido "${soundType}":`, error);
+                });
+        }
+        
+        return audio;
+    } catch (error) {
+        console.error(`❌ Error al crear el objeto Audio para "${soundType}":`, error);
+        return null;
+    }
+};
+
+// Función principal para reproducir efectos de sonido
+export const playSoundEffect = (soundType, volume = 1.0, loop = false) => {
+    // Si el audio no está inicializado y estamos en un dispositivo móvil, agregar a la cola
+    if (!audioInitialized && isMobileDevice()) {
+        pendingAudioQueue.push({ soundType, volume, loop });
+        console.log(`📋 Sonido "${soundType}" agregado a la cola (esperando inicialización)`);
+        return null;
+    }
+    
+    // Reproducir el audio directamente
+    return playAudioDirectly(soundType, volume, loop);
+};
+
+// Función para verificar si el audio está inicializado
+export const isAudioInitialized = () => {
+    return audioInitialized;
+};
+
+// Configurar listeners para detectar la primera interacción del usuario
+const setupFirstInteractionListeners = () => {
+    if (firstInteractionDone || typeof window === 'undefined') return;
+    
+    const events = ['touchstart', 'touchend', 'mousedown', 'keydown', 'click'];
+    
+    const handleFirstInteraction = (event) => {
+        if (firstInteractionDone) return;
+        
+        console.log('🎯 Primera interacción detectada:', event.type);
+        
+        // Remover todos los listeners
+        events.forEach(eventType => {
+            document.removeEventListener(eventType, handleFirstInteraction, true);
+        });
+        
+        // Inicializar audio si estamos en móvil
+        if (isMobileDevice()) {
+            initializeAudioForMobile();
+        } else {
+            // En desktop, marcar como inicializado directamente
+            audioInitialized = true;
+            firstInteractionDone = true;
+        }
+    };
+    
+    // Agregar listeners para capturar la primera interacción
+    events.forEach(eventType => {
+        document.addEventListener(eventType, handleFirstInteraction, { capture: true, once: true });
+    });
+    
+    console.log('🎵 Listeners de audio configurados para primera interacción');
+};
+
+// Auto-inicializar los listeners cuando se carga el módulo
+if (typeof window !== 'undefined') {
+    // En desktop, inicializar directamente
+    if (!isMobileDevice()) {
+        audioInitialized = true;
+        firstInteractionDone = true;
+        console.log('🖥️ Desktop detectado: Audio habilitado directamente');
+    } else {
+        setupFirstInteractionListeners();
+        console.log('📱 Móvil detectado: Esperando primera interacción para habilitar audio');
+    }
 }
 
-// Función especializada para música de fondo con loop
-export function playLoopingMusic(key: string, volume: number = 0.1): HTMLAudioElement | null {
-  const url = soundEffectUrls[key];
-  if (!url) return null;
-  
-  const audio = new window.Audio(url);
-  audio.volume = volume;
-  audio.loop = true;
-  // Removido crossOrigin para evitar problemas CORS con Dropbox
-  audio.play().catch(console.error);
-  
-  return audio;
-}
+// Exportar funciones utilitarias adicionales
+export const getAvailableSounds = () => Object.keys(soundEffects);
+export const getPendingAudioCount = () => pendingAudioQueue.length;
+
+// Funciones para compatibilidad con código existente
+export const isAudioReady = () => audioInitialized;
+export const forceAudioInitialization = () => {
+    if (isMobileDevice() && !audioInitialized) {
+        return initializeAudioForMobile();
+    }
+    return Promise.resolve();
+};
