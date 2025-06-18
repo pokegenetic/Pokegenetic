@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { playSoundEffect } from '@/lib/soundEffects';
+import { playSoundEffect, isAudioReady, forceAudioInitialization, getPendingAudioCount } from '@/lib/soundEffects';
 
 // Función para obtener URL de audio desde soundEffects
 const getAudioUrl = (key: string): string | null => {
