@@ -508,6 +508,71 @@ body {
   cursor: pointer;
 }
 
+/* Prevenir zoom en el área de juego completa */
+.no-zoom-area {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -ms-touch-action: manipulation;
+}
+
+/* Botón de batalla optimizado para móviles */
+.battle-button {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  /* Prevenir doble tap zoom */
+  -ms-touch-action: manipulation;
+  /* Optimizar para respuesta rápida */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Efecto visual de tap exitoso */
+@keyframes tapSuccess {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.8);
+  }
+  50% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.3);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(59, 130, 246, 0);
+  }
+}
+
+.tap-success-animation {
+  animation: tapSuccess 0.3s ease-out;
+}
+
+/* Efecto visual de partículas para taps */
+@keyframes particleExplode {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.tap-particle {
+  animation: particleExplode 0.5s ease-out forwards;
+}
+
 /* Prevenir zoom en inputs y textareas si es necesario */
 input, textarea, select {
   -webkit-user-select: text;

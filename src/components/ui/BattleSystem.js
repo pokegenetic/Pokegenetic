@@ -44,6 +44,15 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
     // Estados para diálogo de derrota del usuario
     const [mostrarDialogoDerrota, setMostrarDialogoDerrota] = useState(false);
     const [mensajeDialogoDerrota, setMensajeDialogoDerrota] = useState('');
+    
+    // Estados adicionales para efectos visuales y optimización móvil
+    const [showTapEffect, setShowTapEffect] = useState(false);
+    const [tapParticles, setTapParticles] = useState([]);
+    const [lastTapTime, setLastTapTime] = useState(0);
+    
+    // Debounce muy corto para permitir taps rápidos pero evitar registros duplicados
+    const TAP_DEBOUNCE_MS = 50; // Reducido para permitir taps más rápidos
+    
     // Referencias
     const tapsAcumuladosRef = useRef(tapsAcumulados);
     const combateEnCursoRef = useRef(combateEnCurso);
@@ -647,48 +656,120 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
         const mensajes = isLeader ? mensajesLider : mensajesEntrenador;
         return mensajes[Math.floor(Math.random() * mensajes.length)];
     };
-    // Manejar clics para sumar taps
+    // Función para crear partículas visuales en el tap
+    const createTapParticles = () => {
+        const particles = [];
+        for (let i = 0; i < 6; i++) {
+            particles.push({
+                id: Math.random(),
+                x: Math.random() * 60 - 30, // -30 a 30
+                y: Math.random() * 60 - 30,
+                delay: i * 50
+            });
+        }
+        setTapParticles(particles);
+        setTimeout(() => setTapParticles([]), 500);
+    };
+
+    // Manejar clics/toques para sumar taps - OPTIMIZADO PARA MÓVILES
     const handleTap = () => {
-        if (!combateEnCurso)
-            return;
+        if (!combateEnCurso) return;
+        
+        // Debounce para evitar taps duplicados
+        const now = Date.now();
+        if (now - lastTapTime < TAP_DEBOUNCE_MS) return;
+        setLastTapTime(now);
+        
+        // Efecto visual inmediato
+        setShowTapEffect(true);
+        createTapParticles();
+        setTimeout(() => setShowTapEffect(false), 300);
+        
         // Calcular si es un ataque crítico (2% de probabilidad)
-        const esCritico = Math.random() < 0.02; // 2% de probabilidad
+        const esCritico = Math.random() < 0.02;
+        
         if (esCritico) {
-            // Ataque crítico: multiplicador equilibrado
-            playSoundEffect('notification', 0.3); // Sonido especial para crítico
-            setTapsAcumulados(prev => prev + 4); // x4 taps - balance entre ventaja y equilibrio
+            // Ataque crítico: sin sonido de notificación, solo efecto visual
+            setTapsAcumulados(prev => prev + 4);
             setTapsHistoricos(prev => prev + 4);
+            
             // Mostrar mensaje de crítico
             setMensajeCritico('¡GOLPE CRÍTICO!');
             setMostrarCritico(true);
-            // Ocultar mensaje después de 1.0 segundos
+            
             setTimeout(() => {
                 setMostrarCritico(false);
             }, 1500);
-        }
-        else {
-            // Ataque normal
-            playSoundEffect('pop', 0.1);
+        } else {
+            // Ataque normal: SIN sonido, solo efectos visuales
             setTapsAcumulados(prev => prev + 1);
             setTapsHistoricos(prev => prev + 1);
         }
     };
-    // Manejar Ataque Cargado (botón separado)
+
+    // Funciones específicas para dispositivos táctiles - OPTIMIZADO
+    const handleTouchStart = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (!combateEnCurso) return;
+        
+        // Debounce para evitar múltiples registros
+        const now = Date.now();
+        if (now - lastTapTime < TAP_DEBOUNCE_MS) return;
+        
+        // Ejecutar tap inmediatamente en touchstart para máxima respuesta
+        handleTap();
+    };
+
+    const handleTouchEnd = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // No hacer nada en touchend para evitar doble registro
+    };
+    // Manejar Ataque Cargado (botón separado) - OPTIMIZADO
     const handleSuperTap = () => {
-        if (!combateEnCurso || !superTapDisponible)
-            return;
+        if (!combateEnCurso || !superTapDisponible) return;
+        
+        // Efecto visual para super tap
+        setShowTapEffect(true);
+        createTapParticles();
+        setTimeout(() => setShowTapEffect(false), 300);
+        
         // Ataque Cargado: 20 taps de una vez
-        playSoundEffect('superpower', 0.9); // Sonido especial para Ataque Cargado
+        playSoundEffect('superpower', 0.9); // Mantenemos sonido especial para SuperTap
         setTapsAcumulados(prev => prev + 20);
         setTapsHistoricos(prev => prev + 20);
+        
         // Mostrar mensaje de Ataque Cargado
         setMensajeCritico('¡ATAQUE CARGADO!');
         setMostrarSuperTap(true);
-        setSuperTapDisponible(false); // Consumir el Ataque Cargado
-        // Ocultar mensaje después de 2 segundos
+        setSuperTapDisponible(false);
+        
         setTimeout(() => {
             setMostrarSuperTap(false);
         }, 2000);
+    };
+    
+    // Funciones específicas para SuperTap en dispositivos táctiles
+    const handleSuperTouchStart = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (!combateEnCurso || !superTapDisponible) return;
+        
+        // Debounce para evitar múltiples registros
+        const now = Date.now();
+        if (now - lastTapTime < TAP_DEBOUNCE_MS) return;
+        
+        // Registrar el super toque inmediatamente en touchstart
+        handleSuperTap();
+    };
+
+    const handleSuperTouchEnd = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        // No hacer nada más en touchend para evitar doble registro
     };
     // Verificar victoria automáticamente
     useEffect(() => {
@@ -1019,18 +1100,58 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
                                     } }, i))) })] })) })] }));
     }
     // Pantalla principal de combate (faseAnimacion === 'battle')
-    return (_jsxs("div", { className: "fixed inset-0 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 flex flex-col items-center justify-center z-[60] text-white", children: [_jsx("div", { className: "absolute inset-0 bg-black/30" }), _jsxs("div", { className: "relative z-10 flex flex-col items-center justify-center w-full h-full px-4", children: [_jsx("div", { className: "flex items-center gap-4 mb-8 bg-black/40 backdrop-blur-sm rounded-xl p-4 border border-white/20", children: _jsxs("div", { className: "text-shadow-lg", children: [_jsx("h2", { className: "text-2xl font-bold text-white drop-shadow-lg", children: oponenteNombre }), _jsx("p", { className: "text-lg text-gray-100 drop-shadow-md", children: pokemonNombre }), _jsxs("p", { className: "text-sm text-gray-200 drop-shadow-md", children: ["Tipo: ", gimnasio.tipo] })] }) }), _jsx("div", { className: "mb-6", children: _jsx("div", { className: "relative bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20", children: _jsx("img", { src: getPokemonIconUrl(pokemonNombre), alt: pokemonNombre, className: "w-32 mx-auto", style: {
+    return (_jsxs("div", { className: "no-zoom-area fixed inset-0 bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 flex flex-col items-center justify-center z-[60] text-white", style: { touchAction: 'manipulation' }, children: [_jsx("div", { className: "absolute inset-0 bg-black/30" }), _jsxs("div", { className: "relative z-10 flex flex-col items-center justify-center w-full h-full px-4", children: [_jsx("div", { className: "flex items-center gap-4 mb-8 bg-black/40 backdrop-blur-sm rounded-xl p-4 border border-white/20", children: _jsxs("div", { className: "text-shadow-lg", children: [_jsx("h2", { className: "text-2xl font-bold text-white drop-shadow-lg", children: oponenteNombre }), _jsx("p", { className: "text-lg text-gray-100 drop-shadow-md", children: pokemonNombre }), _jsxs("p", { className: "text-sm text-gray-200 drop-shadow-md", children: ["Tipo: ", gimnasio.tipo] })] }) }), _jsx("div", { className: "mb-6", children: _jsx("div", { className: "relative bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20", children: _jsx("img", { src: getPokemonIconUrl(pokemonNombre), alt: pokemonNombre, className: "w-32 mx-auto", style: {
                                     imageRendering: 'pixelated',
                                     aspectRatio: 'auto',
                                     maxHeight: '128px',
                                     objectFit: 'contain'
                                 } }) }) }), _jsx("div", { className: "mb-6 w-full max-w-md space-y-4", children: _jsxs("div", { className: "bg-black/40 backdrop-blur-sm rounded-lg p-4 border border-white/20", children: [_jsxs("div", { className: "flex justify-between text-sm text-gray-200 mb-2", children: [_jsxs("span", { children: ["Progreso: ", tapsAcumulados, "/", tapsObjetivo] }), _jsxs("span", { children: ["Tiempo: ", tiempoRestante, "s"] })] }), _jsx("div", { className: "w-full bg-gray-600 rounded-full h-3 mb-2 overflow-hidden", children: _jsx("div", { className: "bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full transition-all duration-300 shadow-lg", style: { width: `${Math.min((tapsAcumulados / tapsObjetivo) * 100, 100)}%` } }) }), _jsx("div", { className: "w-full bg-gray-600 rounded-full h-2 overflow-hidden", children: _jsx("div", { className: "bg-gradient-to-r from-yellow-400 to-red-500 h-2 rounded-full transition-all duration-1000", style: { width: `${(tiempoRestante / calcularTiempoBase(combatienteActual, gimnasioActual)) * 100}%` } }) }), _jsxs("div", { className: "mt-3 pt-3 border-t border-white/20", children: [_jsxs("div", { className: "flex justify-between text-xs text-gray-300 mb-1", children: [_jsx("span", { children: "Ataque Cargado" }), _jsxs("span", { children: [tapsHistoricos % 100, "/100"] })] }), _jsx("div", { className: "w-full bg-gray-700 rounded-full h-2 overflow-hidden", children: _jsx("div", { className: `h-2 rounded-full transition-all duration-300 ${superTapDisponible
                                                     ? 'bg-gradient-to-r from-yellow-400 to-orange-500 animate-pulse'
-                                                    : 'bg-gradient-to-r from-purple-400 to-pink-500'}`, style: { width: `${superTapDisponible ? 100 : (tapsHistoricos % 100)}%` } }) }), superTapDisponible && (_jsx("div", { className: "text-center text-yellow-300 text-xs font-bold mt-1 animate-pulse", children: "\u26A1 \u00A1ATAQUE CARGADO LISTO! \u26A1" }))] })] }) }), _jsxs("div", { className: "mb-8 relative flex gap-6 items-center justify-center", children: [_jsxs("div", { className: "relative", children: [_jsx("button", { onClick: handleTap, disabled: !combateEnCurso, className: `relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl ${combateEnCurso
+                                                    : 'bg-gradient-to-r from-purple-400 to-pink-500'}`, style: { width: `${superTapDisponible ? 100 : (tapsHistoricos % 100)}%` } }) }), superTapDisponible && (_jsx("div", { className: "text-center text-yellow-300 text-xs font-bold mt-1 animate-pulse", children: "\u26A1 \u00A1ATAQUE CARGADO LISTO! \u26A1" }))] })] }) }), _jsxs("div", { className: "mb-8 relative flex gap-6 items-center justify-center", children: [_jsxs("div", { className: "relative", children: [
+                                    // Botón principal optimizado para móviles
+                                    _jsx("button", { 
+                                        onClick: handleTap,
+                                        onTouchStart: handleTouchStart,
+                                        onTouchEnd: handleTouchEnd,
+                                        disabled: !combateEnCurso, 
+                                        className: `battle-button no-zoom-area relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl ${showTapEffect ? 'tap-success-animation' : ''} ${combateEnCurso
                                             ? ataqueInminente
                                                 ? 'bg-red-500 hover:bg-red-400 animate-pulse border-red-300 shadow-red-500/50'
                                                 : 'bg-blue-500 hover:bg-blue-400 border-blue-300 shadow-blue-500/50'
-                                            : 'bg-gray-500 cursor-not-allowed border-gray-400 shadow-gray-500/30'}`, children: combateEnCurso ? '👊' : '🔄' }), _jsx("div", { className: "absolute -bottom-8 left-1/2 transform -translate-x-1/2", children: _jsx("span", { className: "text-white text-sm font-bold", children: "Tap Normal" }) })] }), superTapDisponible && (_jsxs("div", { className: "relative animate-in fade-in slide-in-from-right-5 duration-500", children: [_jsx("div", { className: "absolute inset-0 rounded-full bg-yellow-300 opacity-30 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-2 rounded-full bg-yellow-400 opacity-20 animate-pulse pointer-events-none" }), _jsx("div", { className: "absolute -inset-4 rounded-full bg-orange-400 opacity-10 animate-bounce pointer-events-none" }), _jsx("button", { onClick: handleSuperTap, disabled: !combateEnCurso, className: "relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 animate-pulse border-yellow-300 shadow-yellow-500/50 text-black", children: "\u26A1" }), _jsx("div", { className: "absolute -bottom-8 left-1/2 transform -translate-x-1/2", children: _jsx("span", { className: "text-yellow-300 text-sm font-bold animate-pulse", children: "Ataque Cargado" }) })] })), mostrarCritico && !mostrarSuperTap && (_jsxs("div", { className: "absolute -top-20 -left-32 transform z-20 pointer-events-none", children: [_jsxs("div", { className: "bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-6 py-3 rounded-lg shadow-2xl border-2 border-yellow-300 animate-bounce", children: [_jsx("div", { className: "text-lg font-extrabold drop-shadow-md whitespace-nowrap", children: mensajeCritico }), _jsx("div", { className: "text-sm font-bold text-center", children: "\u00A1x4 Da\u00F1o!" })] }), _jsx("div", { className: "absolute inset-0 bg-yellow-300 rounded-lg opacity-50 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-2 bg-yellow-400 rounded-lg opacity-30 animate-pulse pointer-events-none" })] })), mostrarSuperTap && (_jsxs("div", { className: "absolute -top-24 -left-36 transform z-20 pointer-events-none", children: [_jsxs("div", { className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold px-8 py-4 rounded-lg shadow-2xl border-2 border-purple-300 animate-bounce", children: [_jsxs("div", { className: "text-xl font-extrabold drop-shadow-md whitespace-nowrap", children: ["\u26A1 ", mensajeCritico, " \u26A1"] }), _jsx("div", { className: "text-sm font-bold text-center", children: "\u00A1+20 Taps!" })] }), _jsx("div", { className: "absolute inset-0 bg-purple-300 rounded-lg opacity-50 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-3 bg-pink-400 rounded-lg opacity-30 animate-pulse pointer-events-none" }), _jsx("div", { className: "absolute -inset-5 bg-yellow-400 rounded-lg opacity-20 animate-bounce pointer-events-none" })] }))] }), combateEnCurso && (_jsxs("div", { className: "mt-4 text-center bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20", children: [_jsxs("p", { className: "text-sm text-white drop-shadow-md", children: [tipoSeleccionado, " vs ", gimnasio.tipo] }), _jsx("p", { className: `text-xs font-bold drop-shadow-md ${calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'fuerte' ? 'text-green-400' :
+                                            : 'bg-gray-500 cursor-not-allowed border-gray-400 shadow-gray-500/30'}`,
+                                        style: { touchAction: 'manipulation' },
+                                        children: combateEnCurso ? '👊' : '🔄' 
+                                    }),
+                                    
+                                    // Partículas de tap
+                                    tapParticles.map(particle => 
+                                        _jsx("div", {
+                                            className: "absolute w-2 h-2 bg-blue-400 rounded-full tap-particle pointer-events-none",
+                                            style: {
+                                                left: `50%`,
+                                                top: `50%`,
+                                                transform: `translate(${particle.x}px, ${particle.y}px)`,
+                                                animationDelay: `${particle.delay}ms`
+                                            }
+                                        }, particle.id)
+                                    ),
+                                    
+                                    _jsx("div", { className: "absolute -bottom-8 left-1/2 transform -translate-x-1/2", children: _jsx("span", { className: "text-white text-sm font-bold", children: "Tap Normal" }) })
+                                ] }), superTapDisponible && (_jsxs("div", { className: "relative animate-in fade-in slide-in-from-right-5 duration-500", children: [
+                                    _jsx("div", { className: "absolute inset-0 rounded-full bg-yellow-300 opacity-30 animate-ping pointer-events-none" }), 
+                                    _jsx("div", { className: "absolute -inset-2 rounded-full bg-yellow-400 opacity-20 animate-pulse pointer-events-none" }), 
+                                    _jsx("div", { className: "absolute -inset-4 rounded-full bg-orange-400 opacity-10 animate-bounce pointer-events-none" }), 
+                                    _jsx("button", { 
+                                        onClick: handleSuperTap,
+                                        onTouchStart: handleSuperTouchStart,
+                                        onTouchEnd: handleSuperTouchEnd,
+                                        disabled: !combateEnCurso, 
+                                        className: "battle-button no-zoom-area relative z-10 w-32 h-32 rounded-full text-4xl font-bold transition-all duration-200 border-4 shadow-2xl bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-300 hover:to-orange-400 animate-pulse border-yellow-300 shadow-yellow-500/50 text-black",
+                                        style: { touchAction: 'manipulation' },
+                                        children: "⚡" 
+                                    }), 
+                                    _jsx("div", { className: "absolute -bottom-8 left-1/2 transform -translate-x-1/2", children: _jsx("span", { className: "text-yellow-300 text-sm font-bold animate-pulse", children: "Ataque Cargado" }) })
+                                ] })), mostrarCritico && !mostrarSuperTap && (_jsxs("div", { className: "absolute -top-20 -left-32 transform z-20 pointer-events-none", children: [_jsxs("div", { className: "bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold px-6 py-3 rounded-lg shadow-2xl border-2 border-yellow-300 animate-bounce", children: [_jsx("div", { className: "text-lg font-extrabold drop-shadow-md whitespace-nowrap", children: mensajeCritico }), _jsx("div", { className: "text-sm font-bold text-center", children: "\u00A1x4 Da\u00F1o!" })] }), _jsx("div", { className: "absolute inset-0 bg-yellow-300 rounded-lg opacity-50 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-2 bg-yellow-400 rounded-lg opacity-30 animate-pulse pointer-events-none" })] })), mostrarSuperTap && (_jsxs("div", { className: "absolute -top-24 -left-36 transform z-20 pointer-events-none", children: [_jsxs("div", { className: "bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold px-8 py-4 rounded-lg shadow-2xl border-2 border-purple-300 animate-bounce", children: [_jsxs("div", { className: "text-xl font-extrabold drop-shadow-md whitespace-nowrap", children: ["\u26A1 ", mensajeCritico, " \u26A1"] }), _jsx("div", { className: "text-sm font-bold text-center", children: "\u00A1+20 Taps!" })] }), _jsx("div", { className: "absolute inset-0 bg-purple-300 rounded-lg opacity-50 animate-ping pointer-events-none" }), _jsx("div", { className: "absolute -inset-3 bg-pink-400 rounded-lg opacity-30 animate-pulse pointer-events-none" }), _jsx("div", { className: "absolute -inset-5 bg-yellow-400 rounded-lg opacity-20 animate-bounce pointer-events-none" })] }))] }), combateEnCurso && (_jsxs("div", { className: "mt-4 text-center bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20", children: [_jsxs("p", { className: "text-sm text-white drop-shadow-md", children: [tipoSeleccionado, " vs ", gimnasio.tipo] }), _jsx("p", { className: `text-xs font-bold drop-shadow-md ${calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'fuerte' ? 'text-green-400' :
                                     calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'debil' ? 'text-red-400' :
                                         'text-white'}`, children: calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'fuerte' ? 'Súper efectivo' :
                                     calcularEfectividad(tipoSeleccionado, gimnasio.tipo) === 'debil' ? 'No muy efectivo' :

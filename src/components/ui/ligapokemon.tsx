@@ -1506,7 +1506,7 @@ export default function LigaPokemon() {
                                 setEstado('lider');
                               }}
                               disabled={!tipoSeleccionado || !todosEntrenadoresVencidos || isLiderVencido}
-                              className={`w-full py-3 rounded-lg font-bold transition-all duration-300 ${
+                              className={`battle-button no-zoom-area w-full py-3 rounded-lg font-bold transition-all duration-300 ${
                                 isLiderVencido
                                   ? 'bg-yellow-600 text-yellow-200 cursor-not-allowed opacity-50'
                                   : !todosEntrenadoresVencidos
@@ -1515,6 +1515,7 @@ export default function LigaPokemon() {
                                   ? 'bg-gradient-to-r from-yellow-400 to-red-500 hover:from-yellow-500 hover:to-red-600 text-white hover:scale-[1.02] shadow-lg hover:shadow-xl'
                                   : 'bg-gray-400 cursor-not-allowed opacity-50 text-white'
                               }`}
+                              style={{ touchAction: 'manipulation' }}
                             >
                               {isLiderVencido ? `👑 ${currentCombatant.nombre} (Vencido)` :
                                !todosEntrenadoresVencidos ? '🔒 Vence a todos los entrenadores primero' :
@@ -1576,7 +1577,8 @@ export default function LigaPokemon() {
                                 setEstado('entrenador');
                               }}
                               disabled={!canClick}
-                              className={`w-full py-2 rounded-lg font-semibold transition-all duration-300 ${buttonState}`}
+                              className={`battle-button no-zoom-area w-full py-2 rounded-lg font-semibold transition-all duration-300 ${buttonState}`}
+                              style={{ touchAction: 'manipulation' }}
                             >
                               {buttonText}
                             </button>
