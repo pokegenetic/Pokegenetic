@@ -250,7 +250,7 @@ export default function WhosThatPokemon() {
     const handleSkipPokemon = useCallback(() => {
         if (dailyStats.skipsUsed >= dailyStats.maxSkips)
             return;
-        playSoundEffect('notification', 0.1);
+        playSoundEffect('notification', 0.2);
         updateDailyStats(false, true);
         // Limpiar timer del botón skip
         if (skipTimer) {

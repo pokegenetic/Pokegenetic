@@ -22,14 +22,14 @@ export const TipoSelector: React.FC<TipoSelectorProps> = ({ tipoSeleccionado, se
   }, [tipoSeleccionado, indiceActual]);
 
   const navegarAnterior = () => {
-    playSoundEffect('notification', 0.3);
+    playSoundEffect('notification', 0.2);
     const nuevoIndice = indiceActual === 0 ? TIPOS_JUGADOR.length - 1 : indiceActual - 1;
     setIndiceActual(nuevoIndice);
     setTipoSeleccionado(TIPOS_JUGADOR[nuevoIndice].nombre);
   };
 
   const navegarSiguiente = () => {
-    playSoundEffect('notification', 0.3);
+    playSoundEffect('notification', 0.2);
     const nuevoIndice = indiceActual === TIPOS_JUGADOR.length - 1 ? 0 : indiceActual + 1;
     setIndiceActual(nuevoIndice);
     setTipoSeleccionado(TIPOS_JUGADOR[nuevoIndice].nombre);

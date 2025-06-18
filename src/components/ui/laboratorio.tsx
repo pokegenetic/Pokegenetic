@@ -8,15 +8,15 @@ export default function Laboratorio() {
   const navigate = useNavigate()
 
   const goToCrear = () => {
-    playSoundEffect('notification', 0.1);
+    playSoundEffect('notification', 0.2);
     navigate('/crear');
   };
   const goToMisPokemon = () => {
-    playSoundEffect('notification', 0.1);
+    playSoundEffect('notification', 0.2);
     navigate('/mis-pokemon');
   };
   const goToPacks = () => {
-    playSoundEffect('notification', 0.1);
+    playSoundEffect('notification', 0.2);
     navigate('/packs');
   };
 

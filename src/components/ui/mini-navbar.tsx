@@ -41,7 +41,7 @@ const AnimatedNavLink = ({ href, children }: { href: string; children: React.Rea
     <Link
       to={href}
       className={`group relative inline-block h-7 flex items-center justify-center px-1 overflow-hidden ${textSizeClass} hover:text-gray-900 transition-colors duration-200`}
-      onClick={() => playSoundEffect('notification', 0.1)}
+      onClick={() => playSoundEffect('notification', 0.2)}
     >
       <span className={`${isActive ? 'font-bold' : ''} ${defaultTextColor}`}>
         {children}

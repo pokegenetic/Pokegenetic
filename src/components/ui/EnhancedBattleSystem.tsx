@@ -381,7 +381,7 @@ const EnhancedBattleSystem: React.FC<BattleProps> = ({
       // Efectos especiales por combos
       if (consecutiveTaps >= 20) {
         addBattleEffect('¡COMBO MAESTRO!');
-        playSoundEffect('notification', 0.25);
+        playSoundEffect('notification', 0.2);
         setConsecutiveTaps(0);
         return newValue + 5; // Bonus por combo maestro
       } else if (newValue % 15 === 0) {

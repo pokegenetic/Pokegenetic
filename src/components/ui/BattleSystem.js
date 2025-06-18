@@ -461,7 +461,7 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
                         clearInterval(countdownIntervalRef.current);
                         countdownIntervalRef.current = null;
                     }
-                    playSoundEffect('notification', 0.3); // Sonido especial para "¡COMBATE!"
+                    playSoundEffect('notification', 0.2); // Sonido especial para "¡COMBATE!"
                     setFaseAnimacion('battle');
                     iniciarCombateReal();
                     return 0;
@@ -786,7 +786,7 @@ const BattleSystem = ({ gimnasioActual, entrenadorActual, pokemonActual, combati
     useEffect(() => {
         if (tapsHistoricos > 0 && tapsHistoricos % 100 === 0 && !superTapDisponible) {
             setSuperTapDisponible(true);
-            playSoundEffect('notification', 0.4); // Sonido de activación del Ataque Cargado
+            playSoundEffect('notification', 0.2); // Sonido de activación del Ataque Cargado
             console.log(`⚡ Ataque Cargado activado! Taps históricos: ${tapsHistoricos}`);
         }
     }, [tapsHistoricos, superTapDisponible]);

@@ -242,7 +242,7 @@ export default function LigaPokemon() {
 
   // Continuar al siguiente gimnasio/Pokémon
   const continuar = async () => {
-    playSoundEffect('notification', 0.15);
+    playSoundEffect('notification', 0.2);
     
     if (combatienteActual === 'entrenador') {
       const gimnasio = REGION_KANTO.gimnasios[gimnasioActual];
@@ -320,13 +320,13 @@ export default function LigaPokemon() {
 
   // Volver al gimnasio
   const reintentar = () => {
-    playSoundEffect('notification', 0.15);
+    playSoundEffect('notification', 0.2);
     setEstado('seleccion');
   };
 
   // Volver al menú
   const volverAlMenu = () => {
-    playSoundEffect('notification', 0.15);
+    playSoundEffect('notification', 0.2);
     navigate('/minigames');
   };
 
@@ -467,7 +467,7 @@ export default function LigaPokemon() {
     // Si quieres también resetear al primer entrenador disponible:
     const proximoEntrenador = getProximoEntrenadorDisponible(gimnasioActual);
     setEntrenadorActual(proximoEntrenador === -1 ? 0 : proximoEntrenador);
-    playSoundEffect('notification', 0.15);
+    playSoundEffect('notification', 0.2);
   };
 
   // Callbacks para BattleSystem
@@ -553,14 +553,14 @@ export default function LigaPokemon() {
         // No es el último Pokémon del entrenador, continuar automáticamente
         setPokemonActual(prev => prev + 1);
         setEstado('entrenador');
-        playSoundEffect('notification', 0.15);
+        playSoundEffect('notification', 0.2);
       }
     } else {
       // Para líderes, la lógica es similar
       if (pokemonActual < REGION_KANTO.gimnasios[gimnasioActual].pokemon.length - 1) {
         setPokemonActual(prev => prev + 1);
         setEstado('lider');
-        playSoundEffect('notification', 0.15);
+        playSoundEffect('notification', 0.2);
       }
     }
   };
